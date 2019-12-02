@@ -2,14 +2,25 @@ require('./bootstrap');
    
 window.Vue = require('vue');
 import VueRouter from 'vue-router'
-  
+import ExampleComponent from './components/ExampleComponent.vue'
+import user from './components/user.vue' 
+
 Vue.use(VueRouter)
    
+
 const routes = [
-  { path: '/', component: require('./components/ExampleComponent.vue').default },
-  { path: '/user', component: require('./components/User.vue').default }
+    {
+      path: '/',
+      name: 'ExampleComponent',
+      component: ExampleComponent
+    },
+    {
+        path: '/user',
+        name: 'user',
+        component: user
+      }
 ]
-  
+
 const router = new VueRouter({
   routes 
 })
