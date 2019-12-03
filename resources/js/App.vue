@@ -10,7 +10,7 @@
                           <a class="nav-link"><router-link to="/">Home</router-link></a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link"><router-link to="/user">User</router-link></a>
+                          <a class="nav-link"><router-link to="/about">User</router-link></a>
                       </li>
                       <li class="nav-item">
                           <a class="nav-link" href="#" @click.prevent="showLogin">Login</a>

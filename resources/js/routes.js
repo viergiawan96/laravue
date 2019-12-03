@@ -1,5 +1,5 @@
 import home from './components/home.vue';
-import user from './components/user.vue';
+import about from './components/about.vue';
 
 export const routes = [
     {
@@ -8,8 +8,8 @@ export const routes = [
         component: home
       },
       {
-          path: '/user',
-          name: 'user',
-          component: user
+          path: '/about',
+          name: 'about',
+          component: about
         }
 ]
