@@ -10,7 +10,7 @@
                           <a class="nav-link"><router-link to="/">Home</router-link></a>
                       </li>
                       <li class="nav-item">
-                          <a class="nav-link"><router-link to="/about">User</router-link></a>
+                          <a class="nav-link"><router-link to="/about">About</router-link></a>
                       </li>
                       <li class="nav-item">
                           <a class="nav-link" href="#" @click.prevent="showLogin">Login</a>
@@ -21,9 +21,40 @@
                   </ul>
               </div>
           </nav>
-          <modal name="login" :width="200">
-              Login
-          </modal>
+          <modal 
+            name="login"
+            transition="nice-modal-fade"
+            :width="350"
+            :min-height="200"
+            :delay="90"
+            :adaptive="true">
+          <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon1">@</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="basic-addon2">@</span>
+                    </div>
+                    <input type="Password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2">
+                </div>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Login</button>
+              </div>
+          </div>
+        </modal>
+
+
           <modal name="registrasi">
               Register
           </modal>

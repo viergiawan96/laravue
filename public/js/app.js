@@ -1874,6 +1874,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'main-app',
   methods: {
@@ -38052,7 +38083,7 @@ var render = function() {
                   { staticClass: "nav-link" },
                   [
                     _c("router-link", { attrs: { to: "/about" } }, [
-                      _vm._v("User")
+                      _vm._v("About")
                     ])
                   ],
                   1
@@ -38097,9 +38128,113 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c("modal", { attrs: { name: "login", width: 200 } }, [
-        _vm._v("\n          Login\n      ")
-      ]),
+      _c(
+        "modal",
+        {
+          attrs: {
+            name: "login",
+            transition: "nice-modal-fade",
+            width: 350,
+            "min-height": 200,
+            delay: 90,
+            adaptive: true
+          }
+        },
+        [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-header" }, [
+              _c(
+                "h5",
+                {
+                  staticClass: "modal-title",
+                  attrs: { id: "exampleModalLabel" }
+                },
+                [_vm._v("Modal title")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "close",
+                  attrs: {
+                    type: "button",
+                    "data-dismiss": "modal",
+                    "aria-label": "Close"
+                  }
+                },
+                [
+                  _c("span", { attrs: { "aria-hidden": "true" } }, [
+                    _vm._v("×")
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c("div", { staticClass: "input-group mb-3" }, [
+                _c("div", { staticClass: "input-group-prepend" }, [
+                  _c(
+                    "span",
+                    {
+                      staticClass: "input-group-text",
+                      attrs: { id: "basic-addon1" }
+                    },
+                    [_vm._v("@")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    placeholder: "Username",
+                    "aria-label": "Username",
+                    "aria-describedby": "basic-addon1"
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group mb-3" }, [
+                _c("div", { staticClass: "input-group-prepend" }, [
+                  _c(
+                    "span",
+                    {
+                      staticClass: "input-group-text",
+                      attrs: { id: "basic-addon2" }
+                    },
+                    [_vm._v("@")]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "Password",
+                    placeholder: "Password",
+                    "aria-label": "Password",
+                    "aria-describedby": "basic-addon2"
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-secondary",
+                  attrs: { type: "button", "data-dismiss": "modal" }
+                },
+                [_vm._v("Close")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                { staticClass: "btn btn-primary", attrs: { type: "button" } },
+                [_vm._v("Login")]
+              )
+            ])
+          ])
+        ]
+      ),
       _vm._v(" "),
       _c("modal", { attrs: { name: "registrasi" } }, [
         _vm._v("\n          Register\n      ")
@@ -53562,7 +53697,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "routes", function() { return routes; });
 /* harmony import */ var _components_home_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/home.vue */ "./resources/js/components/home.vue");
-/* harmony import */ var _components_about_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/about.vue */ "./resources/js/components/about.vue");
+/* harmony import */ var _components_about_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/about.vue */ "./resources/js/components/about.vue");
 
 
 var routes = [{
@@ -53572,7 +53707,7 @@ var routes = [{
 }, {
   path: '/about',
   name: 'about',
-  component: _components_about_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  component: _components_about_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
 }];
 
 /***/ }),
