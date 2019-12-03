@@ -4,8 +4,10 @@ window.Vue = require('vue');
 import VueRouter from 'vue-router';
 import {routes} from './routes';
 import Vuex from 'vuex';
-import App from './App.vue'
-
+import App from './App.vue';
+import VModal from 'vue-js-modal';
+ 
+Vue.use(VModal);
 Vue.use(VueRouter);
 Vue.use(Vuex);
    
