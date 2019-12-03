@@ -5,14 +5,19 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Laravel Vue Router/title</title>
+        <title>Laravel VueJs</title>
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <!-- Fonts -->
+        <link rel="dns-prefetch" href="//fonts.gstatic.com">
+        <!-- Scripts -->
+        <script src="{{ asset('js/app.js') }}" defer></script>
+        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+        <!-- Styles -->
         <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <h1>Laravel Vue Router</h1>
-        <div id="app">
-            <router-view></router-view>
-        </div>
+        <div id="app"></div>
         <script src="{{asset('js/app.js')}}" ></script>
     </body>
 </html>

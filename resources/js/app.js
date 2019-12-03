@@ -1,30 +1,21 @@
 require('./bootstrap');
-   
+
 window.Vue = require('vue');
-import VueRouter from 'vue-router'
-import ExampleComponent from './components/ExampleComponent.vue'
-import user from './components/user.vue' 
+import VueRouter from 'vue-router';
+import {routes} from './routes';
+import Vuex from 'vuex';
+import App from './App.vue'
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
+Vue.use(Vuex);
    
-
-const routes = [
-    {
-      path: '/',
-      name: 'ExampleComponent',
-      component: ExampleComponent
-    },
-    {
-        path: '/user',
-        name: 'user',
-        component: user
-      }
-]
-
 const router = new VueRouter({
-  routes 
+  routes,
+  mode: 'history' 
 })
   
 const app = new Vue({
-  router
-}).$mount('#app')
+    el: '#app',
+    router,
+    render: h => h(App)
+})
