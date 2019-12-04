@@ -1912,7 +1912,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$modal.show('login');
     },
     hideLogin: function hideLogin() {
-      this.$modal.hide('Login');
+      this.$modal.hide('login');
     },
     showRegis: function showRegis() {
       this.$modal.show('registrasi');
@@ -6543,7 +6543,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "\n.nav1 .nav-item a[data-v-f348271a]{\n  font-size: 16px;\n  color: white;\n}\n", ""]);
+exports.push([module.i, "\n.nav1 .nav-item a[data-v-f348271a]{\n    font-size: 16px;\n    color: white;\n    font-family: 'Alata', sans-serif;\n    text-decoration: none;\n}\n.navlinks a.router-link-exact-active[data-v-f348271a]{\n    color: #00E676;\n}\n.py-5[data-v-f348271a]{\n    font-family: 'Cabin', sans-serif;\n}\n", ""]);
 
 // exports
 
@@ -38067,7 +38067,7 @@ var render = function() {
               1
             ),
             _vm._v(" "),
-            _c("ul", { staticClass: "navbar-nav ml-auto nav1" }, [
+            _c("ul", { staticClass: "navbar-nav ml-auto nav1 navlinks" }, [
               _c("li", { staticClass: "nav-item" }, [
                 _c(
                   "a",
@@ -38144,12 +38144,12 @@ var render = function() {
           _c("div", { staticClass: "modal-content" }, [
             _c("div", { staticClass: "modal-header" }, [
               _c(
-                "h5",
+                "h4",
                 {
                   staticClass: "modal-title",
                   attrs: { id: "exampleModalLabel" }
                 },
-                [_vm._v("Modal title")]
+                [_vm._v("Login")]
               ),
               _vm._v(" "),
               _c(
@@ -38160,6 +38160,12 @@ var render = function() {
                     type: "button",
                     "data-dismiss": "modal",
                     "aria-label": "Close"
+                  },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.hideLogin($event)
+                    }
                   }
                 },
                 [
@@ -38179,7 +38185,7 @@ var render = function() {
                       staticClass: "input-group-text",
                       attrs: { id: "basic-addon1" }
                     },
-                    [_vm._v("@")]
+                    [_c("i", { staticClass: "fas fa-user-alt" })]
                   )
                 ]),
                 _vm._v(" "),
@@ -38202,7 +38208,7 @@ var render = function() {
                       staticClass: "input-group-text",
                       attrs: { id: "basic-addon2" }
                     },
-                    [_vm._v("@")]
+                    [_c("i", { staticClass: "fas fa-key" })]
                   )
                 ]),
                 _vm._v(" "),
@@ -53730,8 +53736,8 @@ var routes = [{
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\prod\laravue\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\prod\laravue\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Satrio\download\github\laravue\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Satrio\download\github\laravue\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
