@@ -6543,7 +6543,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "\n.nav1 .nav-item a[data-v-f348271a]{\n    font-size: 16px;\n    color: white;\n    font-family: 'Alata', sans-serif;\n    text-decoration: none;\n}\n.navlinks a.router-link-exact-active[data-v-f348271a]{\n    color: #00E676;\n}\n.py-5[data-v-f348271a]{\n    font-family: 'Cabin', sans-serif;\n}\n", ""]);
+exports.push([module.i, "\n.nav1 .nav-item a[data-v-f348271a]{\n    font-size: 16px;\n    color: white;\n    font-family: 'Alata', sans-serif;\n    text-decoration: none;\n}\n.nav1 a.router-link-exact-active[data-v-f348271a]{\n    color: #00E676;\n}\n.nav1 .nav-item a[data-v-f348271a]:hover {\n    color: #00E676;\n}\n.py-5[data-v-f348271a]{\n    font-family: 'Cabin', sans-serif;\n}\n", ""]);
 
 // exports
 
@@ -38067,7 +38067,7 @@ var render = function() {
               1
             ),
             _vm._v(" "),
-            _c("ul", { staticClass: "navbar-nav ml-auto nav1 navlinks" }, [
+            _c("ul", { staticClass: "navbar-nav ml-auto nav1" }, [
               _c("li", { staticClass: "nav-item" }, [
                 _c(
                   "a",
@@ -38225,17 +38225,23 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "button",
-                {
-                  staticClass: "btn btn-secondary",
-                  attrs: { type: "button", "data-dismiss": "modal" }
-                },
-                [_vm._v("Close")]
+                { staticClass: "btn btn-primary", attrs: { type: "button" } },
+                [_vm._v("Login")]
               ),
               _vm._v(" "),
               _c(
                 "button",
-                { staticClass: "btn btn-primary", attrs: { type: "button" } },
-                [_vm._v("Login")]
+                {
+                  staticClass: "btn btn-danger",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.hideLogin($event)
+                    }
+                  }
+                },
+                [_vm._v("Close")]
               )
             ])
           ])

@@ -5,7 +5,7 @@
                     <a class="navbar-brand">
                         <Label>Laravel VueJs</Label>
                     </a>
-                    <ul class="navbar-nav ml-auto nav1 navlinks">
+                    <ul class="navbar-nav ml-auto nav1">
                         <li class="nav-item">
                             <a class="nav-link"><router-link to="/">Home</router-link></a>
                         </li>
@@ -48,8 +48,8 @@
                       </div>
                       <input type="Password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2">
                   </div>
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                   <button type="button" class="btn btn-primary">Login</button>
+                  <button type="button" class="btn btn-danger" @click.prevent="hideLogin">Close</button>
                 </div>
             </div>
           </modal>
@@ -92,7 +92,10 @@ export default {
         font-family: 'Alata', sans-serif;
         text-decoration: none;
     }
-    .navlinks a.router-link-exact-active{
+    .nav1 a.router-link-exact-active{
+        color: #00E676;
+    }
+    .nav1 .nav-item a:hover {
         color: #00E676;
     }
     .py-5{
