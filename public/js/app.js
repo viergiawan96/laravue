@@ -1905,6 +1905,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'main-app',
   methods: {
@@ -1915,10 +1950,10 @@ __webpack_require__.r(__webpack_exports__);
       this.$modal.hide('login');
     },
     showRegis: function showRegis() {
-      this.$modal.show('registrasi');
+      this.$modal.show('register');
     },
     hideRegis: function hideRegis() {
-      this.$modal.hide('registrasi');
+      this.$modal.hide('register');
     }
   }
 });
@@ -38185,16 +38220,16 @@ var render = function() {
                       staticClass: "input-group-text",
                       attrs: { id: "basic-addon1" }
                     },
-                    [_c("i", { staticClass: "fas fa-user-alt" })]
+                    [_c("i", { staticClass: "fas fa-envelope" })]
                   )
                 ]),
                 _vm._v(" "),
                 _c("input", {
                   staticClass: "form-control",
                   attrs: {
-                    type: "text",
-                    placeholder: "Username",
-                    "aria-label": "Username",
+                    type: "email",
+                    placeholder: "Email",
+                    "aria-label": "Email",
                     "aria-describedby": "basic-addon1"
                   }
                 })
@@ -38248,9 +38283,148 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c("modal", { attrs: { name: "registrasi" } }, [
-        _vm._v("\n          Register\n      ")
-      ]),
+      _c(
+        "modal",
+        {
+          attrs: {
+            name: "register",
+            transition: "nice-modal-fade",
+            width: 350,
+            "min-height": 200,
+            delay: 90,
+            adaptive: true
+          }
+        },
+        [
+          _c("div", { staticClass: "modal-content" }, [
+            _c("div", { staticClass: "modal-header" }, [
+              _c(
+                "h4",
+                {
+                  staticClass: "modal-title",
+                  attrs: { id: "exampleModalLabel" }
+                },
+                [_vm._v("Create Account")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "close",
+                  attrs: {
+                    type: "button",
+                    "data-dismiss": "modal",
+                    "aria-label": "Close"
+                  },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.hideRegis($event)
+                    }
+                  }
+                },
+                [
+                  _c("span", { attrs: { "aria-hidden": "true" } }, [
+                    _vm._v("×")
+                  ])
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _c("div", { staticClass: "input-group mb-3" }, [
+                _c("div", { staticClass: "input-group-prepend" }, [
+                  _c(
+                    "span",
+                    {
+                      staticClass: "input-group-text",
+                      attrs: { id: "basic-addon1" }
+                    },
+                    [_c("i", { staticClass: "fas fa-user-alt" })]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    placeholder: "Name",
+                    "aria-label": "Name",
+                    "aria-describedby": "basic-addon1"
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group mb-3" }, [
+                _c("div", { staticClass: "input-group-prepend" }, [
+                  _c(
+                    "span",
+                    {
+                      staticClass: "input-group-text",
+                      attrs: { id: "basic-addon1" }
+                    },
+                    [_c("i", { staticClass: "fas fa-envelope" })]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "email",
+                    placeholder: "Email",
+                    "aria-label": "Email",
+                    "aria-describedby": "basic-addon1"
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "input-group mb-3" }, [
+                _c("div", { staticClass: "input-group-prepend" }, [
+                  _c(
+                    "span",
+                    {
+                      staticClass: "input-group-text",
+                      attrs: { id: "basic-addon2" }
+                    },
+                    [_c("i", { staticClass: "fas fa-key" })]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "Password",
+                    placeholder: "Password",
+                    "aria-label": "Password",
+                    "aria-describedby": "basic-addon2"
+                  }
+                })
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                { staticClass: "btn btn-primary", attrs: { type: "button" } },
+                [_vm._v("Create Account")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-danger",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.hideRegis($event)
+                    }
+                  }
+                },
+                [_vm._v("Close")]
+              )
+            ])
+          ])
+        ]
+      ),
       _vm._v(" "),
       _c("main", { staticClass: "py-5" }, [_c("router-view")], 1)
     ],

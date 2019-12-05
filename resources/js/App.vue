@@ -38,9 +38,9 @@
                 <div class="modal-body">
                   <div class="input-group mb-3">
                       <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1"><i class='fas fa-user-alt'></i></span>
+                        <span class="input-group-text" id="basic-addon1"><i class='fas fa-envelope'></i></span>
                       </div>
-                      <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                      <input type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
                   </div>
                   <div class="input-group mb-3">
                       <div class="input-group-prepend">
@@ -55,8 +55,43 @@
           </modal>
 
 
-          <modal name="registrasi">
-              Register
+          <modal 
+              name="register"
+              transition="nice-modal-fade"
+              :width="350"
+              :min-height="200"
+              :delay="90"
+              :adaptive="true">
+            <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title" id="exampleModalLabel">Create Account</h4>
+                  <button type="button" @click.prevent="hideRegis" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1"><i class='fas fa-user-alt'></i></span>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="basic-addon1">
+                  </div>
+                  <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1"><i class='fas fa-envelope'></i></span>
+                      </div>
+                      <input type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
+                  </div>
+                  <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon2"><i class="fas fa-key"></i></span>
+                      </div>
+                      <input type="Password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2">
+                  </div>
+                  <button type="button" class="btn btn-primary">Create Account</button>
+                  <button type="button" class="btn btn-danger" @click.prevent="hideRegis">Close</button>
+                </div>
+            </div>
           </modal>
 
           <main class="py-5">
@@ -76,10 +111,10 @@ export default {
       this.$modal.hide('login');
     },
     showRegis(){
-      this.$modal.show('registrasi');
+      this.$modal.show('register');
     },
     hideRegis(){
-      this.$modal.hide('registrasi');
+      this.$modal.hide('register');
     }
   }
 }
