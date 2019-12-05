@@ -1966,7 +1966,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     hideLogin: function hideLogin() {
       this.$modal.hide('login');
-      this.error = null;
     },
     showRegis: function showRegis() {
       this.$modal.show('register');
@@ -1982,7 +1981,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.$store.commit("loginSuccess", res);
 
         _this.$router.push({
-          path: '/'
+          path: '/about'
         });
       })["catch"](function (error) {
         _this.$store.commit("loginFailed", {
@@ -54825,7 +54824,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: _routes__WEBPACK_IMPORTED_MODULE_2__["routes"],
   mode: 'history'
 });
-_helpers_general__WEBPACK_IMPORTED_MODULE_7__["initialize"];
+Object(_helpers_general__WEBPACK_IMPORTED_MODULE_7__["initialize"])(store, router);
 var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   router: router,
   store: store,

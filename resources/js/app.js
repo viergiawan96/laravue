@@ -20,7 +20,7 @@ const router = new VueRouter({
   mode: 'history' 
 })
   
-initialize
+initialize(store, router);
 
 const app = new Vue({
     router,

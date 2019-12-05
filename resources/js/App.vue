@@ -127,7 +127,6 @@ export default {
       },
       hideLogin(){
         this.$modal.hide('login');
-        this.error = null
       },
       showRegis(){
         this.$modal.show('register');
@@ -141,7 +140,7 @@ export default {
             login(this.$data.from)
             .then((res) => {
                 this.$store.commit("loginSuccess", res);
-                this.$router.push({path: '/'});
+                this.$router.push({path: '/about'});
             })
             .catch((error) => {
               this.$store.commit("loginFailed", {error});
