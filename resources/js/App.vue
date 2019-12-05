@@ -127,6 +127,7 @@ export default {
       },
       hideLogin(){
         this.$modal.hide('login');
+        this.error = null
       },
       showRegis(){
         this.$modal.show('register');
