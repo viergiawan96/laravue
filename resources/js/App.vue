@@ -36,20 +36,27 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1"><i class='fas fa-envelope'></i></span>
+                  <form @submit.prevent="authenticate">
+                      <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class='fas fa-envelope'></i></span>
+                          </div>
+                          <input type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
                       </div>
-                      <input type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
-                  </div>
-                  <div class="input-group mb-3">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon2"><i class="fas fa-key"></i></span>
+                      <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon2"><i class="fas fa-key"></i></span>
+                          </div>
+                          <input type="Password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2">
                       </div>
-                      <input type="Password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2">
-                  </div>
-                  <button type="button" class="btn btn-primary">Login</button>
-                  <button type="button" class="btn btn-danger" @click.prevent="hideLogin">Close</button>
+                      <button type="submit" class="btn btn-primary">Login</button>
+                      <button type="button" class="btn btn-danger" @click.prevent="hideLogin">Close</button>
+                      <div class="form-group row" v-if="authError">
+                            <p class="error">
+                                {{ authError }}
+                            </p>
+                      </div>
+                  </form>
                 </div>
             </div>
           </modal>
@@ -101,26 +108,58 @@
 </template>
 
 <script>
+import {login} from './helpers/auth';
+
 export default {
   name: 'main-app',
+  data(){
+    return {
+      form : {
+        email: '',
+        password:''
+      },
+      error: null
+    };
+  },
   methods :{
-    showLogin(){
-      this.$modal.show('login');
+      showLogin(){
+        this.$modal.show('login');
+      },
+      hideLogin(){
+        this.$modal.hide('login');
+      },
+      showRegis(){
+        this.$modal.show('register');
+      },
+      hideRegis(){
+        this.$modal.hide('register');
+      },
+      authenticate() {
+            this.$store.dispatch('login');
+
+            login(this.$data.from)
+            .then((res) => {
+                this.$store.commit("loginSuccess", res);
+                this.$router.push({path: '/'});
+            })
+            .catch((error) => {
+              this.$store.commit("loginFailed", {error});
+            });
+      }
     },
-    hideLogin(){
-      this.$modal.hide('login');
-    },
-    showRegis(){
-      this.$modal.show('register');
-    },
-    hideRegis(){
-      this.$modal.hide('register');
-    }
+    computed : {
+        authError() {
+          return this.$store.getters.authError;
+        }
   }
 }
 </script>
 
 <style scoped>
+    .error {
+        text-align: center;
+        color: red;
+    }
     .nav1 .nav-item a{
         font-size: 16px;
         color: white;
