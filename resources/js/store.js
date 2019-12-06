@@ -1,5 +1,4 @@
 import { getLocalUser } from "./helpers/auth";
-import { get } from "http";
 
 const user = getLocalUser();
 
@@ -8,7 +7,8 @@ export default {
         currentUser: user,
         isLoggedIn: !!user,
         loading: false,
-        auth_error: null
+        auth_error: null,
+        users: null
     },
     getters: {
         isLoading(state) {
@@ -22,6 +22,9 @@ export default {
         },
         authError(state) {
             return state.auth_error;
+        },users(state){
+            var  userss= JSON.stringify(state.currentUser)
+            return userss;
         }
     },
     mutations: {

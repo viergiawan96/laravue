@@ -14,6 +14,7 @@
                         proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                         <br/>
                         <router-link to="/">Go to Home</router-link>
+                            <h1>{{users.name}}</h1>
                     </div>
                 </div>
             </div>
@@ -23,11 +24,19 @@
   
 <script>
     export default {
-
+        data(){
+            return{
+                users : ''
+            }
+        },
+        methods: {
+            load(){
+                var user = JSON.parse(this.$store.getters.users)
+                this.users = user;
+            }
+        },
         mounted() {
-            var parsedObj = JSON.stringify(this.$store.getters.currentUser)
-            var user = JSON.parse(parsedObj)
-                console.log(user.id)
+            this.load()
         }
     }
 </script>
