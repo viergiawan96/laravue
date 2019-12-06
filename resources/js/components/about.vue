@@ -31,7 +31,7 @@
         },
         methods: {
             load(){
-                var user = JSON.parse(this.$store.getters.users)
+                var user = this.$store.getters.currentUser;
                 this.users = user;
             }
         },

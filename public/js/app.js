@@ -2042,7 +2042,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     load: function load() {
-      var user = JSON.parse(this.$store.getters.users);
+      var user = this.$store.getters.currentUser;
       this.users = user;
     }
   },
@@ -55206,10 +55206,6 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
     },
     authError: function authError(state) {
       return state.auth_error;
-    },
-    users: function users(state) {
-      var userss = JSON.stringify(state.currentUser);
-      return userss;
     }
   },
   mutations: {

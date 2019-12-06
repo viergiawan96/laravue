@@ -22,9 +22,6 @@ export default {
         },
         authError(state) {
             return state.auth_error;
-        },users(state){
-            var  userss= JSON.stringify(state.currentUser)
-            return userss;
         }
     },
     mutations: {
