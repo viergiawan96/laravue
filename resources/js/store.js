@@ -7,8 +7,7 @@ export default {
         currentUser: user,
         isLoggedIn: !!user,
         loading: false,
-        auth_error: null,
-        users: null
+        auth_error: null
     },
     getters: {
         isLoading(state) {

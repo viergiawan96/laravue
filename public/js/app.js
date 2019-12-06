@@ -55191,8 +55191,7 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
     currentUser: user,
     isLoggedIn: !!user,
     loading: false,
-    auth_error: null,
-    users: null
+    auth_error: null
   },
   getters: {
     isLoading: function isLoading(state) {
