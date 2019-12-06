@@ -41,13 +41,13 @@
                           <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><i class='fas fa-envelope'></i></span>
                           </div>
-                          <input type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
+                          <input v-model="form.email" type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
                       </div>
                       <div class="input-group mb-3">
                           <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon2"><i class="fas fa-key"></i></span>
                           </div>
-                          <input type="Password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2">
+                          <input v-model="form.password" type="Password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2">
                       </div>
                       <button type="submit" class="btn btn-primary">Login</button>
                       <button type="button" class="btn btn-danger" @click.prevent="hideLogin">Close</button>
@@ -109,18 +109,19 @@
 
 <script>
 import {login} from './helpers/auth';
+import {routes} from './routes';
 
 export default {
   name: 'main-app',
-  data(){
-    return {
-      form : {
-        email: '',
-        password:''
-      },
-      error: null
-    };
-  },
+  data() {
+            return {
+                form: {
+                    email: '',
+                    password: ''
+                },
+                error: null
+            };
+        },
   methods :{
       showLogin(){
         this.$modal.show('login');
@@ -135,23 +136,23 @@ export default {
         this.$modal.hide('register');
       },
       authenticate() {
-            this.$store.dispatch('login');
+                this.$store.dispatch('login');
 
-            login(this.$data.from)
-            .then((res) => {
-                this.$store.commit("loginSuccess", res);
-                this.$router.push({path: '/about'});
-            })
-            .catch((error) => {
-              this.$store.commit("loginFailed", {error});
-            });
-      }
-    },
-    computed : {
-        authError() {
-          return this.$store.getters.authError;
+                login(this.$data.form)
+                    .then((res) => {
+                        this.$store.commit("loginSuccess", res);
+                        this.$router.push({path: '/about'});
+                    })
+                    .catch((error) => {
+                        this.$store.commit("loginFailed", {error});
+                    });
+            }
+  },
+        computed: {
+            authError() {
+                return this.$store.getters.authError;
+            }
         }
-  }
 }
 </script>
 

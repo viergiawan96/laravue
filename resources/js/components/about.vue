@@ -23,8 +23,11 @@
   
 <script>
     export default {
+
         mounted() {
-            console.log('Component mounted.')
+            var parsedObj = JSON.stringify(this.$store.getters.currentUser)
+            var user = JSON.parse(parsedObj)
+                console.log(user.id)
         }
     }
 </script>
