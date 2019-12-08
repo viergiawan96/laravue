@@ -28,7 +28,11 @@ export default {
             state.loading = true;
             state.auth_error = null;
         },
-        loginSuccess(state, payload) {
+        register(state) {
+            state.loading = true;
+            state.auth_error = null;
+        },
+        prosesSuccess(state, payload) {
             state.auth_error = null;
             state.isLoggedIn = true;
             state.loading = false;
@@ -49,6 +53,9 @@ export default {
     actions: {
         login(context) {
             context.commit("login");
+        },
+        register(context) {
+            context.commit("register");
         }
     }
 };

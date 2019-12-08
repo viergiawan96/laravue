@@ -144,20 +144,26 @@ export default {
 
                 login(this.$data.form)
                     .then((res) => {
-                        this.$store.commit("loginSuccess", res);
+                        this.$store.commit("prosesSuccess", res);
                         this.$router.push({path: '/about'});
+                        this.$modal.hide('login');
                     })
                     .catch((error) => {
                         this.$store.commit("loginFailed", {error});
                     });
       },
       registerrr() {
+          this.$store.dispatch('register');
+
           register(this.$data.form)
-          .then((res) => {
-            this.$router.push({path: '/about'});
-          }).catch((error) => {
-            console.log('error');
-          });
+                    .then((res) => {
+                        this.$store.commit("prosesSuccess", res);
+                        this.$router.push({path: '/about'});
+                        this.$modal.hide('register');
+                    })
+                    .catch((error) => {
+                        console.log('errot');
+                    });
       }
   },
         computed: {

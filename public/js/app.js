@@ -1984,11 +1984,13 @@ __webpack_require__.r(__webpack_exports__);
 
       this.$store.dispatch('login');
       Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["login"])(this.$data.form).then(function (res) {
-        _this.$store.commit("loginSuccess", res);
+        _this.$store.commit("prosesSuccess", res);
 
         _this.$router.push({
           path: '/about'
         });
+
+        _this.$modal.hide('login');
       })["catch"](function (error) {
         _this.$store.commit("loginFailed", {
           error: error
@@ -1998,12 +2000,17 @@ __webpack_require__.r(__webpack_exports__);
     registerrr: function registerrr() {
       var _this2 = this;
 
+      this.$store.dispatch('register');
       Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["register"])(this.$data.form).then(function (res) {
+        _this2.$store.commit("prosesSuccess", res);
+
         _this2.$router.push({
           path: '/about'
         });
+
+        _this2.$modal.hide('register');
       })["catch"](function (error) {
-        console.log('error');
+        console.log('errot');
       });
     }
   },
@@ -55180,7 +55187,7 @@ function register(credentials) {
       Object(_general__WEBPACK_IMPORTED_MODULE_0__["setAuthorization"])(response.data.access_token);
       res(response.data);
     })["catch"](function (err) {
-      rej("Data Error");
+      rej("Wrong email or password");
     });
   });
 }
@@ -55305,7 +55312,11 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
       state.loading = true;
       state.auth_error = null;
     },
-    loginSuccess: function loginSuccess(state, payload) {
+    register: function register(state) {
+      state.loading = true;
+      state.auth_error = null;
+    },
+    prosesSuccess: function prosesSuccess(state, payload) {
       state.auth_error = null;
       state.isLoggedIn = true;
       state.loading = false;
@@ -55327,6 +55338,9 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
   actions: {
     login: function login(context) {
       context.commit("login");
+    },
+    register: function register(context) {
+      context.commit("register");
     }
   }
 });

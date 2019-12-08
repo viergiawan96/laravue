@@ -20,7 +20,7 @@ export function register(credentials) {
                 res(response.data);
             })
             .catch((err) => {
-                rej("Data Error");
+                rej("Wrong email or password");
             })
     })
 }
