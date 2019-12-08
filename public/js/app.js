@@ -1949,6 +1949,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -1956,6 +1959,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       form: {
+        name: '',
         email: '',
         password: ''
       },
@@ -1989,6 +1993,17 @@ __webpack_require__.r(__webpack_exports__);
         _this.$store.commit("loginFailed", {
           error: error
         });
+      });
+    },
+    registerrr: function registerrr() {
+      var _this2 = this;
+
+      Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["register"])(this.$data.form).then(function (res) {
+        _this2.$router.push({
+          path: '/about'
+        });
+      })["catch"](function (error) {
+        console.log('error');
       });
     }
   },
@@ -38447,94 +38462,161 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "modal-body" }, [
-              _c("div", { staticClass: "input-group mb-3" }, [
-                _c("div", { staticClass: "input-group-prepend" }, [
-                  _c(
-                    "span",
-                    {
-                      staticClass: "input-group-text",
-                      attrs: { id: "basic-addon1" }
-                    },
-                    [_c("i", { staticClass: "fas fa-user-alt" })]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    placeholder: "Name",
-                    "aria-label": "Name",
-                    "aria-describedby": "basic-addon1"
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-group mb-3" }, [
-                _c("div", { staticClass: "input-group-prepend" }, [
-                  _c(
-                    "span",
-                    {
-                      staticClass: "input-group-text",
-                      attrs: { id: "basic-addon1" }
-                    },
-                    [_c("i", { staticClass: "fas fa-envelope" })]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "email",
-                    placeholder: "Email",
-                    "aria-label": "Email",
-                    "aria-describedby": "basic-addon1"
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-group mb-3" }, [
-                _c("div", { staticClass: "input-group-prepend" }, [
-                  _c(
-                    "span",
-                    {
-                      staticClass: "input-group-text",
-                      attrs: { id: "basic-addon2" }
-                    },
-                    [_c("i", { staticClass: "fas fa-key" })]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "Password",
-                    placeholder: "Password",
-                    "aria-label": "Password",
-                    "aria-describedby": "basic-addon2"
-                  }
-                })
-              ]),
-              _vm._v(" "),
               _c(
-                "button",
-                { staticClass: "btn btn-primary", attrs: { type: "button" } },
-                [_vm._v("Create Account")]
-              ),
-              _vm._v(" "),
-              _c(
-                "button",
+                "form",
                 {
-                  staticClass: "btn btn-danger",
-                  attrs: { type: "button" },
                   on: {
-                    click: function($event) {
+                    submit: function($event) {
                       $event.preventDefault()
-                      return _vm.hideRegis($event)
+                      return _vm.registerrr($event)
                     }
                   }
                 },
-                [_vm._v("Close")]
+                [
+                  _c("div", { staticClass: "input-group mb-3" }, [
+                    _c("div", { staticClass: "input-group-prepend" }, [
+                      _c(
+                        "span",
+                        {
+                          staticClass: "input-group-text",
+                          attrs: { id: "basic-addon1" }
+                        },
+                        [_c("i", { staticClass: "fas fa-user-alt" })]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.name,
+                          expression: "form.name"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        placeholder: "Name",
+                        "aria-label": "Name",
+                        "aria-describedby": "basic-addon1"
+                      },
+                      domProps: { value: _vm.form.name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "name", $event.target.value)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group mb-3" }, [
+                    _c("div", { staticClass: "input-group-prepend" }, [
+                      _c(
+                        "span",
+                        {
+                          staticClass: "input-group-text",
+                          attrs: { id: "basic-addon1" }
+                        },
+                        [_c("i", { staticClass: "fas fa-envelope" })]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.email,
+                          expression: "form.email"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "email",
+                        placeholder: "Email",
+                        "aria-label": "Email",
+                        "aria-describedby": "basic-addon1"
+                      },
+                      domProps: { value: _vm.form.email },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "email", $event.target.value)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group mb-3" }, [
+                    _c("div", { staticClass: "input-group-prepend" }, [
+                      _c(
+                        "span",
+                        {
+                          staticClass: "input-group-text",
+                          attrs: { id: "basic-addon2" }
+                        },
+                        [_c("i", { staticClass: "fas fa-key" })]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.form.password,
+                          expression: "form.password"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "Password",
+                        placeholder: "Password",
+                        "aria-label": "Password",
+                        "aria-describedby": "basic-addon2"
+                      },
+                      domProps: { value: _vm.form.password },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.form, "password", $event.target.value)
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { type: "submit" }
+                    },
+                    [_vm._v("Create Account")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          return _vm.hideRegis($event)
+                        }
+                      }
+                    },
+                    [_vm._v("Close")]
+                  )
+                ]
               )
             ])
           ])
@@ -55072,12 +55154,13 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************!*\
   !*** ./resources/js/helpers/auth.js ***!
   \**************************************/
-/*! exports provided: login, getLocalUser */
+/*! exports provided: login, register, getLocalUser */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "register", function() { return register; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getLocalUser", function() { return getLocalUser; });
 /* harmony import */ var _general__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./general */ "./resources/js/helpers/general.js");
 
@@ -55088,6 +55171,16 @@ function login(credentials) {
       res(response.data);
     })["catch"](function (err) {
       rej("Wrong email or password");
+    });
+  });
+}
+function register(credentials) {
+  return new Promise(function (res, rej) {
+    axios.post('/api/register', credentials).then(function (response) {
+      Object(_general__WEBPACK_IMPORTED_MODULE_0__["setAuthorization"])(response.data.access_token);
+      res(response.data);
+    })["catch"](function (err) {
+      rej("Data Error");
     });
   });
 }
@@ -55124,7 +55217,7 @@ function initialize(store, router) {
     if (requiresAuth && !currentUser) {
       next('/login');
     } else if (to.path == '/login' && currentUser) {
-      next('/');
+      next('/about');
     } else {
       next();
     }
@@ -55258,8 +55351,8 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Satrio\download\github\laravue\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Satrio\download\github\laravue\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\prod\laravue\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\prod\laravue\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
