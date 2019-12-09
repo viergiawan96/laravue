@@ -1952,11 +1952,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 
@@ -1969,8 +1964,7 @@ __webpack_require__.r(__webpack_exports__);
         email: '',
         password: ''
       },
-      error: null,
-      RegErr: []
+      error: null
     };
   },
   methods: {
@@ -2008,30 +2002,27 @@ __webpack_require__.r(__webpack_exports__);
     register: function register() {
       var _this2 = this;
 
-      this.RegErr = [];
+      this.$store.dispatch('register');
 
-      if (!this.form.name) {
-        this.RegErr.push("Name required.");
-      } else if (!this.errors.length) {
-        this.$store.dispatch('register');
+      Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["register"])(this.$data.form).then(function (res) {
+        _this2.$store.commit("prosesSuccess", res);
 
-        Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["register"])(this.$data.form).then(function (res) {
-          _this2.$store.commit("prosesSuccess", res);
-
-          _this2.$router.push({
-            path: '/about'
-          });
-
-          _this2.$modal.hide('register');
-        })["catch"](function (error) {
-          console.log(error);
+        _this2.$router.push({
+          path: '/about'
         });
-      }
+
+        _this2.$modal.hide('register');
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
   },
   computed: {
     authError: function authError() {
       return this.$store.getters.authError;
+    },
+    validation: function validation() {
+      return this.form.name.length > 4 && this.form.name.length < 13;
     }
   }
 });
@@ -38518,6 +38509,8 @@ var render = function() {
                       ],
                       staticClass: "form-control",
                       attrs: {
+                        state: _vm.validation,
+                        required: "",
                         type: "text",
                         placeholder: "Name",
                         "aria-label": "Name",
@@ -38558,6 +38551,7 @@ var render = function() {
                       ],
                       staticClass: "form-control",
                       attrs: {
+                        required: "",
                         type: "email",
                         placeholder: "Email",
                         "aria-label": "Email",
@@ -38598,6 +38592,7 @@ var render = function() {
                       ],
                       staticClass: "form-control",
                       attrs: {
+                        required: "",
                         type: "Password",
                         placeholder: "Password",
                         "aria-label": "Password",
@@ -38637,23 +38632,7 @@ var render = function() {
                       }
                     },
                     [_vm._v("Close")]
-                  ),
-                  _vm._v(" "),
-                  _vm.RegErr.length
-                    ? _c("p", [
-                        _c("b", [
-                          _vm._v("Please correct the following error(s):")
-                        ]),
-                        _vm._v(" "),
-                        _c("ul", [
-                          _c(
-                            "li",
-                            { attrs: { "v-for": _vm.error in _vm.RegErr } },
-                            [_vm._v(_vm._s(_vm.error))]
-                          )
-                        ])
-                      ])
-                    : _vm._e()
+                  )
                 ]
               )
             ])

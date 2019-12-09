@@ -82,28 +82,23 @@
                           <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><i class='fas fa-user-alt'></i></span>
                           </div>
-                          <input v-model="form.name" type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="basic-addon1">
+                          <input :state="validation" required v-model="form.name" type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="basic-addon1">
+
                       </div>
                       <div class="input-group mb-3">
                           <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><i class='fas fa-envelope'></i></span>
                           </div>
-                          <input v-model="form.email" type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
+                          <input required v-model="form.email" type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
                       </div>
                       <div class="input-group mb-3">
                           <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon2"><i class="fas fa-key"></i></span>
                           </div>
-                          <input v-model="form.password" type="Password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2">
+                          <input required v-model="form.password" type="Password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2">
                       </div>
                       <button type="submit" class="btn btn-primary">Create Account</button>
                       <button type="button" class="btn btn-danger" @click.prevent="hideRegis">Close</button>
-                      <p v-if="RegErr.length">
-                        <b>Please correct the following error(s):</b>
-                        <ul>
-                          <li :v-for="error in RegErr">{{ error }}</li>
-                        </ul>
-                      </p>
                   </form>
                 </div>
             </div>
@@ -130,7 +125,6 @@ export default {
                     password: ''
                 },
                 error: null,
-                RegErr:[]
             };
         },
   methods :{
@@ -161,13 +155,8 @@ export default {
                     });
       },
       register() {
-          this.RegErr = [];
 
-          if(!this.form.name){
-            this.RegErr.push("Name required.");
-          } else if(!this.errors.length){
-              this.$store.dispatch('register');
-
+          this.$store.dispatch('register');
           register(this.$data.form)
                     .then((res) => {
                         this.$store.commit("prosesSuccess", res);
@@ -177,13 +166,15 @@ export default {
                     .catch((error) => {
                         console.log(error);
                     });
-          }
       }
   },
         computed: {
             authError() {
                 return this.$store.getters.authError;
-            }
+            },
+            validation() {
+            return this.form.name.length > 4 && this.form.name.length < 13
+          }
         }
 }
 </script>
