@@ -5,11 +5,14 @@ export const routes = [
     {
         path: '/',
         name: 'home',
-        component: home
-      },
-      {
-          path: '/about',
-          name: 'about',
-          component: about
+        component: home,
+        meta: {
+          requiresAuth : true
         }
+    },
+    {
+        path: '/about',
+        name: 'about',
+        component: about
+    }
 ]

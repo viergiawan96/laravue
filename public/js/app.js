@@ -55275,7 +55275,10 @@ __webpack_require__.r(__webpack_exports__);
 var routes = [{
   path: '/',
   name: 'home',
-  component: _components_home_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  component: _components_home_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+  meta: {
+    requiresAuth: true
+  }
 }, {
   path: '/about',
   name: 'about',
