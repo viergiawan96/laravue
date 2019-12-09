@@ -1951,6 +1951,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1963,7 +1969,8 @@ __webpack_require__.r(__webpack_exports__);
         email: '',
         password: ''
       },
-      error: null
+      error: null,
+      RegErr: []
     };
   },
   methods: {
@@ -1977,6 +1984,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$modal.show('register');
     },
     hideRegis: function hideRegis() {
+      this.RegErr = [];
       this.$modal.hide('register');
     },
     authenticate: function authenticate() {
@@ -1997,21 +2005,28 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
-    registerrr: function registerrr() {
+    register: function register() {
       var _this2 = this;
 
-      this.$store.dispatch('register');
-      Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["register"])(this.$data.form).then(function (res) {
-        _this2.$store.commit("prosesSuccess", res);
+      this.RegErr = [];
 
-        _this2.$router.push({
-          path: '/about'
+      if (!this.form.name) {
+        this.RegErr.push("Name required.");
+      } else if (!this.errors.length) {
+        this.$store.dispatch('register');
+
+        Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["register"])(this.$data.form).then(function (res) {
+          _this2.$store.commit("prosesSuccess", res);
+
+          _this2.$router.push({
+            path: '/about'
+          });
+
+          _this2.$modal.hide('register');
+        })["catch"](function (error) {
+          console.log(error);
         });
-
-        _this2.$modal.hide('register');
-      })["catch"](function (error) {
-        console.log('errot');
-      });
+      }
     }
   },
   computed: {
@@ -38475,7 +38490,7 @@ var render = function() {
                   on: {
                     submit: function($event) {
                       $event.preventDefault()
-                      return _vm.registerrr($event)
+                      return _vm.register($event)
                     }
                   }
                 },
@@ -38622,7 +38637,23 @@ var render = function() {
                       }
                     },
                     [_vm._v("Close")]
-                  )
+                  ),
+                  _vm._v(" "),
+                  _vm.RegErr.length
+                    ? _c("p", [
+                        _c("b", [
+                          _vm._v("Please correct the following error(s):")
+                        ]),
+                        _vm._v(" "),
+                        _c("ul", [
+                          _c(
+                            "li",
+                            { attrs: { "v-for": _vm.error in _vm.RegErr } },
+                            [_vm._v(_vm._s(_vm.error))]
+                          )
+                        ])
+                      ])
+                    : _vm._e()
                 ]
               )
             ])
@@ -55187,7 +55218,7 @@ function register(credentials) {
       Object(_general__WEBPACK_IMPORTED_MODULE_0__["setAuthorization"])(response.data.access_token);
       res(response.data);
     })["catch"](function (err) {
-      rej("Wrong email or password");
+      rej("koneksi gagal");
     });
   });
 }
@@ -55365,8 +55396,8 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\prod\laravue\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\prod\laravue\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Satrio\download\github\laravue\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Satrio\download\github\laravue\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

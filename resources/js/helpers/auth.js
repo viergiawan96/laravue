@@ -19,8 +19,8 @@ export function register(credentials) {
                 setAuthorization(response.data.access_token);
                 res(response.data);
             })
-            .catch((err) => {
-                rej("Wrong email or password");
+            .catch((err) =>{
+                rej("koneksi gagal");
             })
     })
 }

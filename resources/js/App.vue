@@ -77,7 +77,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <form @submit.prevent="registerrr">
+                  <form @submit.prevent="register">
                       <div class="input-group mb-3">
                           <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><i class='fas fa-user-alt'></i></span>
@@ -98,6 +98,12 @@
                       </div>
                       <button type="submit" class="btn btn-primary">Create Account</button>
                       <button type="button" class="btn btn-danger" @click.prevent="hideRegis">Close</button>
+                      <p v-if="RegErr.length">
+                        <b>Please correct the following error(s):</b>
+                        <ul>
+                          <li :v-for="error in RegErr">{{ error }}</li>
+                        </ul>
+                      </p>
                   </form>
                 </div>
             </div>
@@ -123,7 +129,8 @@ export default {
                     email: '',
                     password: ''
                 },
-                error: null
+                error: null,
+                RegErr:[]
             };
         },
   methods :{
@@ -137,6 +144,7 @@ export default {
         this.$modal.show('register');
       },
       hideRegis(){
+        this.RegErr = [];
         this.$modal.hide('register');
       },
       authenticate() {
@@ -152,8 +160,13 @@ export default {
                         this.$store.commit("loginFailed", {error});
                     });
       },
-      registerrr() {
-          this.$store.dispatch('register');
+      register() {
+          this.RegErr = [];
+
+          if(!this.form.name){
+            this.RegErr.push("Name required.");
+          } else if(!this.errors.length){
+              this.$store.dispatch('register');
 
           register(this.$data.form)
                     .then((res) => {
@@ -162,8 +175,9 @@ export default {
                         this.$modal.hide('register');
                     })
                     .catch((error) => {
-                        console.log('errot');
+                        console.log(error);
                     });
+          }
       }
   },
         computed: {
