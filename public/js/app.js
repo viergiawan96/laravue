@@ -1952,6 +1952,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -1964,10 +1965,15 @@ __webpack_require__.r(__webpack_exports__);
         email: '',
         password: ''
       },
-      error: null
+      error: null,
+      GetUser: ''
     };
   },
   methods: {
+    GetUsr: function GetUsr() {
+      var Usr = this.$store.getters.isLoggedIn;
+      this.GetUser = Usr;
+    },
     showLogin: function showLogin() {
       this.$modal.show('login');
     },
@@ -2015,15 +2021,17 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error);
       });
-    }
+    },
+    logouts: function logouts() {}
   },
   computed: {
     authError: function authError() {
       return this.$store.getters.authError;
-    },
-    validation: function validation() {
-      return this.form.name.length > 4 && this.form.name.length < 13;
     }
+  },
+  mounted: function mounted() {
+    this.GetUsr();
+    console.log(this.$store.getters.isLoggedIn);
   }
 });
 
@@ -38210,6 +38218,14 @@ var render = function() {
                 _c(
                   "a",
                   {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.GetUser,
+                        expression: "!GetUser"
+                      }
+                    ],
                     staticClass: "nav-link",
                     attrs: { href: "#" },
                     on: {
@@ -38220,6 +38236,29 @@ var render = function() {
                     }
                   },
                   [_vm._v("Login")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.GetUser,
+                        expression: "GetUser"
+                      }
+                    ],
+                    staticClass: "nav-link",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        $event.preventDefault()
+                        return _vm.logouts()
+                      }
+                    }
+                  },
+                  [_vm._v("Logouts")]
                 )
               ]),
               _vm._v(" "),
@@ -38227,6 +38266,14 @@ var render = function() {
                 _c(
                   "a",
                   {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.GetUser,
+                        expression: "!GetUser"
+                      }
+                    ],
                     staticClass: "nav-link",
                     attrs: { href: "#" },
                     on: {
@@ -38509,7 +38556,6 @@ var render = function() {
                       ],
                       staticClass: "form-control",
                       attrs: {
-                        state: _vm.validation,
                         required: "",
                         type: "text",
                         placeholder: "Name",
@@ -55240,7 +55286,7 @@ function initialize(store, router) {
     }
   });
   axios.interceptors.response.use(null, function (error) {
-    if (error.resposne.status == 401) {
+    if (error.response.status == 401) {
       store.commit('logout');
       router.push('/login');
     }

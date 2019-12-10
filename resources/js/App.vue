@@ -13,10 +13,11 @@
                             <a class="nav-link"><router-link to="/about">About</router-link></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" @click.prevent="showLogin">Login</a>
+                            <a v-show="!GetUser" class="nav-link" href="#" @click.prevent="showLogin">Login</a>
+                            <a v-show="GetUser" class="nav-link" href="#" @click.prevent="logouts()">Logouts</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" @click.prevent="showRegis">Register</a>
+                            <a v-show="!GetUser" class="nav-link" href="#" @click.prevent="showRegis">Register</a>
                         </li>          
                     </ul>
                 </div>
@@ -82,7 +83,7 @@
                           <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><i class='fas fa-user-alt'></i></span>
                           </div>
-                          <input :state="validation" required v-model="form.name" type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="basic-addon1">
+                          <input required v-model="form.name" type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="basic-addon1">
 
                       </div>
                       <div class="input-group mb-3">
@@ -125,9 +126,14 @@ export default {
                     password: ''
                 },
                 error: null,
+                GetUser: ''
             };
         },
   methods :{
+      GetUsr(){
+        var Usr = this.$store.getters.isLoggedIn;
+        this.GetUser = Usr;
+      },
       showLogin(){
         this.$modal.show('login');
       },
@@ -166,15 +172,19 @@ export default {
                     .catch((error) => {
                         console.log(error);
                     });
+      },
+      logouts() {
+          
       }
   },
         computed: {
             authError() {
                 return this.$store.getters.authError;
-            },
-            validation() {
-            return this.form.name.length > 4 && this.form.name.length < 13
-          }
+            } 
+        },
+        mounted() {
+          this.GetUsr();
+          console.log(this.$store.getters.isLoggedIn);
         }
 }
 </script>
