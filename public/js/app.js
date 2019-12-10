@@ -2022,7 +2022,9 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       });
     },
-    logouts: function logouts() {}
+    logouts: function logouts() {
+      tes;
+    }
   },
   computed: {
     authError: function authError() {

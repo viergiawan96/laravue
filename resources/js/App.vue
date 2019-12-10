@@ -174,7 +174,7 @@ export default {
                     });
       },
       logouts() {
-          
+          tes
       }
   },
         computed: {
