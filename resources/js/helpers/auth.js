@@ -13,14 +13,14 @@ export function login(credentials) {
     })
 }
 export function register(credentials) {
-    return new Promise((res, rej) => {
+    return new Promise((res, err) => {
         axios.post('/api/register', credentials)
             .then((response) => {
                 setAuthorization(response.data.access_token);
                 res(response.data);
             })
-            .catch((err) =>{
-                rej("koneksi gagal");
+            .catch(error => {
+                err(error)
             })
     })
 }

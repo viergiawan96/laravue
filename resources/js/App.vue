@@ -13,11 +13,11 @@
                             <a class="nav-link"><router-link to="/about">About</router-link></a>
                         </li>
                         <li class="nav-item">
-                            <a v-show="!GetUser" class="nav-link" href="#" @click.prevent="showLogin">Login</a>
-                            <a v-show="GetUser" class="nav-link" href="#" @click.prevent="logouts()">Logouts</a>
+                            <a v-if="!isLoggedIn" class="nav-link" href="#" @click.prevent="showLogin">Login</a>
+                            <a v-if="isLoggedIn" class="nav-link" href="#" @click.prevent="logout()">Logout</a>
                         </li>
                         <li class="nav-item">
-                            <a v-show="!GetUser" class="nav-link" href="#" @click.prevent="showRegis">Register</a>
+                            <a v-show="!isLoggedIn" class="nav-link" href="#" @click.prevent="showRegis">Register</a>
                         </li>          
                     </ul>
                 </div>
@@ -83,20 +83,20 @@
                           <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><i class='fas fa-user-alt'></i></span>
                           </div>
-                          <input required v-model="form.name" type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="basic-addon1">
+                          <input required v-model="forms.name" type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="basic-addon1">
 
                       </div>
                       <div class="input-group mb-3">
                           <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1"><i class='fas fa-envelope'></i></span>
                           </div>
-                          <input required v-model="form.email" type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
+                          <input required v-model="forms.email" type="email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
                       </div>
                       <div class="input-group mb-3">
                           <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon2"><i class="fas fa-key"></i></span>
                           </div>
-                          <input required v-model="form.password" type="Password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2">
+                          <input required v-model="forms.password" type="Password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon2">
                       </div>
                       <button type="submit" class="btn btn-primary">Create Account</button>
                       <button type="button" class="btn btn-danger" @click.prevent="hideRegis">Close</button>
@@ -121,19 +121,18 @@ export default {
   data() {
             return {
                 form: {
+                    email: '',
+                    password: ''
+                },
+                forms: {
                     name:'',
                     email: '',
                     password: ''
                 },
-                error: null,
-                GetUser: ''
+                error: null
             };
         },
   methods :{
-      GetUsr(){
-        var Usr = this.$store.getters.isLoggedIn;
-        this.GetUser = Usr;
-      },
       showLogin(){
         this.$modal.show('login');
       },
@@ -161,30 +160,30 @@ export default {
                     });
       },
       register() {
-
           this.$store.dispatch('register');
-          register(this.$data.form)
+          register(this.$data.forms)
                     .then((res) => {
                         this.$store.commit("prosesSuccess", res);
                         this.$router.push({path: '/about'});
                         this.$modal.hide('register');
                     })
                     .catch((error) => {
-                        console.log(error);
+                        console.log(error.response.data);
+                        this.$modal.hide('register');
                     });
       },
-      logouts() {
-          tes
+      logout() {
+        this.$store.commit('logout');
+        this.$router.go();
       }
   },
         computed: {
             authError() {
                 return this.$store.getters.authError;
-            } 
-        },
-        mounted() {
-          this.GetUsr();
-          console.log(this.$store.getters.isLoggedIn);
+            },
+            isLoggedIn() {
+              return this.$store.getters.isLoggedIn;
+            }
         }
 }
 </script>

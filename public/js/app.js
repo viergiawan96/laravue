@@ -1961,19 +1961,18 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       form: {
+        email: '',
+        password: ''
+      },
+      forms: {
         name: '',
         email: '',
         password: ''
       },
-      error: null,
-      GetUser: ''
+      error: null
     };
   },
   methods: {
-    GetUsr: function GetUsr() {
-      var Usr = this.$store.getters.isLoggedIn;
-      this.GetUser = Usr;
-    },
     showLogin: function showLogin() {
       this.$modal.show('login');
     },
@@ -2010,7 +2009,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.$store.dispatch('register');
 
-      Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["register"])(this.$data.form).then(function (res) {
+      Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["register"])(this.$data.forms).then(function (res) {
         _this2.$store.commit("prosesSuccess", res);
 
         _this2.$router.push({
@@ -2019,21 +2018,23 @@ __webpack_require__.r(__webpack_exports__);
 
         _this2.$modal.hide('register');
       })["catch"](function (error) {
-        console.log(error);
+        console.log(error.response.data);
+
+        _this2.$modal.hide('register');
       });
     },
-    logouts: function logouts() {
-      tes;
+    logout: function logout() {
+      this.$store.commit('logout');
+      this.$router.go();
     }
   },
   computed: {
     authError: function authError() {
       return this.$store.getters.authError;
+    },
+    isLoggedIn: function isLoggedIn() {
+      return this.$store.getters.isLoggedIn;
     }
-  },
-  mounted: function mounted() {
-    this.GetUsr();
-    console.log(this.$store.getters.isLoggedIn);
   }
 });
 
@@ -38217,51 +38218,39 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "nav-item" }, [
-                _c(
-                  "a",
-                  {
-                    directives: [
+                !_vm.isLoggedIn
+                  ? _c(
+                      "a",
                       {
-                        name: "show",
-                        rawName: "v-show",
-                        value: !_vm.GetUser,
-                        expression: "!GetUser"
-                      }
-                    ],
-                    staticClass: "nav-link",
-                    attrs: { href: "#" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.showLogin($event)
-                      }
-                    }
-                  },
-                  [_vm._v("Login")]
-                ),
+                        staticClass: "nav-link",
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.showLogin($event)
+                          }
+                        }
+                      },
+                      [_vm._v("Login")]
+                    )
+                  : _vm._e(),
                 _vm._v(" "),
-                _c(
-                  "a",
-                  {
-                    directives: [
+                _vm.isLoggedIn
+                  ? _c(
+                      "a",
                       {
-                        name: "show",
-                        rawName: "v-show",
-                        value: _vm.GetUser,
-                        expression: "GetUser"
-                      }
-                    ],
-                    staticClass: "nav-link",
-                    attrs: { href: "#" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        return _vm.logouts()
-                      }
-                    }
-                  },
-                  [_vm._v("Logouts")]
-                )
+                        staticClass: "nav-link",
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.logout()
+                          }
+                        }
+                      },
+                      [_vm._v("Logout")]
+                    )
+                  : _vm._e()
               ]),
               _vm._v(" "),
               _c("li", { staticClass: "nav-item" }, [
@@ -38272,8 +38261,8 @@ var render = function() {
                       {
                         name: "show",
                         rawName: "v-show",
-                        value: !_vm.GetUser,
-                        expression: "!GetUser"
+                        value: !_vm.isLoggedIn,
+                        expression: "!isLoggedIn"
                       }
                     ],
                     staticClass: "nav-link",
@@ -38552,8 +38541,8 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.form.name,
-                          expression: "form.name"
+                          value: _vm.forms.name,
+                          expression: "forms.name"
                         }
                       ],
                       staticClass: "form-control",
@@ -38564,13 +38553,13 @@ var render = function() {
                         "aria-label": "Name",
                         "aria-describedby": "basic-addon1"
                       },
-                      domProps: { value: _vm.form.name },
+                      domProps: { value: _vm.forms.name },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(_vm.form, "name", $event.target.value)
+                          _vm.$set(_vm.forms, "name", $event.target.value)
                         }
                       }
                     })
@@ -38593,8 +38582,8 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.form.email,
-                          expression: "form.email"
+                          value: _vm.forms.email,
+                          expression: "forms.email"
                         }
                       ],
                       staticClass: "form-control",
@@ -38605,13 +38594,13 @@ var render = function() {
                         "aria-label": "Email",
                         "aria-describedby": "basic-addon1"
                       },
-                      domProps: { value: _vm.form.email },
+                      domProps: { value: _vm.forms.email },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(_vm.form, "email", $event.target.value)
+                          _vm.$set(_vm.forms, "email", $event.target.value)
                         }
                       }
                     })
@@ -38634,8 +38623,8 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.form.password,
-                          expression: "form.password"
+                          value: _vm.forms.password,
+                          expression: "forms.password"
                         }
                       ],
                       staticClass: "form-control",
@@ -38646,13 +38635,13 @@ var render = function() {
                         "aria-label": "Password",
                         "aria-describedby": "basic-addon2"
                       },
-                      domProps: { value: _vm.form.password },
+                      domProps: { value: _vm.forms.password },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(_vm.form, "password", $event.target.value)
+                          _vm.$set(_vm.forms, "password", $event.target.value)
                         }
                       }
                     })
@@ -55240,12 +55229,12 @@ function login(credentials) {
   });
 }
 function register(credentials) {
-  return new Promise(function (res, rej) {
+  return new Promise(function (res, err) {
     axios.post('/api/register', credentials).then(function (response) {
       Object(_general__WEBPACK_IMPORTED_MODULE_0__["setAuthorization"])(response.data.access_token);
       res(response.data);
-    })["catch"](function (err) {
-      rej("koneksi gagal");
+    })["catch"](function (error) {
+      err(error);
     });
   });
 }
@@ -55273,29 +55262,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialize", function() { return initialize; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAuthorization", function() { return setAuthorization; });
 function initialize(store, router) {
-  router.beforeEach(function (to, from, next) {
-    var requiresAuth = to.matched.some(function (record) {
-      return record.meta.requiresAuth;
-    });
-    var currentUser = store.state.currentUser;
-
-    if (requiresAuth && !currentUser) {
-      next('/login');
-    } else if (to.path == '/login' && currentUser) {
-      next('/about');
-    } else {
-      next();
-    }
-  });
-  axios.interceptors.response.use(null, function (error) {
-    if (error.response.status == 401) {
-      store.commit('logout');
-      router.push('/login');
-    }
-
-    return Promise.reject(error);
-  });
-
   if (store.getters.currentUser) {
     setAuthorization(store.getters.currentUser.token);
   }
@@ -55323,14 +55289,14 @@ __webpack_require__.r(__webpack_exports__);
 var routes = [{
   path: '/',
   name: 'home',
-  component: _components_home_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-  meta: {
-    requiresAuth: true
-  }
+  component: _components_home_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
 }, {
   path: '/about',
   name: 'about',
-  component: _components_about_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+  component: _components_about_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+  meta: {
+    requiresAuth: true
+  }
 }];
 
 /***/ }),
