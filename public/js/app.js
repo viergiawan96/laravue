@@ -6693,7 +6693,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#sidebar li[data-v-fa6affac]{\n    text-align: center;\n}\n", ""]);
+exports.push([module.i, "\n#sidebar ul li[data-v-fa6affac]{\n    text-align: center;\n    background-color:red; \n    width: 100%;\n}\n", ""]);
 
 // exports
 
@@ -38869,59 +38869,47 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "div",
-      {
-        staticClass:
-          "col collapse show d-md-flex bg-light pt-2 pl-0 min-vh-100",
-        attrs: { id: "sidebar" }
-      },
+      { staticClass: "col bg-light", attrs: { id: "sidebar" } },
       [
-        _c(
-          "ul",
-          { staticClass: "nav flex-column flex-nowrap overflow-hidden" },
-          [
-            _c("li", { staticClass: "nav-item" }, [
-              _c(
-                "a",
-                { staticClass: "nav-link text-truncate", attrs: { href: "#" } },
-                [
-                  _c("i", { staticClass: "fa fa-home" }),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "d-none d-sm-inline" }, [
-                    _vm._v("Overview")
-                  ])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "nav-item" }, [
-              _c(
-                "a",
-                { staticClass: "nav-link text-truncate", attrs: { href: "#" } },
-                [
-                  _c("i", { staticClass: "fa fa-bar-chart" }),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "d-none d-sm-inline" }, [
-                    _vm._v("Analytics")
-                  ])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "nav-item" }, [
-              _c(
-                "a",
-                { staticClass: "nav-link text-truncate", attrs: { href: "#" } },
-                [
-                  _c("i", { staticClass: "fa fa-download" }),
-                  _vm._v(" "),
-                  _c("span", { staticClass: "d-none d-sm-inline" }, [
-                    _vm._v("Export")
-                  ])
-                ]
-              )
+        _c("ul", { staticClass: "nav" }, [
+          _c("li", { staticClass: "nav-item" }, [
+            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+              _c("i", { staticClass: "fa fa-home" }),
+              _vm._v(" "),
+              _c("span", { staticClass: "d-none d-sm-inline" }, [
+                _vm._v("Overview")
+              ])
             ])
-          ]
-        )
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              { staticClass: "nav-link text-truncate", attrs: { href: "#" } },
+              [
+                _c("i", { staticClass: "fa fa-bar-chart" }),
+                _vm._v(" "),
+                _c("span", { staticClass: "d-none d-sm-inline" }, [
+                  _vm._v("Analytics")
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              { staticClass: "nav-link text-truncate", attrs: { href: "#" } },
+              [
+                _c("i", { staticClass: "fa fa-download" }),
+                _vm._v(" "),
+                _c("span", { staticClass: "d-none d-sm-inline" }, [
+                  _vm._v("Export")
+                ])
+              ]
+            )
+          ])
+        ])
       ]
     )
   }
