@@ -105,7 +105,7 @@
             </div>
           </modal>
 
-          <main class="py-5">
+          <main class="py-1">
               <router-view/>
           </main>
     </div>
