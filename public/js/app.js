@@ -2122,6 +2122,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -6693,7 +6719,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#sidebar ul li[data-v-fa6affac]{\n    text-align: center;\n    background-color:red; \n    width: 100%;\n}\n", ""]);
+exports.push([module.i, "\n.row[data-v-fa6affac] {\n    margin-top: 5%;\n    font-family: 'Cabin', sans-serif;\n}\n#sidebar ul li[data-v-fa6affac]{\n    text-align: center;\n    width: 100%;\n}\n", ""]);
 
 // exports
 
@@ -38855,11 +38881,9 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-10" }, [_c("slide")], 1)
-    ])
+    _c("div", [_c("slide")], 1),
+    _vm._v(" "),
+    _vm._m(0)
   ])
 }
 var staticRenderFns = [
@@ -38867,18 +38891,12 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "col bg-light", attrs: { id: "sidebar" } },
-      [
+    return _c("div", { staticClass: "row container" }, [
+      _c("div", { staticClass: "col ", attrs: { id: "sidebar" } }, [
         _c("ul", { staticClass: "nav" }, [
-          _c("li", { staticClass: "nav-item" }, [
-            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-              _c("i", { staticClass: "fa fa-home" }),
-              _vm._v(" "),
-              _c("span", { staticClass: "d-none d-sm-inline" }, [
-                _vm._v("Overview")
-              ])
+          _c("li", { staticClass: "nav-item border-bottom border-primary" }, [
+            _c("h5", { staticClass: "font-weight-bold" }, [
+              _vm._v(" Kategori ")
             ])
           ]),
           _vm._v(" "),
@@ -38887,10 +38905,8 @@ var staticRenderFns = [
               "a",
               { staticClass: "nav-link text-truncate", attrs: { href: "#" } },
               [
-                _c("i", { staticClass: "fa fa-bar-chart" }),
-                _vm._v(" "),
                 _c("span", { staticClass: "d-none d-sm-inline" }, [
-                  _vm._v("Analytics")
+                  _vm._v("Women")
                 ])
               ]
             )
@@ -38901,17 +38917,89 @@ var staticRenderFns = [
               "a",
               { staticClass: "nav-link text-truncate", attrs: { href: "#" } },
               [
-                _c("i", { staticClass: "fa fa-download" }),
-                _vm._v(" "),
                 _c("span", { staticClass: "d-none d-sm-inline" }, [
-                  _vm._v("Export")
+                  _vm._v("Men")
                 ])
               ]
             )
           ])
         ])
-      ]
-    )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-10" }, [
+        _c(
+          "div",
+          {
+            staticClass: "card shadow p-3 mb-5 bg-white rounded",
+            staticStyle: { width: "19rem" }
+          },
+          [
+            _c("img", {
+              staticClass: "card-img-top",
+              attrs: {
+                src: __webpack_require__(/*! ../../../public/img/product1.jpg */ "./public/img/product1.jpg"),
+                alt: "img_card"
+              }
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "card-body" }, [
+              _c("p", { staticClass: "card-text" }, [
+                _vm._v(
+                  "\n                     The Vans All-Weather MTE Collection features footwear and apparel designed to withstand the elements whilst still looking cool.             "
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "options d-flex flex-fill" }, [
+                _c("select", { staticClass: "custom-select mr-1" }, [
+                  _c("option", { attrs: { selected: "" } }, [_vm._v("Color")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "1" } }, [_vm._v("Green")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "2" } }, [_vm._v("Blue")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "3" } }, [_vm._v("Red")])
+                ]),
+                _vm._v(" "),
+                _c("select", { staticClass: "custom-select ml-1" }, [
+                  _c("option", { attrs: { selected: "" } }, [_vm._v("Size")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "1" } }, [_vm._v("41")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "2" } }, [_vm._v("42")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "3" } }, [_vm._v("43")])
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "buy d-flex justify-content-between align-items-center"
+                },
+                [
+                  _c("div", { staticClass: "price text-success" }, [
+                    _c("h5", { staticClass: "mt-4" }, [_vm._v("$125")])
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-primary mt-3",
+                      attrs: { href: "#" }
+                    },
+                    [
+                      _c("i", { staticClass: "fas fa-shopping-cart" }),
+                      _vm._v(" Add to Cart")
+                    ]
+                  )
+                ]
+              )
+            ])
+          ]
+        )
+      ])
+    ])
   }
 ]
 render._withStripped = true
@@ -55148,6 +55236,17 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./public/img/product1.jpg":
+/*!*********************************!*\
+  !*** ./public/img/product1.jpg ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/product1.jpg?014e05baf2b1c8f75709d408eaab3a6e";
+
+/***/ }),
+
 /***/ "./public/img/slide-05.jpg":
 /*!*********************************!*\
   !*** ./public/img/slide-05.jpg ***!
@@ -55434,15 +55533,14 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************************!*\
   !*** ./resources/js/components/home.vue ***!
   \******************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _home_vue_vue_type_template_id_fa6affac_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./home.vue?vue&type=template&id=fa6affac&scoped=true& */ "./resources/js/components/home.vue?vue&type=template&id=fa6affac&scoped=true&");
 /* harmony import */ var _home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./home.vue?vue&type=script&lang=js& */ "./resources/js/components/home.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _home_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _home_vue_vue_type_style_index_0_id_fa6affac_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home.vue?vue&type=style&index=0&id=fa6affac&scoped=true&lang=css& */ "./resources/js/components/home.vue?vue&type=style&index=0&id=fa6affac&scoped=true&lang=css&");
+/* empty/unused harmony star reexport *//* harmony import */ var _home_vue_vue_type_style_index_0_id_fa6affac_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./home.vue?vue&type=style&index=0&id=fa6affac&scoped=true&lang=css& */ "./resources/js/components/home.vue?vue&type=style&index=0&id=fa6affac&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -55474,7 +55572,7 @@ component.options.__file = "resources/js/components/home.vue"
 /*!*******************************************************************!*\
   !*** ./resources/js/components/home.vue?vue&type=script&lang=js& ***!
   \*******************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
