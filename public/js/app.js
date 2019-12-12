@@ -2150,6 +2150,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -38896,10 +38900,26 @@ var render = function() {
     _c("div", { staticClass: "row container" }, [
       _vm._m(0),
       _vm._v(" "),
-      _c("div", { staticClass: "col-10" }, [
-        _vm._m(1),
-        _vm._v("\n            " + _vm._s(_vm.product.name) + "\n        ")
-      ])
+      _c(
+        "div",
+        { staticClass: "col-10" },
+        [
+          _vm._m(1),
+          _vm._v(" "),
+          _vm._l(_vm.product, function(item) {
+            return _c("ul", { key: _vm.product.id }, [
+              _c("li", [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(item.name_product) +
+                    "\n                "
+                )
+              ])
+            ])
+          })
+        ],
+        2
+      )
     ])
   ])
 }
@@ -55876,7 +55896,7 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
     },
     getProducts: function getProducts(context) {
       axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('api/product').then(function (respone) {
-        context.comit('getProduct', respone.data.product);
+        context.comit('getProduct', respone.data);
       });
     }
   }

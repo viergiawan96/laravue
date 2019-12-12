@@ -40,7 +40,11 @@
                         </div>
                     </div>
                 </div>
-                {{product.name }}
+                <ul v-for="item in product" v-bind:key="product.id">
+                    <li>
+                        {{ item.name_product}}
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

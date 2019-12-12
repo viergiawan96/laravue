@@ -68,7 +68,7 @@ export default {
         getProducts(context) {
             Axios.get('api/product')
             .then((respone) =>{
-                context.comit('getProduct', respone.data.product);
+                context.comit('getProduct', respone.data);
             })
         }
     }
