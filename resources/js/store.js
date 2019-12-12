@@ -1,4 +1,5 @@
 import { getLocalUser } from "./helpers/auth";
+import Axios from "axios";
 
 const user = getLocalUser();
 
@@ -7,7 +8,8 @@ export default {
         currentUser: user,
         isLoggedIn: !!user,
         loading: false,
-        auth_error: null
+        auth_error: null,
+        product:[]
     },
     getters: {
         isLoading(state) {
@@ -21,6 +23,9 @@ export default {
         },
         authError(state) {
             return state.auth_error;
+        },
+        product(state) {
+            return state.product;
         }
     },
     mutations: {
@@ -48,6 +53,9 @@ export default {
             localStorage.removeItem("user");
             state.isLoggedIn = false;
             state.currentUser = null;
+        },
+        getProduct(state, products) {
+            state.product = products;
         }
     },
     actions: {
@@ -56,6 +64,12 @@ export default {
         },
         register(context) {
             context.commit("register");
+        },
+        getProducts(context) {
+            Axios.get('api/product')
+            .then((respone) =>{
+                context.comit('getProduct', respone.data.product);
+            })
         }
     }
 };

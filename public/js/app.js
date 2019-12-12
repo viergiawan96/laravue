@@ -2148,10 +2148,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     slide: _slide_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  computed: {
+    product: function product() {
+      return this.$store.getters.product;
+    }
+  },
+  mounted: function mounted() {
+    console.log(this.$store.getters.product);
   }
 });
 
@@ -38883,7 +38893,14 @@ var render = function() {
   return _c("div", { staticClass: "container" }, [
     _c("div", [_c("slide")], 1),
     _vm._v(" "),
-    _vm._m(0)
+    _c("div", { staticClass: "row container" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-10" }, [
+        _vm._m(1),
+        _vm._v("\n            " + _vm._s(_vm.product.name) + "\n        ")
+      ])
+    ])
   ])
 }
 var staticRenderFns = [
@@ -38891,115 +38908,110 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row container" }, [
-      _c("div", { staticClass: "col ", attrs: { id: "sidebar" } }, [
-        _c("ul", { staticClass: "nav" }, [
-          _c("li", { staticClass: "nav-item border-bottom border-primary" }, [
-            _c("h5", { staticClass: "font-weight-bold" }, [
-              _vm._v(" Kategori ")
+    return _c("div", { staticClass: "col ", attrs: { id: "sidebar" } }, [
+      _c("ul", { staticClass: "nav" }, [
+        _c("li", { staticClass: "nav-item border-bottom border-primary" }, [
+          _c("h5", { staticClass: "font-weight-bold" }, [_vm._v(" Kategori ")])
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            { staticClass: "nav-link text-truncate", attrs: { href: "#" } },
+            [
+              _c("span", { staticClass: "d-none d-sm-inline" }, [
+                _vm._v("Women")
+              ])
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item" }, [
+          _c(
+            "a",
+            { staticClass: "nav-link text-truncate", attrs: { href: "#" } },
+            [_c("span", { staticClass: "d-none d-sm-inline" }, [_vm._v("Men")])]
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "card shadow p-3 mb-5 bg-white rounded",
+        staticStyle: { width: "19rem" }
+      },
+      [
+        _c("img", {
+          staticClass: "card-img-top",
+          attrs: {
+            src: __webpack_require__(/*! ../../../public/img/product1.jpg */ "./public/img/product1.jpg"),
+            alt: "img_card"
+          }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("h4", { staticClass: "card-title" }, [
+            _vm._v("Vans Sk8-Hi MTE Shoes")
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "card-text" }, [
+            _vm._v(
+              "\n                     The Vans All-Weather MTE Collection features footwear and apparel designed to withstand the elements whilst still looking cool.             "
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "options d-flex flex-fill" }, [
+            _c("select", { staticClass: "custom-select mr-1" }, [
+              _c("option", { attrs: { selected: "" } }, [_vm._v("Color")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "1" } }, [_vm._v("Green")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "2" } }, [_vm._v("Blue")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "3" } }, [_vm._v("Red")])
+            ]),
+            _vm._v(" "),
+            _c("select", { staticClass: "custom-select ml-1" }, [
+              _c("option", { attrs: { selected: "" } }, [_vm._v("Size")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "1" } }, [_vm._v("41")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "2" } }, [_vm._v("42")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "3" } }, [_vm._v("43")])
             ])
           ]),
           _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              { staticClass: "nav-link text-truncate", attrs: { href: "#" } },
-              [
-                _c("span", { staticClass: "d-none d-sm-inline" }, [
-                  _vm._v("Women")
-                ])
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c(
-              "a",
-              { staticClass: "nav-link text-truncate", attrs: { href: "#" } },
-              [
-                _c("span", { staticClass: "d-none d-sm-inline" }, [
-                  _vm._v("Men")
-                ])
-              ]
-            )
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-10" }, [
-        _c(
-          "div",
-          {
-            staticClass: "card shadow p-3 mb-5 bg-white rounded",
-            staticStyle: { width: "19rem" }
-          },
-          [
-            _c("img", {
-              staticClass: "card-img-top",
-              attrs: {
-                src: __webpack_require__(/*! ../../../public/img/product1.jpg */ "./public/img/product1.jpg"),
-                alt: "img_card"
-              }
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _c("p", { staticClass: "card-text" }, [
-                _vm._v(
-                  "\n                     The Vans All-Weather MTE Collection features footwear and apparel designed to withstand the elements whilst still looking cool.             "
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "options d-flex flex-fill" }, [
-                _c("select", { staticClass: "custom-select mr-1" }, [
-                  _c("option", { attrs: { selected: "" } }, [_vm._v("Color")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "1" } }, [_vm._v("Green")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "2" } }, [_vm._v("Blue")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "3" } }, [_vm._v("Red")])
-                ]),
-                _vm._v(" "),
-                _c("select", { staticClass: "custom-select ml-1" }, [
-                  _c("option", { attrs: { selected: "" } }, [_vm._v("Size")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "1" } }, [_vm._v("41")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "2" } }, [_vm._v("42")]),
-                  _vm._v(" "),
-                  _c("option", { attrs: { value: "3" } }, [_vm._v("43")])
-                ])
+          _c(
+            "div",
+            {
+              staticClass:
+                "buy d-flex justify-content-between align-items-center"
+            },
+            [
+              _c("div", { staticClass: "price text-success" }, [
+                _c("h5", { staticClass: "mt-4" }, [_vm._v("$125")])
               ]),
               _vm._v(" "),
               _c(
-                "div",
-                {
-                  staticClass:
-                    "buy d-flex justify-content-between align-items-center"
-                },
+                "a",
+                { staticClass: "btn btn-primary mt-3", attrs: { href: "#" } },
                 [
-                  _c("div", { staticClass: "price text-success" }, [
-                    _c("h5", { staticClass: "mt-4" }, [_vm._v("$125")])
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-primary mt-3",
-                      attrs: { href: "#" }
-                    },
-                    [
-                      _c("i", { staticClass: "fas fa-shopping-cart" }),
-                      _vm._v(" Add to Cart")
-                    ]
-                  )
+                  _c("i", { staticClass: "fas fa-shopping-cart" }),
+                  _vm._v(" Add to Cart")
                 ]
               )
-            ])
-          ]
-        )
-      ])
-    ])
+            ]
+          )
+        ])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -55794,6 +55806,9 @@ var routes = [{
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers/auth */ "./resources/js/helpers/auth.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+
 
 var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -55801,7 +55816,8 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
     currentUser: user,
     isLoggedIn: !!user,
     loading: false,
-    auth_error: null
+    auth_error: null,
+    product: []
   },
   getters: {
     isLoading: function isLoading(state) {
@@ -55815,6 +55831,9 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
     },
     authError: function authError(state) {
       return state.auth_error;
+    },
+    product: function product(state) {
+      return state.product;
     }
   },
   mutations: {
@@ -55843,6 +55862,9 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
       localStorage.removeItem("user");
       state.isLoggedIn = false;
       state.currentUser = null;
+    },
+    getProduct: function getProduct(state, products) {
+      state.product = products;
     }
   },
   actions: {
@@ -55851,6 +55873,11 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
     },
     register: function register(context) {
       context.commit("register");
+    },
+    getProducts: function getProducts(context) {
+      axios__WEBPACK_IMPORTED_MODULE_1___default.a.get('api/product').then(function (respone) {
+        context.comit('getProduct', respone.data.product);
+      });
     }
   }
 });

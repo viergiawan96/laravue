@@ -18,3 +18,4 @@ Route::group([ 'prefix' => 'auth'], function ($router) {
 
 Route::post('register', 'registerController@register');
 
+Route::get('product', 'productController@index');

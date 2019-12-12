@@ -17,6 +17,7 @@
                 <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 19rem">
                     <img class="card-img-top" src="../../../public/img/product1.jpg" alt="img_card">
                     <div class="card-body">
+                        <h4 class="card-title">Vans Sk8-Hi MTE Shoes</h4>
                         <p class="card-text">
                          The Vans All-Weather MTE Collection features footwear and apparel designed to withstand the elements whilst still looking cool.             </p>
                         <div class="options d-flex flex-fill">
@@ -39,6 +40,7 @@
                         </div>
                     </div>
                 </div>
+                {{product.name }}
             </div>
         </div>
     </div>
@@ -49,7 +51,16 @@
   export default {
       components: {
           slide
+      },
+      computed: {
+          product() {
+              return this.$store.getters.product;
+          }
+      },
+      mounted() {
+          console.log(this.$store.getters.product);
       }
+
   }
 </script>
 
