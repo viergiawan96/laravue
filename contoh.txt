@@ -1,1 +1,23 @@
 http://laravel-school.com/posts/how-to-add-new-columns-to-the-existing-table-in-laravel-migration-24
+
+-----------
+const app = new Vue({
+  el: "#app",
+  data: function() {
+    return {
+      message: "Vue"
+    }
+  },
+  methods: {
+    onChange(event) {
+      console.log(event.target.value);
+    }
+  }
+})
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<div id="app">
+  <select name="LeaveType" @change="onChange" class="form-control">
+   <option value="1">Annual Leave/ Off-Day</option>
+   <option value="2">On Demand Leave</option>
+</select>
+</div>
