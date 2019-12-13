@@ -24,9 +24,7 @@
                         <div class="options d-flex flex-fill">
                             <select class="custom-select mr-1">
                                 <option selected>Color</option>
-                                <option value="1">Green</option>
-                                <option value="2">Blue</option>
-                                <option value="3">Red</option>
+                                <option value="1">{{prod.color}}</option>
                             </select>
                             <select class="custom-select ml-1">
                                 <option selected>Size</option>
@@ -43,6 +41,7 @@
                 </div>
             </div>
         </div>
+        {{this.$store.getters.product}}
     </div>
 </template>
    
