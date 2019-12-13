@@ -11,7 +11,8 @@ class productController extends Controller
     {
         $product = DB::table('products')->join('color_sizes', 'products.id', 'color_sizes.id_product')
                     ->select('products.id','products.name_product','products.type_product','products.price',
-                    'products.images','color_sizes.color','color_sizes.amount','color_sizes.size')
+                    'products.desc','products.images','color_sizes.color',
+                    'color_sizes.amount','color_sizes.size')
                     ->get();
         return response()->json(compact('product'), 200);
     }

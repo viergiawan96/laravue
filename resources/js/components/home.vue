@@ -14,12 +14,13 @@
                 </ul>
             </div>
             <div class="col-10">
-                <div class="card shadow p-3 mb-5 bg-white rounded" style="width: 19rem">
+                <div v-for="prod in getProd" :key="prod.id" class="card shadow p-3 mb-5 bg-white rounded" style="width: 19rem">
                     <img class="card-img-top" src="../../../public/img/product1.jpg" alt="img_card">
                     <div class="card-body">
-                        <h4 class="card-title">Vans Sk8-Hi MTE Shoes</h4>
+                        <h4 class="card-title">{{prod.name_product}}</h4>
                         <p class="card-text">
-                         The Vans All-Weather MTE Collection features footwear and apparel designed to withstand the elements whilst still looking cool.             </p>
+                         {{prod.desc}}
+                        </p>
                         <div class="options d-flex flex-fill">
                             <select class="custom-select mr-1">
                                 <option selected>Color</option>
@@ -40,32 +41,38 @@
                         </div>
                     </div>
                 </div>
-                <ul v-for="item in product" v-bind:key="product.id">
-                    <li>
-                        {{ item.name_product}}
-                    </li>
-                </ul>
             </div>
         </div>
     </div>
 </template>
    
 <script>
-  import slide from './slide.vue'
-  export default {
-      components: {
-          slide
-      },
-      computed: {
-          product() {
-              return this.$store.getters.product;
-          }
-      },
-      mounted() {
-          console.log(this.$store.getters.product);
-      }
-
-  }
+    import {getProduct} from '../helpers/data/getData';
+    import slide from './slide.vue'
+    export default {
+        components: {
+            slide 
+        },
+        methods: {
+            load(){
+                getProduct()
+                    .then((res) =>{
+                        this.$store.commit('getProduct', res);
+                    })
+                    .catch((err) =>{
+                        console.log(err);
+                    })
+            }
+        },
+        computed: {
+            getProd() {
+                return this.$store.getters.product;
+            }
+        },
+        mounted() {
+            this.load();
+        }
+    }
 </script>
 
 <style scoped>

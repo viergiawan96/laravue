@@ -177,14 +177,14 @@ export default {
         this.$router.go();
       }
   },
-        computed: {
-            authError() {
-                return this.$store.getters.authError;
-            },
-            isLoggedIn() {
-              return this.$store.getters.isLoggedIn;
-            }
-        }
+  computed: {
+      authError() {
+        return this.$store.getters.authError;
+      },
+      isLoggedIn() {
+        return this.$store.getters.isLoggedIn;
+      }
+  }
 }
 </script>
 
