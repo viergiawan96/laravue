@@ -24,13 +24,18 @@
                         <div class="options d-flex flex-fill">
                             <select class="custom-select mr-1">
                                 <option selected>Color</option>
-                                <option value="1">{{prod.color}}</option>
+                                <option value="red">Red</option>
+                                <option value="blue">Blue</option>
+                                <option value="black">Black</option>
+                                <option value="white">White</option>
                             </select>
                             <select class="custom-select ml-1">
                                 <option selected>Size</option>
-                                <option value="1">41</option>
-                                <option value="2">42</option>
-                                <option value="3">43</option>
+                                <option value="S">S</option>
+                                <option value="M">M</option>
+                                <option value="L">L</option>
+                                <option value="XL">XL</option>
+                                <option value="XXL">XXL</option>
                             </select>
                         </div>
                         <div class="buy d-flex justify-content-between align-items-center">

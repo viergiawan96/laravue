@@ -2150,6 +2150,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -38941,19 +38946,7 @@ var render = function() {
                   )
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "options d-flex flex-fill" }, [
-                  _c("select", { staticClass: "custom-select mr-1" }, [
-                    _c("option", { attrs: { selected: "" } }, [
-                      _vm._v("Color")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "1" } }, [
-                      _vm._v(_vm._s(prod.color))
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(1, true)
-                ]),
+                _vm._m(1, true),
                 _vm._v(" "),
                 _vm._m(2, true)
               ])
@@ -39003,14 +38996,32 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("select", { staticClass: "custom-select ml-1" }, [
-      _c("option", { attrs: { selected: "" } }, [_vm._v("Size")]),
+    return _c("div", { staticClass: "options d-flex flex-fill" }, [
+      _c("select", { staticClass: "custom-select mr-1" }, [
+        _c("option", { attrs: { selected: "" } }, [_vm._v("Color")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "red" } }, [_vm._v("Red")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "blue" } }, [_vm._v("Blue")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "black" } }, [_vm._v("Black")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "white" } }, [_vm._v("White")])
+      ]),
       _vm._v(" "),
-      _c("option", { attrs: { value: "1" } }, [_vm._v("41")]),
-      _vm._v(" "),
-      _c("option", { attrs: { value: "2" } }, [_vm._v("42")]),
-      _vm._v(" "),
-      _c("option", { attrs: { value: "3" } }, [_vm._v("43")])
+      _c("select", { staticClass: "custom-select ml-1" }, [
+        _c("option", { attrs: { selected: "" } }, [_vm._v("Size")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "S" } }, [_vm._v("S")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "M" } }, [_vm._v("M")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "L" } }, [_vm._v("L")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "XL" } }, [_vm._v("XL")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "XXL" } }, [_vm._v("XXL")])
+      ])
     ])
   },
   function() {
