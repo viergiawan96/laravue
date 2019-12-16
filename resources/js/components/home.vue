@@ -14,39 +14,45 @@
                 </ul>
             </div>
             <div class="col-10">
-                <div v-for="prod in getProd" :key="prod.id" class="card shadow p-3 mb-5 bg-white rounded" style="width: 19rem">
-                    <img class="card-img-top" src="../../../public/img/product1.jpg" alt="img_card">
-                    <div class="card-body">
-                        <h4 class="card-title">{{prod.name_product}}</h4>
-                        <p class="card-text">
-                         {{prod.desc}}
-                        </p>
-                        <div class="options d-flex flex-fill">
-                            <select class="custom-select mr-1">
-                                <option selected>Color</option>
-                                <option value="red">Red</option>
-                                <option value="blue">Blue</option>
-                                <option value="black">Black</option>
-                                <option value="white">White</option>
-                            </select>
-                            <select class="custom-select ml-1">
-                                <option selected>Size</option>
-                                <option value="S">S</option>
-                                <option value="M">M</option>
-                                <option value="L">L</option>
-                                <option value="XL">XL</option>
-                                <option value="XXL">XXL</option>
-                            </select>
-                        </div>
-                        <div class="buy d-flex justify-content-between align-items-center">
-                            <div class="price text-success"><h5 class="mt-4">$125</h5></div>
-                             <a href="#" class="btn btn-primary mt-3"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
+                <div class="container">
+                    <div class="row">        
+                        <div v-for="prod in getProd" :key="prod.id" class="card shadow p-3 mr-2 bg-white rounded" style="width: 19rem;">
+                            <img class="card-img-top" src="../../../public/img/product1.jpg" alt="img_card">
+                            <div class="card-body">
+                                <h4 class="card-title">{{prod.name_product}}</h4>
+                                <p class="card-text">
+                                {{prod.desc}}
+                                </p>
+                                <form @submit.prevent="add_cart()">
+                                    <input type="hidden" name="hid" :value="prod.id">
+                                    <div class="options d-flex flex-fill">
+                                            <select v-model="from.color" class="custom-select mr-1">
+                                            <option value="selected">Color</option>
+                                            <option value="red">Red</option>
+                                            <option value="blue">Blue</option>
+                                            <option value="black">Black</option>
+                                            <option value="white">White</option>
+                                        </select>
+                                        <select v-model="from.size" class="custom-select ml-1">
+                                            <option value="selected">Size</option>
+                                            <option value="S">S</option>
+                                            <option value="M">M</option>
+                                            <option value="L">L</option>
+                                            <option value="XL">XL</option>
+                                            <option value="XXL">XXL</option>
+                                        </select>
+                                    </div>
+                                    <div class="buy d-flex justify-content-between align-items-center">
+                                        <div class="price text-success"><h5 class="mt-4">Rp.{{ prod.price }}</h5></div>
+                                        <button type="submit" class="btn btn-primary mt-3"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                                    </div>
+                                </form>
+                            </div>   
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> 
         </div>
-        {{this.$store.getters.product}}
     </div>
 </template>
    
@@ -54,6 +60,15 @@
     import {getProduct} from '../helpers/data/getData';
     import slide from './slide.vue'
     export default {
+        data() {
+            return {
+                from: {
+                    id:1,
+                    color:'selected',
+                    size:'selected'
+                }
+            }
+        },
         components: {
             slide 
         },
@@ -66,6 +81,9 @@
                     .catch((err) =>{
                         console.log(err);
                     })
+            },
+            add_cart(){
+                console.log();
             }
         },
         computed: {
@@ -75,6 +93,7 @@
         },
         mounted() {
             this.load();
+            
         }
     }
 </script>

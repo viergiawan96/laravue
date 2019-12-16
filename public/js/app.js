@@ -2155,9 +2155,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      from: {
+        id: 1,
+        color: 'selected',
+        size: 'selected'
+      }
+    };
+  },
   components: {
     slide: _slide_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
@@ -2170,6 +2185,9 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         console.log(err);
       });
+    },
+    add_cart: function add_cart() {
+      console.log();
     }
   },
   computed: {
@@ -38913,50 +38931,202 @@ var render = function() {
     _c("div", { staticClass: "row container" }, [
       _vm._m(0),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-10" },
-        _vm._l(_vm.getProd, function(prod) {
-          return _c(
+      _c("div", { staticClass: "col-10" }, [
+        _c("div", { staticClass: "container" }, [
+          _c(
             "div",
-            {
-              key: prod.id,
-              staticClass: "card shadow p-3 mb-5 bg-white rounded",
-              staticStyle: { width: "19rem" }
-            },
-            [
-              _c("img", {
-                staticClass: "card-img-top",
-                attrs: {
-                  src: __webpack_require__(/*! ../../../public/img/product1.jpg */ "./public/img/product1.jpg"),
-                  alt: "img_card"
-                }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "card-body" }, [
-                _c("h4", { staticClass: "card-title" }, [
-                  _vm._v(_vm._s(prod.name_product))
-                ]),
-                _vm._v(" "),
-                _c("p", { staticClass: "card-text" }, [
-                  _vm._v(
-                    "\n                     " +
-                      _vm._s(prod.desc) +
-                      "\n                    "
-                  )
-                ]),
-                _vm._v(" "),
-                _vm._m(1, true),
-                _vm._v(" "),
-                _vm._m(2, true)
-              ])
-            ]
+            { staticClass: "row" },
+            _vm._l(_vm.getProd, function(prod) {
+              return _c(
+                "div",
+                {
+                  key: prod.id,
+                  staticClass: "card shadow p-3 mr-2 bg-white rounded",
+                  staticStyle: { width: "19rem" }
+                },
+                [
+                  _c("img", {
+                    staticClass: "card-img-top",
+                    attrs: {
+                      src: __webpack_require__(/*! ../../../public/img/product1.jpg */ "./public/img/product1.jpg"),
+                      alt: "img_card"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("h4", { staticClass: "card-title" }, [
+                      _vm._v(_vm._s(prod.name_product))
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "card-text" }, [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(prod.desc) +
+                          "\n                            "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            return _vm.add_cart()
+                          }
+                        }
+                      },
+                      [
+                        _c("input", {
+                          attrs: { type: "hidden", name: "hid" },
+                          domProps: { value: prod.id }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "options d-flex flex-fill" }, [
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.from.color,
+                                  expression: "from.color"
+                                }
+                              ],
+                              staticClass: "custom-select mr-1",
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.from,
+                                    "color",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { value: "selected" } }, [
+                                _vm._v("Color")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "red" } }, [
+                                _vm._v("Red")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "blue" } }, [
+                                _vm._v("Blue")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "black" } }, [
+                                _vm._v("Black")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "white" } }, [
+                                _vm._v("White")
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.from.size,
+                                  expression: "from.size"
+                                }
+                              ],
+                              staticClass: "custom-select ml-1",
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.from,
+                                    "size",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            [
+                              _c("option", { attrs: { value: "selected" } }, [
+                                _vm._v("Size")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "S" } }, [
+                                _vm._v("S")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "M" } }, [
+                                _vm._v("M")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "L" } }, [
+                                _vm._v("L")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "XL" } }, [
+                                _vm._v("XL")
+                              ]),
+                              _vm._v(" "),
+                              _c("option", { attrs: { value: "XXL" } }, [
+                                _vm._v("XXL")
+                              ])
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "buy d-flex justify-content-between align-items-center"
+                          },
+                          [
+                            _c("div", { staticClass: "price text-success" }, [
+                              _c("h5", { staticClass: "mt-4" }, [
+                                _vm._v("Rp." + _vm._s(prod.price))
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _vm._m(1, true)
+                          ]
+                        )
+                      ]
+                    )
+                  ])
+                ]
+              )
+            }),
+            0
           )
-        }),
-        0
-      )
-    ]),
-    _vm._v("\n    " + _vm._s(this.$store.getters.product) + "\n")
+        ])
+      ])
+    ])
   ])
 }
 var staticRenderFns = [
@@ -38996,51 +39166,10 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "options d-flex flex-fill" }, [
-      _c("select", { staticClass: "custom-select mr-1" }, [
-        _c("option", { attrs: { selected: "" } }, [_vm._v("Color")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "red" } }, [_vm._v("Red")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "blue" } }, [_vm._v("Blue")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "black" } }, [_vm._v("Black")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "white" } }, [_vm._v("White")])
-      ]),
-      _vm._v(" "),
-      _c("select", { staticClass: "custom-select ml-1" }, [
-        _c("option", { attrs: { selected: "" } }, [_vm._v("Size")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "S" } }, [_vm._v("S")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "M" } }, [_vm._v("M")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "L" } }, [_vm._v("L")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "XL" } }, [_vm._v("XL")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "XXL" } }, [_vm._v("XXL")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c(
-      "div",
-      { staticClass: "buy d-flex justify-content-between align-items-center" },
-      [
-        _c("div", { staticClass: "price text-success" }, [
-          _c("h5", { staticClass: "mt-4" }, [_vm._v("$125")])
-        ]),
-        _vm._v(" "),
-        _c("a", { staticClass: "btn btn-primary mt-3", attrs: { href: "#" } }, [
-          _c("i", { staticClass: "fas fa-shopping-cart" }),
-          _vm._v(" Add to Cart")
-        ])
-      ]
+      "button",
+      { staticClass: "btn btn-primary mt-3", attrs: { type: "submit" } },
+      [_c("i", { staticClass: "fas fa-shopping-cart" }), _vm._v(" Add to Cart")]
     )
   }
 ]
