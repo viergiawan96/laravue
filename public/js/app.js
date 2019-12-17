@@ -2190,7 +2190,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     getSz: function getSz(event) {
       this.size = event.target.value;
-      console.log(this.size);
     },
     add_cart: function add_cart(id) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('api/GetProduct', {

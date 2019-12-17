@@ -16,11 +16,16 @@ class productController extends Controller
 
     public function store(Request $request)
     {
-       $id = $request->get('id');
-       $color = $request->get('color');
-       $size = $request->get('size');  
+        $id = $request->get('id');
+        $color = $request->get('color');
+        $size = $request->get('size');  
+        $stok = color_size::where('id_product', $id)
+                            ->where('color', $color)
+                            ->where('size', $size)
+                            ->select('amount')
+                            ->get();
 
-       return response()->json($request->get('color'));
+       return response()->json(compact('stok'));
 
     }
 

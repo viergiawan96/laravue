@@ -84,7 +84,6 @@
             },
             getSz(event){
                 this.size = event.target.value;
-                console.log(this.size);
             },
             add_cart(id){
                 axios.post('api/GetProduct',{
