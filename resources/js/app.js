@@ -10,6 +10,7 @@ import StoreData from './store';
 import Vuex from 'vuex';
 import {initialize} from './helpers/general';
  
+
 Vue.use(VModal);
 Vue.use(VueRouter);
 

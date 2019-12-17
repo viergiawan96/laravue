@@ -23,17 +23,16 @@
                                 <p class="card-text">
                                 {{prod.desc}}
                                 </p>
-                                <form @submit.prevent="add_cart()">
-                                    <input type="hidden" name="hid" :value="prod.id">
+                                <form @submit.prevent="add_cart(prod.id)">
                                     <div class="options d-flex flex-fill">
-                                            <select v-model="from.color" class="custom-select mr-1">
+                                        <select v-on:change="getClr($event)" name="color" class="custom-select mr-1">
                                             <option value="selected">Color</option>
                                             <option value="red">Red</option>
                                             <option value="blue">Blue</option>
                                             <option value="black">Black</option>
                                             <option value="white">White</option>
                                         </select>
-                                        <select v-model="from.size" class="custom-select ml-1">
+                                        <select v-on:change="getSz($event)" name="size" class="custom-select ml-1">
                                             <option value="selected">Size</option>
                                             <option value="S">S</option>
                                             <option value="M">M</option>
@@ -58,15 +57,13 @@
    
 <script>
     import {getProduct} from '../helpers/data/getData';
-    import slide from './slide.vue'
+    import slide from './slide.vue';
+    import axios from 'axios';
     export default {
         data() {
             return {
-                from: {
-                    id:1,
-                    color:'selected',
-                    size:'selected'
-                }
+                color :'',
+                size : ''
             }
         },
         components: {
@@ -82,8 +79,22 @@
                         console.log(err);
                     })
             },
-            add_cart(){
-                console.log();
+            getClr(event) {
+                this.color = event.target.value;
+            },
+            getSz(event){
+                this.size = event.target.value;
+                console.log(this.size);
+            },
+            add_cart(id){
+                axios.post('api/GetProduct',{
+                    id : id,
+                    color : this.color,
+                    size : this.size
+                })
+                .then(function (response) {
+                    console.log(response)
+                }) 
             }
         },
         computed: {
@@ -93,7 +104,6 @@
         },
         mounted() {
             this.load();
-            
         }
     }
 </script>

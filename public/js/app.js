@@ -2103,6 +2103,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_data_getData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/data/getData */ "./resources/js/helpers/data/getData.js");
 /* harmony import */ var _slide_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./slide.vue */ "./resources/js/components/slide.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
 //
@@ -2160,17 +2162,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      from: {
-        id: 1,
-        color: 'selected',
-        size: 'selected'
-      }
+      color: '',
+      size: ''
     };
   },
   components: {
@@ -2186,8 +2185,21 @@ __webpack_require__.r(__webpack_exports__);
         console.log(err);
       });
     },
-    add_cart: function add_cart() {
-      console.log();
+    getClr: function getClr(event) {
+      this.color = event.target.value;
+    },
+    getSz: function getSz(event) {
+      this.size = event.target.value;
+      console.log(this.size);
+    },
+    add_cart: function add_cart(id) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('api/GetProduct', {
+        id: id,
+        color: this.color,
+        size: this.size
+      }).then(function (response) {
+        console.log(response);
+      });
     }
   },
   computed: {
@@ -38972,47 +38984,20 @@ var render = function() {
                         on: {
                           submit: function($event) {
                             $event.preventDefault()
-                            return _vm.add_cart()
+                            return _vm.add_cart(prod.id)
                           }
                         }
                       },
                       [
-                        _c("input", {
-                          attrs: { type: "hidden", name: "hid" },
-                          domProps: { value: prod.id }
-                        }),
-                        _vm._v(" "),
                         _c("div", { staticClass: "options d-flex flex-fill" }, [
                           _c(
                             "select",
                             {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.from.color,
-                                  expression: "from.color"
-                                }
-                              ],
                               staticClass: "custom-select mr-1",
+                              attrs: { name: "color" },
                               on: {
                                 change: function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.$set(
-                                    _vm.from,
-                                    "color",
-                                    $event.target.multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  )
+                                  return _vm.getClr($event)
                                 }
                               }
                             },
@@ -39042,33 +39027,11 @@ var render = function() {
                           _c(
                             "select",
                             {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.from.size,
-                                  expression: "from.size"
-                                }
-                              ],
                               staticClass: "custom-select ml-1",
+                              attrs: { name: "size" },
                               on: {
                                 change: function($event) {
-                                  var $$selectedVal = Array.prototype.filter
-                                    .call($event.target.options, function(o) {
-                                      return o.selected
-                                    })
-                                    .map(function(o) {
-                                      var val =
-                                        "_value" in o ? o._value : o.value
-                                      return val
-                                    })
-                                  _vm.$set(
-                                    _vm.from,
-                                    "size",
-                                    $event.target.multiple
-                                      ? $$selectedVal
-                                      : $$selectedVal[0]
-                                  )
+                                  return _vm.getSz($event)
                                 }
                               }
                             },

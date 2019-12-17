@@ -11,9 +11,19 @@ class productController extends Controller
     public function index()
     {
         $product = product::all();
-        $color_size = color_size::all();
-        return response()->json(compact('product','color_size'), 200);
+        return response()->json(compact('product'), 200);
     }
+
+    public function store(Request $request)
+    {
+       $id = $request->get('id');
+       $color = $request->get('color');
+       $size = $request->get('size');  
+
+       return response()->json($request->get('color'));
+
+    }
+
 }
 
 
