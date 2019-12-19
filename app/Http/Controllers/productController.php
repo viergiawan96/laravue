@@ -27,7 +27,7 @@ class productController extends Controller
         {
             /* $getStok->stok = $getStok->stok - 1;
             $getStok->save(); */
-            return response()->json(compact('getStok'), 200);
+            return response()->json(['sukses' => 'stok tersedia'], 200);
         }
     }
 
