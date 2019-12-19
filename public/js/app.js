@@ -2103,25 +2103,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_data_getData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/data/getData */ "./resources/js/helpers/data/getData.js");
 /* harmony import */ var _slide_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./slide.vue */ "./resources/js/components/slide.vue");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2166,12 +2147,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      color: '',
-      size: ''
-    };
-  },
   components: {
     slide: _slide_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
@@ -2191,13 +2166,12 @@ __webpack_require__.r(__webpack_exports__);
     getSz: function getSz(event) {
       this.size = event.target.value;
     },
-    add_cart: function add_cart(id) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('api/GetProduct', {
-        id: id,
-        color: this.color,
-        size: this.size
-      }).then(function (response) {
-        console.log(response);
+    add_cart: function add_cart(prod_id) {
+      var getId = 'id=' + prod_id;
+      Object(_helpers_data_getData__WEBPACK_IMPORTED_MODULE_0__["getStok"])(getId).then(function (res) {
+        console.log(res);
+      })["catch"](function (err) {
+        alert(err);
       });
     }
   },
@@ -38959,7 +38933,7 @@ var render = function() {
                   _c("img", {
                     staticClass: "card-img-top",
                     attrs: {
-                      src: __webpack_require__(/*! ../../../public/img/product1.jpg */ "./public/img/product1.jpg"),
+                      src: __webpack_require__(/*! ../../../public/img/asus.jpg */ "./public/img/asus.jpg"),
                       alt: "img_card"
                     }
                   }),
@@ -38988,80 +38962,6 @@ var render = function() {
                         }
                       },
                       [
-                        _c("div", { staticClass: "options d-flex flex-fill" }, [
-                          _c(
-                            "select",
-                            {
-                              staticClass: "custom-select mr-1",
-                              attrs: { name: "color" },
-                              on: {
-                                change: function($event) {
-                                  return _vm.getClr($event)
-                                }
-                              }
-                            },
-                            [
-                              _c("option", { attrs: { value: "selected" } }, [
-                                _vm._v("Color")
-                              ]),
-                              _vm._v(" "),
-                              _c("option", { attrs: { value: "red" } }, [
-                                _vm._v("Red")
-                              ]),
-                              _vm._v(" "),
-                              _c("option", { attrs: { value: "blue" } }, [
-                                _vm._v("Blue")
-                              ]),
-                              _vm._v(" "),
-                              _c("option", { attrs: { value: "black" } }, [
-                                _vm._v("Black")
-                              ]),
-                              _vm._v(" "),
-                              _c("option", { attrs: { value: "white" } }, [
-                                _vm._v("White")
-                              ])
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "select",
-                            {
-                              staticClass: "custom-select ml-1",
-                              attrs: { name: "size" },
-                              on: {
-                                change: function($event) {
-                                  return _vm.getSz($event)
-                                }
-                              }
-                            },
-                            [
-                              _c("option", { attrs: { value: "selected" } }, [
-                                _vm._v("Size")
-                              ]),
-                              _vm._v(" "),
-                              _c("option", { attrs: { value: "S" } }, [
-                                _vm._v("S")
-                              ]),
-                              _vm._v(" "),
-                              _c("option", { attrs: { value: "M" } }, [
-                                _vm._v("M")
-                              ]),
-                              _vm._v(" "),
-                              _c("option", { attrs: { value: "L" } }, [
-                                _vm._v("L")
-                              ]),
-                              _vm._v(" "),
-                              _c("option", { attrs: { value: "XL" } }, [
-                                _vm._v("XL")
-                              ]),
-                              _vm._v(" "),
-                              _c("option", { attrs: { value: "XXL" } }, [
-                                _vm._v("XXL")
-                              ])
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
                         _c(
                           "div",
                           {
@@ -55369,14 +55269,14 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./public/img/product1.jpg":
-/*!*********************************!*\
-  !*** ./public/img/product1.jpg ***!
-  \*********************************/
+/***/ "./public/img/asus.jpg":
+/*!*****************************!*\
+  !*** ./public/img/asus.jpg ***!
+  \*****************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/images/product1.jpg?014e05baf2b1c8f75709d408eaab3a6e";
+module.exports = "/images/asus.jpg?a4f1233ed6b1da62924a9a6145a62d9c";
 
 /***/ }),
 
@@ -55870,18 +55770,28 @@ function getLocalUser() {
 /*!**********************************************!*\
   !*** ./resources/js/helpers/data/getData.js ***!
   \**********************************************/
-/*! exports provided: getProduct */
+/*! exports provided: getProduct, getStok */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProduct", function() { return getProduct; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getStok", function() { return getStok; });
 function getProduct() {
   return new Promise(function (res, err) {
     axios.get('/api/product').then(function (response) {
       res(response.data.product);
     })["catch"](function (error) {
       err(error);
+    });
+  });
+}
+function getStok(credentials) {
+  return new Promise(function (res, rej) {
+    axios.post('/api/GetProduct', credentials).then(function (response) {
+      res(response.data);
+    })["catch"](function (error) {
+      rej("stok kosong");
     });
   });
 }
@@ -55957,7 +55867,8 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
     isLoggedIn: !!user,
     loading: false,
     auth_error: null,
-    product: []
+    product: [],
+    cart: []
   },
   getters: {
     isLoading: function isLoading(state) {
@@ -55973,6 +55884,9 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
       return state.auth_error;
     },
     product: function product(state) {
+      return state.product;
+    },
+    cart: function cart(state) {
       return state.product;
     }
   },
@@ -56005,6 +55919,9 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
     },
     getProduct: function getProduct(state, product) {
       state.product = product;
+    },
+    getCart: function getCart(state, cart) {
+      state.product = cart;
     }
   },
   actions: {

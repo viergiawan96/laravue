@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\product;
-use App\color_size;
 
 class productController extends Controller
 {
@@ -17,16 +16,19 @@ class productController extends Controller
     public function store(Request $request)
     {
         $id = $request->get('id');
-        $color = $request->get('color');
-        $size = $request->get('size');  
-        $stok = color_size::where('id_product', $id)
-                            ->where('color', $color)
-                            ->where('size', $size)
-                            ->select('amount')
-                            ->get();
+        $getStok =  product::find($id);
+        $a = $getStok->stok;
 
-       return response()->json(compact('stok'));
-
+        if($a === 0 )
+        {
+            return response()->json(['error' => 'stok kosong'], 404);   
+        }
+        else
+        {
+            /* $getStok->stok = $getStok->stok - 1;
+            $getStok->save(); */
+            return response()->json(compact('getStok'), 200);
+        }
     }
 
 }

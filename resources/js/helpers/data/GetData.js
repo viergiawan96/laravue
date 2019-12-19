@@ -9,3 +9,14 @@ export function getProduct() {
             })
     })
 }
+export function getStok(credentials){
+    return new Promise((res, rej) => {
+        axios.post('/api/GetProduct',credentials)
+            .then((response) => {
+                res(response.data);
+            })
+            .catch((error) =>{
+                rej("stok kosong");
+            })
+    })
+}

@@ -8,7 +8,8 @@ export default {
         isLoggedIn: !!user,
         loading: false,
         auth_error: null,
-        product:[]
+        product:[],
+        cart:[]
     },
     getters: {
         isLoading(state) {
@@ -24,6 +25,9 @@ export default {
             return state.auth_error;
         },
         product(state) {
+            return state.product;
+        },
+        cart(state) {
             return state.product;
         }
     },
@@ -55,6 +59,9 @@ export default {
         },
         getProduct(state, product) {
             state.product = product;
+        },
+        getCart(state, cart) {
+            state.product = cart;
         }
     },
     actions: {
