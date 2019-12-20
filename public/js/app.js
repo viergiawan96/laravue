@@ -2148,6 +2148,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -6763,7 +6764,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.row[data-v-fa6affac] {\n    margin-top: 5%;\n    font-family: 'Cabin', sans-serif;\n}\n#sidebar ul li[data-v-fa6affac]{\n    text-align: center;\n    width: 100%;\n}\n.bounce-enter-active[data-v-fa6affac] {\n-webkit-animation: bounce-in-data-v-fa6affac .5s;\n        animation: bounce-in-data-v-fa6affac .5s;\n}\n.bounce-leave-active[data-v-fa6affac] {\nanimation: bounce-in-data-v-fa6affac .5s reverse;\n}\n@-webkit-keyframes bounce-in-data-v-fa6affac {\n0% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n}\n50% {\n    -webkit-transform: scale(1.5);\n            transform: scale(1.5);\n}\n100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n}\n}\n@keyframes bounce-in-data-v-fa6affac {\n0% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n}\n50% {\n    -webkit-transform: scale(1.5);\n            transform: scale(1.5);\n}\n100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n}\n}\n", ""]);
+exports.push([module.i, "\n.row[data-v-fa6affac] {\n        margin-top: 5%;\n        font-family: 'Cabin', sans-serif;\n}\n#sidebar ul li[data-v-fa6affac]{\n        text-align: center;\n        width: 100%;\n}\n.bounce-enter-active[data-v-fa6affac] {\n    -webkit-animation: bounce-in-data-v-fa6affac .5s;\n            animation: bounce-in-data-v-fa6affac .5s;\n}\n.bounce-leave-active[data-v-fa6affac] {\n    animation: bounce-in-data-v-fa6affac .5s reverse;\n}\n@-webkit-keyframes bounce-in-data-v-fa6affac {\n0% {\n        -webkit-transform: scale(0);\n                transform: scale(0);\n}\n50% {\n        -webkit-transform: scale(1.5);\n                transform: scale(1.5);\n}\n100% {\n        -webkit-transform: scale(1);\n                transform: scale(1);\n}\n}\n@keyframes bounce-in-data-v-fa6affac {\n0% {\n        -webkit-transform: scale(0);\n                transform: scale(0);\n}\n50% {\n        -webkit-transform: scale(1.5);\n                transform: scale(1.5);\n}\n100% {\n        -webkit-transform: scale(1);\n                transform: scale(1);\n}\n}\n.cas[data-v-fa6affac] {\n    display:grid;\n    grid-template-columns: repeat(3, auto);\n}\n@media only screen and (max-width: 500px) {\n.cas[data-v-fa6affac] {\n        grid-template-columns: auto;\n        grid-template-rows: auto;\n}\n}\n", ""]);
 
 // exports
 
@@ -38999,10 +39000,13 @@ var render = function() {
           _c(
             "div",
             { staticClass: "row" },
-            _vm._l(_vm.getProd, function(we) {
-              return _c(
-                "transition",
-                { key: we.id, attrs: { name: "bounce", mode: "out-in" } },
+            [
+              _c(
+                "transition-group",
+                {
+                  staticClass: "cas",
+                  attrs: { name: "bounce", mode: "out-in" }
+                },
                 _vm._l(_vm.getProd, function(prod) {
                   return _c(
                     "div",
@@ -39037,6 +39041,19 @@ var render = function() {
                               )
                             ]),
                             _vm._v(" "),
+                            _c("div", { staticClass: "price text-primary" }, [
+                              _c("span", [_vm._v("harga :")]),
+                              _vm._v(" "),
+                              _c("span", [_vm._v("Rp." + _vm._s(prod.price))])
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "price text-primary" }, [
+                              _c("span", [
+                                _vm._v("Stok :"),
+                                _c("span", [_vm._v("Rp." + _vm._s(prod.stok))])
+                              ])
+                            ]),
+                            _vm._v(" "),
                             _c(
                               "form",
                               {
@@ -39052,19 +39069,9 @@ var render = function() {
                                   "div",
                                   {
                                     staticClass:
-                                      "buy d-flex justify-content-between align-items-center"
+                                      "buy d-flex justify-content-center align-items-center"
                                   },
                                   [
-                                    _c(
-                                      "div",
-                                      { staticClass: "price text-success" },
-                                      [
-                                        _c("h5", { staticClass: "mt-4" }, [
-                                          _vm._v("Rp." + _vm._s(prod.price))
-                                        ])
-                                      ]
-                                    ),
-                                    _vm._v(" "),
                                     _c(
                                       "button",
                                       {
@@ -39090,7 +39097,7 @@ var render = function() {
                 }),
                 0
               )
-            }),
+            ],
             1
           )
         ])

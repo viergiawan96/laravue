@@ -17,7 +17,7 @@
             <div class="col-10">
                 <div class="container">
                     <div class="row">     
-                        <transition name="bounce" mode="out-in" v-for="we in getProd" :key="we.id">    
+                        <transition-group name="bounce" mode="out-in" class="cas">    
                             <div v-for="prod in getProd" :key="prod.id" class="card shadow p-3 mr-2 mb-2 bg-white rounded" style="width: 19rem;">
                                 <div data-category="prod.type_product">
                                 <img class="card-img-top" src="../../../public/img/asus.jpg" alt="img_card">
@@ -26,16 +26,17 @@
                                     <p class="card-text">
                                     {{prod.desc}}
                                     </p>
+                                    <div class="price text-primary"><span>harga :</span> <span>Rp.{{ prod.price }}</span></div>
+                                    <div class="price text-primary"><span>Stok :<span>Rp.{{ prod.stok }}</span></span></div>
                                     <form @submit.prevent="add_cart(prod)">
-                                        <div class="buy d-flex justify-content-between align-items-center">
-                                            <div class="price text-success"><h5 class="mt-4">Rp.{{ prod.price }}</h5></div>
+                                        <div class="buy d-flex justify-content-center align-items-center">
                                             <button type="submit" class="btn btn-primary mt-3"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
                                         </div>
                                     </form>
                                 </div>   
                                 </div>
                             </div>
-                        </transition>
+                        </transition-group>
                     </div>
                 </div>
             </div> 
@@ -121,4 +122,14 @@
         transform: scale(1);
     }
     }
+    .cas {
+    display:grid;
+    grid-template-columns: repeat(3, auto);
+}
+@media only screen and (max-width: 500px) {
+    .cas {
+        grid-template-columns: auto;
+        grid-template-rows: auto;
+    }
+}
 </style>
