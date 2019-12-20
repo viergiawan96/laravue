@@ -2146,15 +2146,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      selectedCategory: "all"
-    };
-  },
   components: {
     slide: _slide_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
@@ -2167,12 +2164,6 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         console.log(err);
       });
-    },
-    getClr: function getClr(event) {
-      this.color = event.target.value;
-    },
-    getSz: function getSz(event) {
-      this.size = event.target.value;
     },
     add_cart: function add_cart(prod) {
       var _this2 = this;
@@ -2205,7 +2196,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.load();
-    console.log(this.$store.state.find);
   }
 });
 
@@ -6773,7 +6763,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.row[data-v-fa6affac] {\n    margin-top: 5%;\n    font-family: 'Cabin', sans-serif;\n}\n#sidebar ul li[data-v-fa6affac]{\n    text-align: center;\n    width: 100%;\n}\n", ""]);
+exports.push([module.i, "\n.row[data-v-fa6affac] {\n    margin-top: 5%;\n    font-family: 'Cabin', sans-serif;\n}\n#sidebar ul li[data-v-fa6affac]{\n    text-align: center;\n    width: 100%;\n}\n.bounce-enter-active[data-v-fa6affac] {\n-webkit-animation: bounce-in-data-v-fa6affac .5s;\n        animation: bounce-in-data-v-fa6affac .5s;\n}\n.bounce-leave-active[data-v-fa6affac] {\nanimation: bounce-in-data-v-fa6affac .5s reverse;\n}\n@-webkit-keyframes bounce-in-data-v-fa6affac {\n0% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n}\n50% {\n    -webkit-transform: scale(1.5);\n            transform: scale(1.5);\n}\n100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n}\n}\n@keyframes bounce-in-data-v-fa6affac {\n0% {\n    -webkit-transform: scale(0);\n            transform: scale(0);\n}\n50% {\n    -webkit-transform: scale(1.5);\n            transform: scale(1.5);\n}\n100% {\n    -webkit-transform: scale(1);\n            transform: scale(1);\n}\n}\n", ""]);
 
 // exports
 
@@ -39009,80 +38999,99 @@ var render = function() {
           _c(
             "div",
             { staticClass: "row" },
-            _vm._l(_vm.getProd, function(prod) {
+            _vm._l(_vm.getProd, function(we) {
               return _c(
-                "div",
-                {
-                  key: prod.id,
-                  staticClass: "card shadow p-3 mr-2 bg-white rounded",
-                  staticStyle: { width: "19rem" }
-                },
-                [
-                  _c(
+                "transition",
+                { key: we.id, attrs: { name: "bounce", mode: "out-in" } },
+                _vm._l(_vm.getProd, function(prod) {
+                  return _c(
                     "div",
-                    { attrs: { "data-category": "prod.type_product" } },
+                    {
+                      key: prod.id,
+                      staticClass: "card shadow p-3 mr-2 mb-2 bg-white rounded",
+                      staticStyle: { width: "19rem" }
+                    },
                     [
-                      _c("img", {
-                        staticClass: "card-img-top",
-                        attrs: {
-                          src: __webpack_require__(/*! ../../../public/img/asus.jpg */ "./public/img/asus.jpg"),
-                          alt: "img_card"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "card-body" }, [
-                        _c("h4", { staticClass: "card-title" }, [
-                          _vm._v(_vm._s(prod.name_product))
-                        ]),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "card-text" }, [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(prod.desc) +
-                              "\n                            "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "form",
-                          {
-                            on: {
-                              submit: function($event) {
-                                $event.preventDefault()
-                                return _vm.add_cart(prod)
-                              }
+                      _c(
+                        "div",
+                        { attrs: { "data-category": "prod.type_product" } },
+                        [
+                          _c("img", {
+                            staticClass: "card-img-top",
+                            attrs: {
+                              src: __webpack_require__(/*! ../../../public/img/asus.jpg */ "./public/img/asus.jpg"),
+                              alt: "img_card"
                             }
-                          },
-                          [
+                          }),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "card-body" }, [
+                            _c("h4", { staticClass: "card-title" }, [
+                              _vm._v(_vm._s(prod.name_product))
+                            ]),
+                            _vm._v(" "),
+                            _c("p", { staticClass: "card-text" }, [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(prod.desc) +
+                                  "\n                                "
+                              )
+                            ]),
+                            _vm._v(" "),
                             _c(
-                              "div",
+                              "form",
                               {
-                                staticClass:
-                                  "buy d-flex justify-content-between align-items-center"
+                                on: {
+                                  submit: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.add_cart(prod)
+                                  }
+                                }
                               },
                               [
                                 _c(
                                   "div",
-                                  { staticClass: "price text-success" },
+                                  {
+                                    staticClass:
+                                      "buy d-flex justify-content-between align-items-center"
+                                  },
                                   [
-                                    _c("h5", { staticClass: "mt-4" }, [
-                                      _vm._v("Rp." + _vm._s(prod.price))
-                                    ])
+                                    _c(
+                                      "div",
+                                      { staticClass: "price text-success" },
+                                      [
+                                        _c("h5", { staticClass: "mt-4" }, [
+                                          _vm._v("Rp." + _vm._s(prod.price))
+                                        ])
+                                      ]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-primary mt-3",
+                                        attrs: { type: "submit" }
+                                      },
+                                      [
+                                        _c("i", {
+                                          staticClass: "fas fa-shopping-cart"
+                                        }),
+                                        _vm._v(" Add to Cart")
+                                      ]
+                                    )
                                   ]
-                                ),
-                                _vm._v(" "),
-                                _vm._m(1, true)
+                                )
                               ]
                             )
-                          ]
-                        )
-                      ])
+                          ])
+                        ]
+                      )
                     ]
                   )
-                ]
+                }),
+                0
               )
             }),
-            0
+            1
           )
         ])
       ])
@@ -39097,16 +39106,6 @@ var staticRenderFns = [
     return _c("li", { staticClass: "nav-item border-bottom border-primary" }, [
       _c("h5", { staticClass: "font-weight-bold" }, [_vm._v(" Kategori ")])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      { staticClass: "btn btn-primary mt-3", attrs: { type: "submit" } },
-      [_c("i", { staticClass: "fas fa-shopping-cart" }), _vm._v(" Add to Cart")]
-    )
   }
 ]
 render._withStripped = true

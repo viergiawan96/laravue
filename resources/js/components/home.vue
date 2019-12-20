@@ -16,24 +16,26 @@
             </div>
             <div class="col-10">
                 <div class="container">
-                    <div class="row">        
-                        <div v-for="prod in getProd" :key="prod.id" class="card shadow p-3 mr-2 bg-white rounded" style="width: 19rem;">
-                            <div data-category="prod.type_product">
-                            <img class="card-img-top" src="../../../public/img/asus.jpg" alt="img_card">
-                            <div class="card-body">
-                                <h4 class="card-title">{{prod.name_product}}</h4>
-                                <p class="card-text">
-                                {{prod.desc}}
-                                </p>
-                                <form @submit.prevent="add_cart(prod)">
-                                    <div class="buy d-flex justify-content-between align-items-center">
-                                        <div class="price text-success"><h5 class="mt-4">Rp.{{ prod.price }}</h5></div>
-                                        <button type="submit" class="btn btn-primary mt-3"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
-                                    </div>
-                                </form>
-                            </div>   
+                    <div class="row">     
+                        <transition name="bounce" mode="out-in" v-for="we in getProd" :key="we.id">    
+                            <div v-for="prod in getProd" :key="prod.id" class="card shadow p-3 mr-2 mb-2 bg-white rounded" style="width: 19rem;">
+                                <div data-category="prod.type_product">
+                                <img class="card-img-top" src="../../../public/img/asus.jpg" alt="img_card">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{prod.name_product}}</h4>
+                                    <p class="card-text">
+                                    {{prod.desc}}
+                                    </p>
+                                    <form @submit.prevent="add_cart(prod)">
+                                        <div class="buy d-flex justify-content-between align-items-center">
+                                            <div class="price text-success"><h5 class="mt-4">Rp.{{ prod.price }}</h5></div>
+                                            <button type="submit" class="btn btn-primary mt-3"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
+                                        </div>
+                                    </form>
+                                </div>   
+                                </div>
                             </div>
-                        </div>
+                        </transition>
                     </div>
                 </div>
             </div> 
@@ -46,11 +48,6 @@
     import {getStok} from '../helpers/data/getData';
     import slide from './slide.vue';
     export default {
-        data() {
-            return {
-                selectedCategory: "all"
-            }
-        },
         components: {
             slide 
         },
@@ -63,12 +60,6 @@
                     .catch((err) =>{
                         console.log(err);
                     })
-            },
-            getClr(event) {
-                this.color = event.target.value;
-            },
-            getSz(event){
-                this.size = event.target.value;
             },
             add_cart(prod){
                 var getId = 'id='+prod.id;
@@ -90,7 +81,7 @@
                         })
             },
             fill(id){
-                    this.$store.commit("getFill", id);
+                this.$store.commit("getFill", id);
             }
         },
         computed: {
@@ -100,7 +91,6 @@
         },
         mounted() {
             this.load();
-            console.log(this.$store.state.find)
         }
     }
 </script>
@@ -113,5 +103,22 @@
     #sidebar ul li{
         text-align: center;
         width: 100%;
+    }
+    .bounce-enter-active {
+    animation: bounce-in .5s;
+    }
+    .bounce-leave-active {
+    animation: bounce-in .5s reverse;
+    }
+    @keyframes bounce-in {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: scale(1);
+    }
     }
 </style>
