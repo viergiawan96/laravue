@@ -4,7 +4,7 @@
             <slide/>
         </div>
         <div class="row container">
-            <div class="col " id="sidebar">
+            <div class="col" id="sidebar">
                 <ul class="nav">
                     <li class="nav-item border-bottom border-primary">
                         <h5 class="font-weight-bold"> Kategori </h5>

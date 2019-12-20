@@ -38929,7 +38929,7 @@ var render = function() {
     _c("div", [_c("slide")], 1),
     _vm._v(" "),
     _c("div", { staticClass: "row container" }, [
-      _c("div", { staticClass: "col ", attrs: { id: "sidebar" } }, [
+      _c("div", { staticClass: "col", attrs: { id: "sidebar" } }, [
         _c("ul", { staticClass: "nav" }, [
           _vm._m(0),
           _vm._v(" "),
