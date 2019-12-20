@@ -23,7 +23,7 @@
                                 <p class="card-text">
                                 {{prod.desc}}
                                 </p>
-                                <form @submit.prevent="add_cart(prod.id)">
+                                <form @submit.prevent="add_cart(prod)">
                                     <div class="buy d-flex justify-content-between align-items-center">
                                         <div class="price text-success"><h5 class="mt-4">Rp.{{ prod.price }}</h5></div>
                                         <button type="submit" class="btn btn-primary mt-3"><i class="fas fa-shopping-cart"></i> Add to Cart</button>
@@ -62,11 +62,20 @@
             getSz(event){
                 this.size = event.target.value;
             },
-            add_cart(prod_id){
-                var getId = 'id='+prod_id;
+            add_cart(prod){
+                var getId = 'id='+prod.id;
                 getStok(getId)
                         .then((res) => {
-                            console.log(res);
+                            var getUsr = this.$store.getters.isLoggedIn;
+                            if(!getUsr) {
+                                console.log(this.$store.getters.isLoggedIn);
+                                this.$store.commit("getCart", prod);
+                            }
+                            else {
+                                console.log(this.$store.getters.cart);
+                                this.$store.commit("getCart", prod);
+                            }
+                            
                         })
                         .catch((err) => {
                             alert(err);

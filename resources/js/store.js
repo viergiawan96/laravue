@@ -1,6 +1,8 @@
 import { getLocalUser } from "./helpers/auth";
+import { getLocalCart } from "./helpers/general";
 
 const user = getLocalUser();
+const cart = getLocalCart();
 
 export default {
     state: {
@@ -9,7 +11,7 @@ export default {
         loading: false,
         auth_error: null,
         product:[],
-        cart:[]
+        cart: cart
     },
     getters: {
         isLoading(state) {
@@ -28,7 +30,7 @@ export default {
             return state.product;
         },
         cart(state) {
-            return state.product;
+            return state.cart;
         }
     },
     mutations: {
@@ -45,7 +47,6 @@ export default {
             state.isLoggedIn = true;
             state.loading = false;
             state.currentUser = Object.assign({}, payload.user, {token: payload.access_token});
-
             localStorage.setItem("user", JSON.stringify(state.currentUser));
         },
         loginFailed(state, payload) {
@@ -61,7 +62,8 @@ export default {
             state.product = product;
         },
         getCart(state, cart) {
-            state.product = cart;
+            state.cart = Object.assign(cart);
+            localStorage.setItem("cart", JSON.stringify(state.cart));
         }
     },
     actions: {

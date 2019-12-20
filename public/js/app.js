@@ -2166,10 +2166,22 @@ __webpack_require__.r(__webpack_exports__);
     getSz: function getSz(event) {
       this.size = event.target.value;
     },
-    add_cart: function add_cart(prod_id) {
-      var getId = 'id=' + prod_id;
+    add_cart: function add_cart(prod) {
+      var _this2 = this;
+
+      var getId = 'id=' + prod.id;
       Object(_helpers_data_getData__WEBPACK_IMPORTED_MODULE_0__["getStok"])(getId).then(function (res) {
-        console.log(res);
+        var getUsr = _this2.$store.getters.isLoggedIn;
+
+        if (!getUsr) {
+          console.log(_this2.$store.getters.isLoggedIn);
+
+          _this2.$store.commit("getCart", prod);
+        } else {
+          console.log(_this2.$store.getters.cart);
+
+          _this2.$store.commit("getCart", prod);
+        }
       })["catch"](function (err) {
         alert(err);
       });
@@ -38957,7 +38969,7 @@ var render = function() {
                         on: {
                           submit: function($event) {
                             $event.preventDefault()
-                            return _vm.add_cart(prod.id)
+                            return _vm.add_cart(prod)
                           }
                         }
                       },
@@ -55802,13 +55814,14 @@ function getStok(credentials) {
 /*!*****************************************!*\
   !*** ./resources/js/helpers/general.js ***!
   \*****************************************/
-/*! exports provided: initialize, setAuthorization */
+/*! exports provided: initialize, setAuthorization, getLocalCart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialize", function() { return initialize; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAuthorization", function() { return setAuthorization; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getLocalCart", function() { return getLocalCart; });
 function initialize(store, router) {
   if (store.getters.currentUser) {
     setAuthorization(store.getters.currentUser.token);
@@ -55816,6 +55829,15 @@ function initialize(store, router) {
 }
 function setAuthorization(token) {
   axios.defaults.headers.common["Authorization"] = "Bearer ".concat(token);
+}
+function getLocalCart() {
+  var cartStr = localStorage.getItem("cart");
+
+  if (!cartStr) {
+    return null;
+  }
+
+  return JSON.parse(cartStr);
 }
 
 /***/ }),
@@ -55859,8 +55881,11 @@ var routes = [{
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers/auth */ "./resources/js/helpers/auth.js");
+/* harmony import */ var _helpers_general__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./helpers/general */ "./resources/js/helpers/general.js");
+
 
 var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
+var cart = Object(_helpers_general__WEBPACK_IMPORTED_MODULE_1__["getLocalCart"])();
 /* harmony default export */ __webpack_exports__["default"] = ({
   state: {
     currentUser: user,
@@ -55868,7 +55893,7 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
     loading: false,
     auth_error: null,
     product: [],
-    cart: []
+    cart: cart
   },
   getters: {
     isLoading: function isLoading(state) {
@@ -55887,7 +55912,7 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
       return state.product;
     },
     cart: function cart(state) {
-      return state.product;
+      return state.cart;
     }
   },
   mutations: {
@@ -55921,7 +55946,8 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
       state.product = product;
     },
     getCart: function getCart(state, cart) {
-      state.product = cart;
+      state.cart = Object.assign(cart);
+      localStorage.setItem("cart", JSON.stringify(state.cart));
     }
   },
   actions: {
