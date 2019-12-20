@@ -55893,7 +55893,7 @@ var cart = Object(_helpers_general__WEBPACK_IMPORTED_MODULE_1__["getLocalCart"])
     loading: false,
     auth_error: null,
     product: [],
-    cart: cart
+    cart: []
   },
   getters: {
     isLoading: function isLoading(state) {
@@ -55946,7 +55946,7 @@ var cart = Object(_helpers_general__WEBPACK_IMPORTED_MODULE_1__["getLocalCart"])
       state.product = product;
     },
     getCart: function getCart(state, cart) {
-      state.cart = Object.assign(cart);
+      state.cart.push(cart);
       localStorage.setItem("cart", JSON.stringify(state.cart));
     }
   },

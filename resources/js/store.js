@@ -11,7 +11,7 @@ export default {
         loading: false,
         auth_error: null,
         product:[],
-        cart: cart
+        cart: []
     },
     getters: {
         isLoading(state) {
@@ -62,7 +62,7 @@ export default {
             state.product = product;
         },
         getCart(state, cart) {
-            state.cart = Object.assign(cart);
+            state.cart.push(cart);
             localStorage.setItem("cart", JSON.stringify(state.cart));
         }
     },

@@ -12,7 +12,7 @@ export function getLocalCart() {
     const cartStr = localStorage.getItem("cart");
 
     if(!cartStr) {
-        return null
+        return null;
     }
 
     return JSON.parse(cartStr);
