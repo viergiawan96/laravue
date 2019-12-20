@@ -39021,7 +39021,7 @@ var staticRenderFns = [
             { staticClass: "nav-link text-truncate", attrs: { href: "#" } },
             [
               _c("span", { staticClass: "d-none d-sm-inline" }, [
-                _vm._v("Women")
+                _vm._v("Laptop")
               ])
             ]
           )
@@ -39031,7 +39031,11 @@ var staticRenderFns = [
           _c(
             "a",
             { staticClass: "nav-link text-truncate", attrs: { href: "#" } },
-            [_c("span", { staticClass: "d-none d-sm-inline" }, [_vm._v("Men")])]
+            [
+              _c("span", { staticClass: "d-none d-sm-inline" }, [
+                _vm._v("Handphone")
+              ])
+            ]
           )
         ])
       ])

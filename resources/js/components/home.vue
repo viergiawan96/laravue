@@ -9,8 +9,8 @@
                     <li class="nav-item border-bottom border-primary">
                         <h5 class="font-weight-bold"> Kategori </h5>
                     </li>
-                    <li class="nav-item"><a class="nav-link text-truncate" href="#"> <span class="d-none d-sm-inline">Women</span></a></li>
-                    <li class="nav-item"><a class="nav-link text-truncate" href="#"> <span class="d-none d-sm-inline">Men</span></a></li>
+                    <li class="nav-item"><a class="nav-link text-truncate" href="#"> <span class="d-none d-sm-inline">Laptop</span></a></li>
+                    <li class="nav-item"><a class="nav-link text-truncate" href="#"> <span class="d-none d-sm-inline">Handphone</span></a></li>
                 </ul>
             </div>
             <div class="col-10">
