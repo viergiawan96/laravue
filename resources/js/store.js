@@ -11,7 +11,7 @@ export default {
         loading: false,
         auth_error: null,
         product:[],
-        cart: []
+        cart: cart
     },
     getters: {
         isLoading(state) {

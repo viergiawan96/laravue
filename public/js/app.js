@@ -55893,7 +55893,7 @@ var cart = Object(_helpers_general__WEBPACK_IMPORTED_MODULE_1__["getLocalCart"])
     loading: false,
     auth_error: null,
     product: [],
-    cart: []
+    cart: cart
   },
   getters: {
     isLoading: function isLoading(state) {
