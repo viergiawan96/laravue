@@ -9,14 +9,16 @@
                     <li class="nav-item border-bottom border-primary">
                         <h5 class="font-weight-bold"> Kategori </h5>
                     </li>
-                    <li class="nav-item"><a class="nav-link text-truncate" href="#"> <span class="d-none d-sm-inline">Laptop</span></a></li>
-                    <li class="nav-item"><a class="nav-link text-truncate" href="#"> <span class="d-none d-sm-inline">Handphone</span></a></li>
+                    <li class="nav-item"><a class="nav-link text-truncate" @click="fill(0)" type="submit"> <span class="d-none d-sm-inline">All</span></a></li>
+                    <li class="nav-item"><a class="nav-link text-truncate" @click="fill(1)" type="submit"> <span class="d-none d-sm-inline">Laptop</span></a></li>
+                    <li class="nav-item"><a class="nav-link text-truncate" @click="fill(2)" type="submit"> <span class="d-none d-sm-inline">Handphone</span></a></li>
                 </ul>
             </div>
             <div class="col-10">
                 <div class="container">
                     <div class="row">        
                         <div v-for="prod in getProd" :key="prod.id" class="card shadow p-3 mr-2 bg-white rounded" style="width: 19rem;">
+                            <div data-category="prod.type_product">
                             <img class="card-img-top" src="../../../public/img/asus.jpg" alt="img_card">
                             <div class="card-body">
                                 <h4 class="card-title">{{prod.name_product}}</h4>
@@ -30,6 +32,7 @@
                                     </div>
                                 </form>
                             </div>   
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -43,6 +46,11 @@
     import {getStok} from '../helpers/data/getData';
     import slide from './slide.vue';
     export default {
+        data() {
+            return {
+                selectedCategory: "all"
+            }
+        },
         components: {
             slide 
         },
@@ -80,6 +88,9 @@
                         .catch((err) => {
                             alert(err);
                         })
+            },
+            fill(id){
+                    this.$store.commit("getFill", id);
             }
         },
         computed: {
@@ -89,7 +100,7 @@
         },
         mounted() {
             this.load();
-            console.log(this.$store.getters.getCart);
+            console.log(this.$store.state.find)
         }
     }
 </script>

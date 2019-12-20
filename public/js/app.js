@@ -2143,10 +2143,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      selectedCategory: "all"
+    };
+  },
   components: {
     slide: _slide_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
@@ -2185,6 +2193,9 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         alert(err);
       });
+    },
+    fill: function fill(id) {
+      this.$store.commit("getFill", id);
     }
   },
   computed: {
@@ -2194,7 +2205,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.load();
-    console.log(this.$store.getters.getCart);
+    console.log(this.$store.state.find);
   }
 });
 
@@ -38927,7 +38938,71 @@ var render = function() {
     _c("div", [_c("slide")], 1),
     _vm._v(" "),
     _c("div", { staticClass: "row container" }, [
-      _vm._m(0),
+      _c("div", { staticClass: "col ", attrs: { id: "sidebar" } }, [
+        _c("ul", { staticClass: "nav" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link text-truncate",
+                attrs: { type: "submit" },
+                on: {
+                  click: function($event) {
+                    return _vm.fill(0)
+                  }
+                }
+              },
+              [
+                _c("span", { staticClass: "d-none d-sm-inline" }, [
+                  _vm._v("All")
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link text-truncate",
+                attrs: { type: "submit" },
+                on: {
+                  click: function($event) {
+                    return _vm.fill(1)
+                  }
+                }
+              },
+              [
+                _c("span", { staticClass: "d-none d-sm-inline" }, [
+                  _vm._v("Laptop")
+                ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "nav-item" }, [
+            _c(
+              "a",
+              {
+                staticClass: "nav-link text-truncate",
+                attrs: { type: "submit" },
+                on: {
+                  click: function($event) {
+                    return _vm.fill(2)
+                  }
+                }
+              },
+              [
+                _c("span", { staticClass: "d-none d-sm-inline" }, [
+                  _vm._v("Handphone")
+                ])
+              ]
+            )
+          ])
+        ])
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-10" }, [
         _c("div", { staticClass: "container" }, [
@@ -38943,57 +39018,67 @@ var render = function() {
                   staticStyle: { width: "19rem" }
                 },
                 [
-                  _c("img", {
-                    staticClass: "card-img-top",
-                    attrs: {
-                      src: __webpack_require__(/*! ../../../public/img/asus.jpg */ "./public/img/asus.jpg"),
-                      alt: "img_card"
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "card-body" }, [
-                    _c("h4", { staticClass: "card-title" }, [
-                      _vm._v(_vm._s(prod.name_product))
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "card-text" }, [
-                      _vm._v(
-                        "\n                            " +
-                          _vm._s(prod.desc) +
-                          "\n                            "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "form",
-                      {
-                        on: {
-                          submit: function($event) {
-                            $event.preventDefault()
-                            return _vm.add_cart(prod)
-                          }
+                  _c(
+                    "div",
+                    { attrs: { "data-category": "prod.type_product" } },
+                    [
+                      _c("img", {
+                        staticClass: "card-img-top",
+                        attrs: {
+                          src: __webpack_require__(/*! ../../../public/img/asus.jpg */ "./public/img/asus.jpg"),
+                          alt: "img_card"
                         }
-                      },
-                      [
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("h4", { staticClass: "card-title" }, [
+                          _vm._v(_vm._s(prod.name_product))
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "card-text" }, [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(prod.desc) +
+                              "\n                            "
+                          )
+                        ]),
+                        _vm._v(" "),
                         _c(
-                          "div",
+                          "form",
                           {
-                            staticClass:
-                              "buy d-flex justify-content-between align-items-center"
+                            on: {
+                              submit: function($event) {
+                                $event.preventDefault()
+                                return _vm.add_cart(prod)
+                              }
+                            }
                           },
                           [
-                            _c("div", { staticClass: "price text-success" }, [
-                              _c("h5", { staticClass: "mt-4" }, [
-                                _vm._v("Rp." + _vm._s(prod.price))
-                              ])
-                            ]),
-                            _vm._v(" "),
-                            _vm._m(1, true)
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "buy d-flex justify-content-between align-items-center"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  { staticClass: "price text-success" },
+                                  [
+                                    _c("h5", { staticClass: "mt-4" }, [
+                                      _vm._v("Rp." + _vm._s(prod.price))
+                                    ])
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _vm._m(1, true)
+                              ]
+                            )
                           ]
                         )
-                      ]
-                    )
-                  ])
+                      ])
+                    ]
+                  )
                 ]
               )
             }),
@@ -39009,36 +39094,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col ", attrs: { id: "sidebar" } }, [
-      _c("ul", { staticClass: "nav" }, [
-        _c("li", { staticClass: "nav-item border-bottom border-primary" }, [
-          _c("h5", { staticClass: "font-weight-bold" }, [_vm._v(" Kategori ")])
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "nav-item" }, [
-          _c(
-            "a",
-            { staticClass: "nav-link text-truncate", attrs: { href: "#" } },
-            [
-              _c("span", { staticClass: "d-none d-sm-inline" }, [
-                _vm._v("Laptop")
-              ])
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("li", { staticClass: "nav-item" }, [
-          _c(
-            "a",
-            { staticClass: "nav-link text-truncate", attrs: { href: "#" } },
-            [
-              _c("span", { staticClass: "d-none d-sm-inline" }, [
-                _vm._v("Handphone")
-              ])
-            ]
-          )
-        ])
-      ])
+    return _c("li", { staticClass: "nav-item border-bottom border-primary" }, [
+      _c("h5", { staticClass: "font-weight-bold" }, [_vm._v(" Kategori ")])
     ])
   },
   function() {
@@ -55899,7 +55956,8 @@ var cart = Object(_helpers_general__WEBPACK_IMPORTED_MODULE_1__["getLocalCart"])
     auth_error: null,
     product: [],
     cart: [],
-    getCart: cart
+    getCart: cart,
+    find: 0
   },
   getters: {
     isLoading: function isLoading(state) {
@@ -55915,7 +55973,15 @@ var cart = Object(_helpers_general__WEBPACK_IMPORTED_MODULE_1__["getLocalCart"])
       return state.auth_error;
     },
     product: function product(state) {
-      return state.product;
+      var cate = state.find;
+
+      if (cate === 0) {
+        return state.product;
+      } else {
+        return state.product.filter(function (product) {
+          return product.type_product === state.find;
+        });
+      }
     },
     cart: function cart(state) {
       return state.cart;
@@ -55957,6 +56023,9 @@ var cart = Object(_helpers_general__WEBPACK_IMPORTED_MODULE_1__["getLocalCart"])
     getCart: function getCart(state, cart) {
       state.cart.push(cart);
       localStorage.setItem("cart", JSON.stringify(state.cart));
+    },
+    getFill: function getFill(state, idFill) {
+      state.find = idFill;
     }
   },
   actions: {

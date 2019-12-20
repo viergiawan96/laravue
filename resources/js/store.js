@@ -12,7 +12,8 @@ export default {
         auth_error: null,
         product:[],
         cart: [],
-        getCart: cart
+        getCart: cart,
+        find: 0
     },
     getters: {
         isLoading(state) {
@@ -28,7 +29,14 @@ export default {
             return state.auth_error;
         },
         product(state) {
-            return state.product;
+            var cate = state.find;
+            if (cate === 0) {
+                return state.product;
+            }else {
+                return state.product.filter(function (product) {
+                    return product.type_product === state.find;
+                })
+            }
         },
         cart(state) {
             return state.cart;
@@ -68,6 +76,9 @@ export default {
         getCart(state, cart) {
             state.cart.push(cart);
             localStorage.setItem("cart", JSON.stringify(state.cart));
+        },
+        getFill(state, idFill) {
+            state.find = idFill;
         }
     },
     actions: {
