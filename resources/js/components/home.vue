@@ -89,6 +89,7 @@
         },
         mounted() {
             this.load();
+            console.log(this.$store.getters.getCart);
         }
     }
 </script>

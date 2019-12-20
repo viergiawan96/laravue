@@ -2194,6 +2194,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.load();
+    console.log(this.$store.getters.getCart);
   }
 });
 
@@ -55837,7 +55838,7 @@ function getLocalCart() {
     return null;
   }
 
-  return JSON.parse(cartStr);
+  return cartStr;
 }
 
 /***/ }),
@@ -55893,7 +55894,8 @@ var cart = Object(_helpers_general__WEBPACK_IMPORTED_MODULE_1__["getLocalCart"])
     loading: false,
     auth_error: null,
     product: [],
-    cart: cart
+    cart: [],
+    getCart: cart
   },
   getters: {
     isLoading: function isLoading(state) {
@@ -55913,6 +55915,9 @@ var cart = Object(_helpers_general__WEBPACK_IMPORTED_MODULE_1__["getLocalCart"])
     },
     cart: function cart(state) {
       return state.cart;
+    },
+    getCart: function getCart(state) {
+      return state.getCart;
     }
   },
   mutations: {
@@ -55980,8 +55985,8 @@ var cart = Object(_helpers_general__WEBPACK_IMPORTED_MODULE_1__["getLocalCart"])
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Satrio\download\github\laravue\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Satrio\download\github\laravue\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\prod\laravue\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\prod\laravue\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

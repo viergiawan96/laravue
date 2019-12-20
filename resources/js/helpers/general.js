@@ -15,5 +15,5 @@ export function getLocalCart() {
         return null;
     }
 
-    return JSON.parse(cartStr);
+    return cartStr;
 }

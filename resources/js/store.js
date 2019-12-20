@@ -11,7 +11,8 @@ export default {
         loading: false,
         auth_error: null,
         product:[],
-        cart: cart
+        cart: [],
+        getCart: cart
     },
     getters: {
         isLoading(state) {
@@ -31,6 +32,9 @@ export default {
         },
         cart(state) {
             return state.cart;
+        },
+        getCart(state) {
+            return state.getCart;
         }
     },
     mutations: {
