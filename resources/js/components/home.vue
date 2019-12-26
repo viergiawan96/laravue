@@ -149,7 +149,6 @@
                                 console.log(getUsr);
                                 this.showLogin();
                             }
-                            
                         })
                         .catch((err) => {
                             alert(err);
