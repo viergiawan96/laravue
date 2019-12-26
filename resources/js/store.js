@@ -1,8 +1,6 @@
 import { getLocalUser } from "./helpers/auth";
-import { getLocalCart } from "./helpers/general";
 
 const user = getLocalUser();
-const cart = getLocalCart();
 
 export default {
     state: {
@@ -12,7 +10,6 @@ export default {
         auth_error: null,
         product:[],
         cart: [],
-        getCart: cart,
         find: 0
     },
     getters: {
@@ -40,9 +37,6 @@ export default {
         },
         cart(state) {
             return state.cart;
-        },
-        getCart(state) {
-            return state.getCart;
         }
     },
     mutations: {
@@ -73,12 +67,11 @@ export default {
         getProduct(state, product) {
             state.product = product;
         },
-        getCart(state, cart) {
-            state.cart.push(cart);
-            localStorage.setItem("cart", JSON.stringify(state.cart));
-        },
         getFill(state, idFill) {
             state.find = idFill;
+        },
+        getCart(state, cart) {
+            state.cart.push(cart);
         }
     },
     actions: {

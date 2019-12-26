@@ -52,11 +52,6 @@
                       </div>
                       <button type="submit" class="btn btn-primary">Login</button>
                       <button type="button" class="btn btn-danger" @click.prevent="hideLogin">Close</button>
-                      <div class="form-group row" v-if="authError">
-                            <p class="error">
-                                {{ authError }}
-                            </p>
-                      </div>
                   </form>
                 </div>
             </div>
@@ -152,11 +147,12 @@ export default {
                 login(this.$data.form)
                     .then((res) => {
                         this.$store.commit("prosesSuccess", res);
-                        this.$router.push({path: '/about'});
+                        this.$router.push({path: '/'});
                         this.$modal.hide('login');
                     })
                     .catch((error) => {
                         this.$store.commit("loginFailed", {error});
+                        alert(this.$store.getters.authError);
                     });
       },
       register() {

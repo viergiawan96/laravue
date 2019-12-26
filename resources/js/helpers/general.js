@@ -7,13 +7,11 @@ export function initialize(store, router) {
 export function setAuthorization(token) {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`
 }
-
-export function getLocalCart() {
-    const cartStr = localStorage.getItem("cart");
-
-    if(!cartStr) {
-        return null;
-    }
-
-    return cartStr;
+export function pushCart(credentials) {
+    return new Promise((res, err) => {
+        axios.post('/api/auth/cart', credentials)
+             .then((res) => {
+                 
+             })
+    })
 }
