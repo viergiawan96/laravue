@@ -12,6 +12,9 @@
                         <li class="nav-item">
                             <a class="nav-link"><router-link to="/about">About</router-link></a>
                         </li>
+                        <li v-if="isLoggedIn" class="nav-item">
+                            <a class="nav-link"><router-link to="/cart">Cart</router-link></a>
+                        </li>
                         <li class="nav-item">
                             <a v-if="!isLoggedIn" class="nav-link" href="#" @click.prevent="showLogin">Login</a>
                             <a v-if="isLoggedIn" class="nav-link" href="#" @click.prevent="logout()">Logout</a>

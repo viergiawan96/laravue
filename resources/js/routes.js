@@ -1,5 +1,6 @@
 import home from './components/home.vue';
 import about from './components/about.vue';
+import cart from './components/cart.vue'
 
 export const routes = [
     {
@@ -14,5 +15,10 @@ export const routes = [
         meta: {
             requiresAuth : true
           }
+    },
+    {
+        path : '/cart',
+        name : 'cart',
+        component : cart
     }
 ]

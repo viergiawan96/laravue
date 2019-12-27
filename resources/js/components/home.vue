@@ -19,8 +19,9 @@
                     <div class="row">     
                         <transition-group name="bounce" mode="out-in" class="cas">    
                             <div v-for="prod in getProd" :key="prod.id" class="card shadow p-3 mr-2 mb-2 bg-white rounded" style="width: 19rem;">
-                                <div data-category="prod.type_product">
-                                <img class="card-img-top" :src="'img/'+prod.images" alt="img_card">
+                                    <div style="height: 200px; margin-top: 10px;">
+                                        <img class="card-img-top" :src="'img/'+prod.images" alt="img_card">
+                                    </div>
                                 <div class="card-body">
                                     <h4 class="card-title">{{prod.name_product}}</h4>
                                     <p class="card-text">
@@ -34,7 +35,6 @@
                                         </div>
                                     </form>
                                 </div>   
-                                </div>
                             </div>
                         </transition-group>
                     </div>
@@ -137,7 +137,7 @@
                 this.carts.id_product = prod.id;
                 getStok(getId)
                         .then((res) => {
-                            var getUsr = this.carts.id_user;
+                            var getUsr = this.$store.getters.isLoggedIn;
                             if(getUsr) {
                             this.carts.id_user = this.$store.getters.currentUser.id;
                                 pushCart(this.$data.carts)
