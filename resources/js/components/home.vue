@@ -84,6 +84,7 @@
     import slide from './slide.vue';
     import {login} from '../helpers/auth';
     import {pushCart} from '../helpers/general';
+    
 
     export default {
         data() {
@@ -94,7 +95,7 @@
                 },
                 carts: {
                     id_product:'',
-                    id_user: this.$store.getters.currentUser.id
+                    id_user:''
                 }
             }
         },
@@ -132,14 +133,29 @@
                     this.$modal.hide('login');
             },
             add_cart(prod){
+                var getId = 'id='+prod.id;
                 this.carts.id_product = prod.id;
-                getStok(this.carts.id_product)
+                getStok(getId)
                         .then((res) => {
-                            var getUsr = this.$store.getters.isLoggedIn;
+                            var getUsr = this.carts.id_user;
                             if(getUsr) {
+                            this.carts.id_user = this.$store.getters.currentUser.id;
                                 pushCart(this.$data.carts)
                                     .then((res) => {
-                                        this.$store.commit("getCart", res);
+
+                                        if(res === 'false'){
+                                            this.$swal.fire(
+                                                 prod.name_product,
+                                                'Berhasil di masukan keranjang',
+                                                'success'
+                                            );
+                                        } else {
+                                            this.$swal.fire(
+                                                 prod.name_product,
+                                                'Berhasil di tambahkan keranjang',
+                                                'success'
+                                            );
+                                        }
                                     })
                                     .catch((err) => {
                                         console.log('koneksi bermasalah');
@@ -149,9 +165,7 @@
                                 console.log(getUsr);
                                 this.showLogin();
                             }
-                        })
-                        .catch((err) => {
-                            alert(err);
+                            
                         })
             },
             fill(id){

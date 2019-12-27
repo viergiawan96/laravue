@@ -16,13 +16,13 @@ class CreateTmpCartsTable extends Migration
         Schema::create('tmp_carts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
-            $table->string('id_product');
+            $table->bigInteger('id_product');
             $table->bigInteger('id_user');
-            $table->bigInteger('quantity');
-            $table->string('dest_add');
-            $table->string('ship_method');
-            $table->string('ship_price');
-            $table->string('resi');
+            $table->bigInteger('quantity')->nullable();
+            $table->string('dest_add')->nullable();
+            $table->string('ship_method')->nullable();
+            $table->string('ship_price')->nullable();
+            $table->string('resi')->nullable();
         });
     }
 

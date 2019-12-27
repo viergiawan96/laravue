@@ -9,10 +9,13 @@ import VModal from 'vue-js-modal';
 import StoreData from './store';
 import Vuex from 'vuex';
 import {initialize} from './helpers/general';
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
  
 
 Vue.use(VModal);
 Vue.use(VueRouter);
+Vue.use(VueSweetalert2);
 
 const store = new Vuex.Store(StoreData);
    

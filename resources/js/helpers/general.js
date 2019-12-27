@@ -10,8 +10,11 @@ export function setAuthorization(token) {
 export function pushCart(credentials) {
     return new Promise((res, err) => {
         axios.post('/api/auth/cart', credentials)
-             .then((res) => {
-                 
+             .then((response) => {
+                 res(response.data);
+             })
+             .catch(error => {
+                 err(error)
              })
     })
 }
