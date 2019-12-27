@@ -20,7 +20,7 @@
                         <transition-group name="bounce" mode="out-in" class="cas">    
                             <div v-for="prod in getProd" :key="prod.id" class="card shadow p-3 mr-2 mb-2 bg-white rounded" style="width: 19rem;">
                                 <div data-category="prod.type_product">
-                                <img class="card-img-top" src="../../../public/img/asus.jpg" alt="img_card">
+                                <img class="card-img-top" src="'../../../public/img/'+ prod.images " alt="img_card">
                                 <div class="card-body">
                                     <h4 class="card-title">{{prod.name_product}}</h4>
                                     <p class="card-text">
@@ -83,7 +83,7 @@
     import {getStok} from '../helpers/data/getData';
     import slide from './slide.vue';
     import {login} from '../helpers/auth';
-    import {pushCart} from '../helpers/general';
+    import {pushCart} from '../helpers/data/getData';
     
 
     export default {

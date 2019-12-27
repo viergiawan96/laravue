@@ -2101,7 +2101,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_data_getData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/data/getData */ "./resources/js/helpers/data/getData.js");
 /* harmony import */ var _slide_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./slide.vue */ "./resources/js/components/slide.vue");
 /* harmony import */ var _helpers_auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../helpers/auth */ "./resources/js/helpers/auth.js");
-/* harmony import */ var _helpers_general__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../helpers/general */ "./resources/js/helpers/general.js");
 //
 //
 //
@@ -2249,7 +2248,7 @@ __webpack_require__.r(__webpack_exports__);
 
         if (getUsr) {
           _this3.carts.id_user = _this3.$store.getters.currentUser.id;
-          Object(_helpers_general__WEBPACK_IMPORTED_MODULE_3__["pushCart"])(_this3.$data.carts).then(function (res) {
+          Object(_helpers_data_getData__WEBPACK_IMPORTED_MODULE_0__["pushCart"])(_this3.$data.carts).then(function (res) {
             if (res === 'false') {
               _this3.$swal.fire(prod.name_product, 'Berhasil di masukan keranjang', 'success');
             } else {
@@ -42067,7 +42066,7 @@ var render = function() {
                             _c("img", {
                               staticClass: "card-img-top",
                               attrs: {
-                                src: __webpack_require__(/*! ../../../public/img/asus.jpg */ "./public/img/asus.jpg"),
+                                src: "'../../../public/img/'+ prod.images ",
                                 alt: "img_card"
                               }
                             }),
@@ -58619,17 +58618,6 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./public/img/asus.jpg":
-/*!*****************************!*\
-  !*** ./public/img/asus.jpg ***!
-  \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "/images/asus.jpg?a4f1233ed6b1da62924a9a6145a62d9c";
-
-/***/ }),
-
 /***/ "./public/img/slide-05.jpg":
 /*!*********************************!*\
   !*** ./public/img/slide-05.jpg ***!
@@ -59126,13 +59114,14 @@ function getLocalUser() {
 /*!**********************************************!*\
   !*** ./resources/js/helpers/data/getData.js ***!
   \**********************************************/
-/*! exports provided: getProduct, getStok */
+/*! exports provided: getProduct, getStok, pushCart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getProduct", function() { return getProduct; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getStok", function() { return getStok; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pushCart", function() { return pushCart; });
 function getProduct() {
   return new Promise(function (res, err) {
     axios.get('/api/product').then(function (response) {
@@ -59151,29 +59140,6 @@ function getStok(credentials) {
     });
   });
 }
-
-/***/ }),
-
-/***/ "./resources/js/helpers/general.js":
-/*!*****************************************!*\
-  !*** ./resources/js/helpers/general.js ***!
-  \*****************************************/
-/*! exports provided: initialize, setAuthorization, pushCart */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialize", function() { return initialize; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAuthorization", function() { return setAuthorization; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pushCart", function() { return pushCart; });
-function initialize(store, router) {
-  if (store.getters.currentUser) {
-    setAuthorization(store.getters.currentUser.token);
-  }
-}
-function setAuthorization(token) {
-  axios.defaults.headers.common["Authorization"] = "Bearer ".concat(token);
-}
 function pushCart(credentials) {
   return new Promise(function (res, err) {
     axios.post('/api/auth/cart', credentials).then(function (response) {
@@ -59182,6 +59148,28 @@ function pushCart(credentials) {
       err(error);
     });
   });
+}
+
+/***/ }),
+
+/***/ "./resources/js/helpers/general.js":
+/*!*****************************************!*\
+  !*** ./resources/js/helpers/general.js ***!
+  \*****************************************/
+/*! exports provided: initialize, setAuthorization */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialize", function() { return initialize; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAuthorization", function() { return setAuthorization; });
+function initialize(store, router) {
+  if (store.getters.currentUser) {
+    setAuthorization(store.getters.currentUser.token);
+  }
+}
+function setAuthorization(token) {
+  axios.defaults.headers.common["Authorization"] = "Bearer ".concat(token);
 }
 
 /***/ }),

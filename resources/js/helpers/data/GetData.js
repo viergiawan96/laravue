@@ -20,3 +20,14 @@ export function getStok(credentials){
             })
     })
 }
+export function pushCart(credentials) {
+    return new Promise((res, err) => {
+        axios.post('/api/auth/cart', credentials)
+             .then((response) => {
+                 res(response.data);
+             })
+             .catch(error => {
+                 err(error)
+             })
+    })
+}
