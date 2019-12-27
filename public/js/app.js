@@ -42066,7 +42066,7 @@ var render = function() {
                             _c("img", {
                               staticClass: "card-img-top",
                               attrs: {
-                                src: "'../../../public/img/'+ prod.images ",
+                                src: __webpack_require__(/*! ../../../public/img/asus.jpg */ "./public/img/asus.jpg"),
                                 alt: "img_card"
                               }
                             }),
@@ -58615,6 +58615,17 @@ module.exports = function(module) {
 	return module;
 };
 
+
+/***/ }),
+
+/***/ "./public/img/asus.jpg":
+/*!*****************************!*\
+  !*** ./public/img/asus.jpg ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/asus.jpg?a4f1233ed6b1da62924a9a6145a62d9c";
 
 /***/ }),
 
