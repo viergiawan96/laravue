@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\tmp_cart;
 use App\product;
@@ -36,5 +36,25 @@ class cartController extends Controller
             ]);
             return response()->json('false', 200);
         }
+    }
+    public function getCart(Request $request)
+    {
+        $cart = DB::table('tmp_carts')->join('products', 'products.id', 'tmp_carts.id_product')
+                                      ->where('id_user', $request->id)
+                                      ->select('tmp_carts.id','tmp_carts.quantity','products.name_product','products.price')
+                                      ->get();
+
+        return response()->json(compact('cart'), 200);
+    }
+    public function putCart(Request $request)
+    {
+        $id = $request->id;
+        $qty =$request->quantity;
+
+        $cart = tmp_cart::find($id);
+        $cart->quantity = $qty;
+        $cart->save();
+
+        return response()->json($request->quantity, 200);
     }
 }

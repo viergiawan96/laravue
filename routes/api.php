@@ -13,7 +13,9 @@ Route::group([ 'prefix' => 'auth'], function ($router) {
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
-    Route::post('cart', 'cartController@store');
+    Route::post('cart', 'cartController@store'); 
+    Route::post('getCart','cartController@getCart');
+    Route::post('putCart','cartController@putCart');
 
 });
 

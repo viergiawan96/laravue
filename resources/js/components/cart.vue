@@ -14,33 +14,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr v-for="cart in viewCart" :key="cart.id">
                                 <td>
                                     <img  class="img" :src="'img/asus.jpg'" alt="product-item">
                                 </td>
-                                <td class="align-middle">Mark</td>
-                                <td class="align-middle">Rp.20000</td>
+                                <td class="align-middle">{{ cart.name_product }}</td>
+                                <td class="align-middle">Rp.{{ cart.price }}</td>
                                 <td class="align-middle">
-                                    <input id="quantity" type="number" value ="1" class="form-control quantity-input">
+                                    <input @change="qty(cart.id, $event)" id="quantity" min="1" type="number" :value="cart.quantity" class="form-control quantity-input">
                                 </td>
-                                <td class="align-middle">Rp.20000</td>
+                                <td id="myBtn" class="align-middle">Rp.{{ cart.price * cart.quantity }}</td>
                                 <td class="align-middle">
-                                    <button type="button" class="close" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="align-middle">
-                                    <img  class="img" :src="'img/asus.jpg'" alt="product-item">
-                                </td>
-                                <td class="align-middle">Jacob</td>
-                                <td class="align-middle">Rp.20000</td>
-                                <td class="align-middle">
-                                    <input id="quantity" type="number" value ="1" class="form-control quantity-input">
-                                </td>
-                                <td class="align-middle">Rp.20000</td>
-                                <td>
                                     <button type="button" class="close" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -82,7 +66,53 @@
     </div>
 </template>
 
+<script>
+import {getCart} from '../helpers/data/getData';
+import {putCart} from '../helpers/data/getData';
+import axios from 'axios';
 
+
+export default {
+    data() {
+        return {
+            putCarts: {
+                id: '',
+                quantity:''
+            },
+            totalAmout:0
+        }
+    },
+    methods: {
+        load(){
+            const id = this.$store.getters.currentUser.id;
+            getCart(id)
+                    .then((res) => {
+                        this.$store.commit('getCart', res.cart);
+                    })
+        },
+        qty(id, event) {
+           // const dataCart = this.$store.getters.cart.find(cart => cart.id === id)
+            this.putCarts.id = id;
+            this.putCarts.quantity = event.target.value;
+
+            putCart(this.$data.putCarts)
+                    .then((res) => {
+                        this.totalAmout = 
+                      console.log();
+                        this.load();
+                    })
+        }
+    },
+    computed: {
+        viewCart() {
+            return this.$store.getters.cart;
+        }
+    },
+    mounted() {
+        this.load();
+    }
+}
+</script>
 
 <style>
     #quantity {

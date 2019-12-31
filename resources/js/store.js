@@ -71,7 +71,7 @@ export default {
             state.find = idFill;
         },
         getCart(state, cart) {
-            state.cart.push(cart);
+            state.cart = cart;
         }
     },
     actions: {
