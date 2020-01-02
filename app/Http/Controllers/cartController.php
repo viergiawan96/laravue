@@ -37,6 +37,7 @@ class cartController extends Controller
             return response()->json('false', 200);
         }
     }
+
     public function getCart(Request $request)
     {
         $cart = DB::table('tmp_carts')->join('products', 'products.id', 'tmp_carts.id_product')
@@ -46,6 +47,7 @@ class cartController extends Controller
 
         return response()->json(compact('cart'), 200);
     }
+
     public function putCart(Request $request)
     {
         $id = $request->id;
@@ -55,6 +57,16 @@ class cartController extends Controller
         $cart->quantity = $qty;
         $cart->save();
 
-        return response()->json($request->quantity, 200);
+        return response()->json( 'quantity berhasil di update',  200);
+    }
+
+    public function deleteCart(Request $request)
+    {
+        $id = $request->id;
+
+        $cart = tmp_cart::find($id);
+        $cart->delete();
+
+        return response()->json('berhasil di hapus', 200);
     }
 }

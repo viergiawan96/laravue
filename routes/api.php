@@ -16,6 +16,7 @@ Route::group([ 'prefix' => 'auth'], function ($router) {
     Route::post('cart', 'cartController@store'); 
     Route::post('getCart','cartController@getCart');
     Route::post('putCart','cartController@putCart');
+    Route::post('deleteCart','cartController@deleteCart');
 
 });
 

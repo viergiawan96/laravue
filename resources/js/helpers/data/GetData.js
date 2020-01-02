@@ -50,8 +50,21 @@ export function putCart(credentials) {
                   res(response.data);
               })
               .catch((err) => {
-                  rej("koneksi bermasalah")
+                  rej("koneksi bermasalah");
               })
     })
 }
+
+export function deleteCart(credentials) {
+    return new Promise((res, rej) => {
+        axios.post('/api/auth/deleteCart', 'id='+credentials)
+            .then((response) => {
+                res(response.data);
+            })
+            .catch((err) => {
+                rej("koneksi bermasalah");
+            })
+    })
+}
+
 

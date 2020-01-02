@@ -19,13 +19,13 @@
                                     <img  class="img" :src="'img/asus.jpg'" alt="product-item">
                                 </td>
                                 <td class="align-middle">{{ cart.name_product }}</td>
-                                <td class="align-middle">Rp.{{ cart.price }}</td>
+                                <td class="align-middle">Rp {{ formatPrice(cart.price) }}</td>
                                 <td class="align-middle">
                                     <input @change="qty(cart.id, $event)" id="quantity" min="1" type="number" :value="cart.quantity" class="form-control quantity-input">
                                 </td>
-                                <td id="myBtn" class="align-middle">Rp.{{ cart.price * cart.quantity }}</td>
+                                <td id="myBtn" class="align-middle">Rp {{ formatPrice(cart.price * cart.quantity) }}</td>
                                 <td class="align-middle">
-                                    <button type="button" class="close" aria-label="Close">
+                                    <button @click="deleteItem(cart.id)" type="button" class="close" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </td>
@@ -52,10 +52,9 @@
                         </select>
                     </div>
                     <div class="mt-4">
-                        <span><strong style="margin-right:55%; font-size: 1.2em;">Subtotal</strong>Rp.20.000</span><br/>
-                        <span><strong style="margin-right:54%; font-size: 1.2em;">Shipping</strong>Rp.20.000</span><br/>
-                        <span><strong style="margin-right:54%; font-size: 1.2em;">Discount</strong>Rp.10.000</span><br/>
-                        <span><strong style="margin-right:64%; font-size: 1.2em;">Total</strong>Rp.10.000</span>
+                        <span><strong style="margin-right:45%; font-size: 1.2em;">Subtotal</strong>Rp {{ formatPrice(subTotalAmout) }}</span><br/>
+                        <span><strong style="margin-right:44%; font-size: 1.2em;">Shipping</strong>Rp 20.000</span><br/>
+                        <span><strong style="margin-right:54%; font-size: 1.2em;">Total</strong>Rp 10.000</span>
                     </div>
                     <div class="d-flex justify-content-center mt-3 mb-2">
                         <button type="button" class=" btn-change btn btn-lg btn-block">CheckOut</button>
@@ -69,6 +68,7 @@
 <script>
 import {getCart} from '../helpers/data/getData';
 import {putCart} from '../helpers/data/getData';
+import {deleteCart} from '../helpers/data/getData';
 import axios from 'axios';
 
 
@@ -79,15 +79,31 @@ export default {
                 id: '',
                 quantity:''
             },
-            totalAmout:0
+            subTotalAmout:0
         }
     },
     methods: {
+         formatPrice(value) {
+            let val = (value/1).toFixed(0).replace('.', ',')
+            return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+        },
         load(){
+            
             const id = this.$store.getters.currentUser.id;
             getCart(id)
                     .then((res) => {
                         this.$store.commit('getCart', res.cart);
+                        //jumlah total keranjang
+                        let items = this.$store.getters.cart;
+                        const cart = [];
+
+                        items.forEach(function(item){
+                        let sum = item.price * item.quantity;
+                            cart.push(sum);
+                        });
+
+                        const arr = cart.reduce((a, b) => a + b, 0)
+                        this.subTotalAmout = arr;
                     })
         },
         qty(id, event) {
@@ -97,9 +113,19 @@ export default {
 
             putCart(this.$data.putCarts)
                     .then((res) => {
-                        this.totalAmout = 
-                      console.log();
                         this.load();
+                    })
+                    .catch((err) => {
+                        console,log(err);
+                    })
+        },
+        deleteItem(id) {
+            deleteCart(id)
+                    .then((res) => {
+                        this.load();
+                    })
+                    .catch((err) => {
+                        console,log(err);
                     })
         }
     },

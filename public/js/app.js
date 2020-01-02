@@ -2171,7 +2171,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
+
 
 
 
@@ -2181,16 +2181,33 @@ __webpack_require__.r(__webpack_exports__);
       putCarts: {
         id: '',
         quantity: ''
-      }
+      },
+      subTotalAmout: 0
     };
   },
   methods: {
+    formatPrice: function formatPrice(value) {
+      var val = (value / 1).toFixed(0).replace('.', ',');
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    },
     load: function load() {
       var _this = this;
 
       var id = this.$store.getters.currentUser.id;
       Object(_helpers_data_getData__WEBPACK_IMPORTED_MODULE_0__["getCart"])(id).then(function (res) {
-        _this.$store.commit('getCart', res.cart);
+        _this.$store.commit('getCart', res.cart); //jumlah total keranjang
+
+
+        var items = _this.$store.getters.cart;
+        var cart = [];
+        items.forEach(function (item) {
+          var sum = item.price * item.quantity;
+          cart.push(sum);
+        });
+        var arr = cart.reduce(function (a, b) {
+          return a + b;
+        }, 0);
+        _this.subTotalAmout = arr;
       });
     },
     qty: function qty(id, event) {
@@ -2200,9 +2217,18 @@ __webpack_require__.r(__webpack_exports__);
       this.putCarts.id = id;
       this.putCarts.quantity = event.target.value;
       Object(_helpers_data_getData__WEBPACK_IMPORTED_MODULE_0__["putCart"])(this.$data.putCarts).then(function (res) {
-        console.log(document.getElementById("myBtn").textContent);
-
         _this2.load();
+      })["catch"](function (err) {
+        console, log(err);
+      });
+    },
+    deleteItem: function deleteItem(id) {
+      var _this3 = this;
+
+      Object(_helpers_data_getData__WEBPACK_IMPORTED_MODULE_0__["deleteCart"])(id).then(function (res) {
+        _this3.load();
+      })["catch"](function (err) {
+        console, log(err);
       });
     }
   },
@@ -42180,7 +42206,7 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("td", { staticClass: "align-middle" }, [
-                    _vm._v("Rp." + _vm._s(cart.price))
+                    _vm._v("Rp " + _vm._s(_vm.formatPrice(cart.price)))
                   ]),
                   _vm._v(" "),
                   _c("td", { staticClass: "align-middle" }, [
@@ -42199,10 +42225,33 @@ var render = function() {
                   _c(
                     "td",
                     { staticClass: "align-middle", attrs: { id: "myBtn" } },
-                    [_vm._v("Rp." + _vm._s(cart.price * cart.quantity))]
+                    [
+                      _vm._v(
+                        "Rp " +
+                          _vm._s(_vm.formatPrice(cart.price * cart.quantity))
+                      )
+                    ]
                   ),
                   _vm._v(" "),
-                  _vm._m(1, true)
+                  _c("td", { staticClass: "align-middle" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "close",
+                        attrs: { type: "button", "aria-label": "Close" },
+                        on: {
+                          click: function($event) {
+                            return _vm.deleteItem(cart.id)
+                          }
+                        }
+                      },
+                      [
+                        _c("span", { attrs: { "aria-hidden": "true" } }, [
+                          _vm._v("×")
+                        ])
+                      ]
+                    )
+                  ])
                 ])
               }),
               0
@@ -42211,7 +42260,34 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(2)
+      _c("div", { staticClass: "col-md mt-2 border rounded total-cart" }, [
+        _c("h3", { staticClass: "mt-4" }, [_vm._v("Cart Total")]),
+        _vm._v(" "),
+        _c("div", { staticStyle: { "margin-top": "5%" } }, [
+          _vm._m(1),
+          _vm._v(" "),
+          _c("div", { staticClass: "mt-4" }, [
+            _c("span", [
+              _c(
+                "strong",
+                {
+                  staticStyle: { "margin-right": "45%", "font-size": "1.2em" }
+                },
+                [_vm._v("Subtotal")]
+              ),
+              _vm._v("Rp " + _vm._s(_vm.formatPrice(_vm.subTotalAmout)))
+            ]),
+            _c("br"),
+            _vm._v(" "),
+            _vm._m(2),
+            _c("br"),
+            _vm._v(" "),
+            _vm._m(3)
+          ]),
+          _vm._v(" "),
+          _vm._m(4)
+        ])
+      ])
     ])
   ])
 }
@@ -42242,14 +42318,37 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", { staticClass: "align-middle" }, [
+    return _c("div", { staticClass: "mt-2" }, [
       _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: { type: "button", "aria-label": "Close" }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+        "select",
+        { staticClass: "browser-default custom-select custom-select-md" },
+        [
+          _c("option", { attrs: { selected: "" } }, [
+            _vm._v("Choose to delivery")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "1" } }, [_vm._v("JNE")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "2" } }, [_vm._v("Tiki")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "3" } }, [_vm._v("Sicepat")])
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "select",
+        { staticClass: "browser-default custom-select custom-select-md mt-2" },
+        [
+          _c("option", { attrs: { selected: "" } }, [
+            _vm._v("Select a country")
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "1" } }, [_vm._v("Bekasi")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "2" } }, [_vm._v("Jakarta")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "3" } }, [_vm._v("Yogyakarta")])
+        ]
       )
     ])
   },
@@ -42257,99 +42356,46 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md mt-2 border rounded total-cart" }, [
-      _c("h3", { staticClass: "mt-4" }, [_vm._v("Cart Total")]),
-      _vm._v(" "),
-      _c("div", { staticStyle: { "margin-top": "5%" } }, [
-        _c("div", { staticClass: "mt-2" }, [
-          _c(
-            "select",
-            { staticClass: "browser-default custom-select custom-select-md" },
-            [
-              _c("option", { attrs: { selected: "" } }, [
-                _vm._v("Choose to delivery")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "1" } }, [_vm._v("JNE")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "2" } }, [_vm._v("Tiki")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "3" } }, [_vm._v("Sicepat")])
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "select",
-            {
-              staticClass: "browser-default custom-select custom-select-md mt-2"
-            },
-            [
-              _c("option", { attrs: { selected: "" } }, [
-                _vm._v("Select a country")
-              ]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "1" } }, [_vm._v("Bekasi")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "2" } }, [_vm._v("Jakarta")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "3" } }, [_vm._v("Yogyakarta")])
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "mt-4" }, [
-          _c("span", [
-            _c(
-              "strong",
-              { staticStyle: { "margin-right": "55%", "font-size": "1.2em" } },
-              [_vm._v("Subtotal")]
-            ),
-            _vm._v("Rp.20.000")
-          ]),
-          _c("br"),
-          _vm._v(" "),
-          _c("span", [
-            _c(
-              "strong",
-              { staticStyle: { "margin-right": "54%", "font-size": "1.2em" } },
-              [_vm._v("Shipping")]
-            ),
-            _vm._v("Rp.20.000")
-          ]),
-          _c("br"),
-          _vm._v(" "),
-          _c("span", [
-            _c(
-              "strong",
-              { staticStyle: { "margin-right": "54%", "font-size": "1.2em" } },
-              [_vm._v("Discount")]
-            ),
-            _vm._v("Rp.10.000")
-          ]),
-          _c("br"),
-          _vm._v(" "),
-          _c("span", [
-            _c(
-              "strong",
-              { staticStyle: { "margin-right": "64%", "font-size": "1.2em" } },
-              [_vm._v("Total")]
-            ),
-            _vm._v("Rp.10.000")
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "d-flex justify-content-center mt-3 mb-2" }, [
-          _c(
-            "button",
-            {
-              staticClass: " btn-change btn btn-lg btn-block",
-              attrs: { type: "button" }
-            },
-            [_vm._v("CheckOut")]
-          )
-        ])
-      ])
+    return _c("span", [
+      _c(
+        "strong",
+        { staticStyle: { "margin-right": "44%", "font-size": "1.2em" } },
+        [_vm._v("Shipping")]
+      ),
+      _vm._v("Rp 20.000")
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", [
+      _c(
+        "strong",
+        { staticStyle: { "margin-right": "54%", "font-size": "1.2em" } },
+        [_vm._v("Total")]
+      ),
+      _vm._v("Rp 10.000")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "d-flex justify-content-center mt-3 mb-2" },
+      [
+        _c(
+          "button",
+          {
+            staticClass: " btn-change btn btn-lg btn-block",
+            attrs: { type: "button" }
+          },
+          [_vm._v("CheckOut")]
+        )
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -59615,7 +59661,7 @@ function getLocalUser() {
 /*!**********************************************!*\
   !*** ./resources/js/helpers/data/getData.js ***!
   \**********************************************/
-/*! exports provided: getProduct, getStok, pushCart, getCart, putCart */
+/*! exports provided: getProduct, getStok, pushCart, getCart, putCart, deleteCart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -59625,6 +59671,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "pushCart", function() { return pushCart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCart", function() { return getCart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "putCart", function() { return putCart; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteCart", function() { return deleteCart; });
 function getProduct() {
   return new Promise(function (res, err) {
     axios.get('/api/product').then(function (response) {
@@ -59664,6 +59711,15 @@ function getCart(credentials) {
 function putCart(credentials) {
   return new Promise(function (res, rej) {
     axios.post('/api/auth/putCart', credentials).then(function (response) {
+      res(response.data);
+    })["catch"](function (err) {
+      rej("koneksi bermasalah");
+    });
+  });
+}
+function deleteCart(credentials) {
+  return new Promise(function (res, rej) {
+    axios.post('/api/auth/deleteCart', 'id=' + credentials).then(function (response) {
       res(response.data);
     })["catch"](function (err) {
       rej("koneksi bermasalah");
