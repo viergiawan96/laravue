@@ -1,5 +1,6 @@
 http://laravel-school.com/posts/how-to-add-new-columns-to-the-existing-table-in-laravel-migration-24
 https://codepen.io/krutie/pen/ybWWyB
+https://github.com/kavist/rajaongkir
 -----------
 const app = new Vue({
   el: "#app",
