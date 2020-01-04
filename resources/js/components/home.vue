@@ -109,7 +109,7 @@
                 login(this.$data.form)
                     .then((res) => {
                         this.$store.commit("prosesSuccess", res);
-                        this.$router.push({path: '/about'});
+                        //this.$router.push({path: '/about'});
                         this.$modal.hide('login');
                     })
                     .catch((error) => {

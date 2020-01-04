@@ -17,6 +17,7 @@ Route::group([ 'prefix' => 'auth'], function ($router) {
     Route::post('getCart','cartController@getCart');
     Route::post('putCart','cartController@putCart');
     Route::post('deleteCart','cartController@deleteCart');
+    Route::get('getCourierProvince','ongkirController@show');
 
 });
 

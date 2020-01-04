@@ -10,7 +10,8 @@ export default {
         auth_error: null,
         product:[],
         cart: [],
-        find: 0
+        find: 0,
+        getCourier:[]
     },
     getters: {
         isLoading(state) {

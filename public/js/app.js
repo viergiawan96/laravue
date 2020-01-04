@@ -2102,8 +2102,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_data_getData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/data/getData */ "./resources/js/helpers/data/getData.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _helpers_data_getCourier__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/data/getCourier */ "./resources/js/helpers/data/getCourier.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
 //
 //
 //
@@ -2171,6 +2172,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -2182,7 +2190,8 @@ __webpack_require__.r(__webpack_exports__);
         id: '',
         quantity: ''
       },
-      subTotalAmout: 0
+      subTotalAmout: 0,
+      selectCity: false
     };
   },
   methods: {
@@ -2363,11 +2372,8 @@ __webpack_require__.r(__webpack_exports__);
 
       this.$store.dispatch('login');
       Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_2__["login"])(this.$data.form).then(function (res) {
-        _this.$store.commit("prosesSuccess", res);
+        _this.$store.commit("prosesSuccess", res); //this.$router.push({path: '/about'});
 
-        _this.$router.push({
-          path: '/about'
-        });
 
         _this.$modal.hide('login');
       })["catch"](function (error) {
@@ -42264,7 +42270,31 @@ var render = function() {
         _c("h3", { staticClass: "mt-4" }, [_vm._v("Cart Total")]),
         _vm._v(" "),
         _c("div", { staticStyle: { "margin-top": "5%" } }, [
-          _vm._m(1),
+          _c("div", { staticClass: "mt-2" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _vm._m(2),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                staticClass:
+                  "browser-default custom-select custom-select-md mt-2",
+                attrs: { disabled: _vm.selectCity }
+              },
+              [
+                _c("option", { attrs: { selected: "" } }, [
+                  _vm._v("Select a City")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "1" } }, [_vm._v("Bekasi")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "2" } }, [_vm._v("Jakarta")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "3" } }, [_vm._v("Yogyakarta")])
+              ]
+            )
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "mt-4" }, [
             _c("span", [
@@ -42279,13 +42309,13 @@ var render = function() {
             ]),
             _c("br"),
             _vm._v(" "),
-            _vm._m(2),
+            _vm._m(3),
             _c("br"),
             _vm._v(" "),
-            _vm._m(3)
+            _vm._m(4)
           ]),
           _vm._v(" "),
-          _vm._m(4)
+          _vm._m(5)
         ])
       ])
     ])
@@ -42318,39 +42348,41 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mt-2" }, [
-      _c(
-        "select",
-        { staticClass: "browser-default custom-select custom-select-md" },
-        [
-          _c("option", { attrs: { selected: "" } }, [
-            _vm._v("Choose to delivery")
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "1" } }, [_vm._v("JNE")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "2" } }, [_vm._v("Tiki")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "3" } }, [_vm._v("Sicepat")])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "select",
-        { staticClass: "browser-default custom-select custom-select-md mt-2" },
-        [
-          _c("option", { attrs: { selected: "" } }, [
-            _vm._v("Select a country")
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "1" } }, [_vm._v("Bekasi")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "2" } }, [_vm._v("Jakarta")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "3" } }, [_vm._v("Yogyakarta")])
-        ]
-      )
-    ])
+    return _c(
+      "select",
+      { staticClass: "browser-default custom-select custom-select-md" },
+      [
+        _c("option", { attrs: { selected: "" } }, [
+          _vm._v("Choose to delivery")
+        ]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "1" } }, [_vm._v("JNE")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "2" } }, [_vm._v("Tiki")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "3" } }, [_vm._v("Sicepat")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "select",
+      { staticClass: "browser-default custom-select custom-select-md mt-2" },
+      [
+        _c("option", { attrs: { selected: "" } }, [
+          _vm._v("Select a Province")
+        ]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "1" } }, [_vm._v("Bekasi")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "2" } }, [_vm._v("Jakarta")]),
+        _vm._v(" "),
+        _c("option", { attrs: { value: "3" } }, [_vm._v("Yogyakarta")])
+      ]
+    )
   },
   function() {
     var _vm = this
@@ -59657,6 +59689,28 @@ function getLocalUser() {
 
 /***/ }),
 
+/***/ "./resources/js/helpers/data/getCourier.js":
+/*!*************************************************!*\
+  !*** ./resources/js/helpers/data/getCourier.js ***!
+  \*************************************************/
+/*! exports provided: getCourierProvince */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCourierProvince", function() { return getCourierProvince; });
+function getCourierProvince() {
+  return new Promise(function (res, rej) {
+    axios.get('/api/auth/getCourier').then(function (response) {
+      res(response.data);
+    })["catch"](function (error) {
+      err(error);
+    });
+  });
+}
+
+/***/ }),
+
 /***/ "./resources/js/helpers/data/getData.js":
 /*!**********************************************!*\
   !*** ./resources/js/helpers/data/getData.js ***!
@@ -59781,7 +59835,10 @@ var routes = [{
 }, {
   path: '/cart',
   name: 'cart',
-  component: _components_cart_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+  component: _components_cart_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
+  meta: {
+    requiresAuth: true
+  }
 }];
 
 /***/ }),
@@ -59806,7 +59863,8 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
     auth_error: null,
     product: [],
     cart: [],
-    find: 0
+    find: 0,
+    getCourier: []
   },
   getters: {
     isLoading: function isLoading(state) {
@@ -59903,8 +59961,8 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\prod\laravue\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\prod\laravue\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Satrio\download\github\laravue\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Satrio\download\github\laravue\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

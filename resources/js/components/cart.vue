@@ -45,7 +45,13 @@
                             <option value="3">Sicepat</option>
                         </select>
                         <select class="browser-default custom-select custom-select-md mt-2">
-                            <option selected>Select a country</option>
+                            <option selected>Select a Province</option>
+                            <option value="1">Bekasi</option>
+                            <option value="2">Jakarta</option>
+                            <option value="3">Yogyakarta</option>
+                        </select>
+                        <select :disabled="selectCity" class="browser-default custom-select custom-select-md mt-2">
+                            <option selected>Select a City</option>
                             <option value="1">Bekasi</option>
                             <option value="2">Jakarta</option>
                             <option value="3">Yogyakarta</option>
@@ -69,6 +75,7 @@
 import {getCart} from '../helpers/data/getData';
 import {putCart} from '../helpers/data/getData';
 import {deleteCart} from '../helpers/data/getData';
+import {getCourier} from '../helpers/data/getCourier';
 import axios from 'axios';
 
 
@@ -79,7 +86,8 @@ export default {
                 id: '',
                 quantity:''
             },
-            subTotalAmout:0
+            subTotalAmout:0,
+            selectCity:false
         }
     },
     methods: {

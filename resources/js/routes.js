@@ -19,6 +19,9 @@ export const routes = [
     {
         path : '/cart',
         name : 'cart',
-        component : cart
+        component : cart,
+        meta: {
+            requiresAuth : true
+          }
     }
 ]
