@@ -2102,13 +2102,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helpers_data_getData__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers/data/getData */ "./resources/js/helpers/data/getData.js");
-/* harmony import */ var _helpers_data_getCourier__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/data/getCourier */ "./resources/js/helpers/data/getCourier.js");
+/* harmony import */ var _helpers_data_getOngkir__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../helpers/data/getOngkir */ "./resources/js/helpers/data/getOngkir.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-//
-//
-//
-//
 //
 //
 //
@@ -2191,7 +2187,8 @@ __webpack_require__.r(__webpack_exports__);
         quantity: ''
       },
       subTotalAmout: 0,
-      selectCity: false
+      selectCity: true,
+      amountShip: 0
     };
   },
   methods: {
@@ -2202,6 +2199,11 @@ __webpack_require__.r(__webpack_exports__);
     load: function load() {
       var _this = this;
 
+      Object(_helpers_data_getOngkir__WEBPACK_IMPORTED_MODULE_1__["getCourierProvince"])().then(function (res) {
+        _this.$store.commit('getCourier', res.courier);
+
+        _this.$store.commit('getProvince', res.province);
+      });
       var id = this.$store.getters.currentUser.id;
       Object(_helpers_data_getData__WEBPACK_IMPORTED_MODULE_0__["getCart"])(id).then(function (res) {
         _this.$store.commit('getCart', res.cart); //jumlah total keranjang
@@ -2239,11 +2241,20 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         console, log(err);
       });
+    },
+    selectProvince: function selectProvince() {
+      this.selectCity = false;
     }
   },
   computed: {
     viewCart: function viewCart() {
       return this.$store.getters.cart;
+    },
+    viewCourier: function viewCourier() {
+      return this.$store.getters.courier;
+    },
+    viewProvince: function viewProvince() {
+      return this.$store.getters.province;
     }
   },
   mounted: function mounted() {
@@ -42271,9 +42282,51 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticStyle: { "margin-top": "5%" } }, [
           _c("div", { staticClass: "mt-2" }, [
-            _vm._m(1),
+            _c(
+              "select",
+              { staticClass: "browser-default custom-select custom-select-md" },
+              [
+                _c("option", { attrs: { selected: "" } }, [
+                  _vm._v("Choose to delivery")
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.viewCourier, function(cr) {
+                  return _c(
+                    "option",
+                    { key: cr.id, domProps: { value: cr.code } },
+                    [_vm._v(_vm._s(cr.title))]
+                  )
+                })
+              ],
+              2
+            ),
             _vm._v(" "),
-            _vm._m(2),
+            _c(
+              "select",
+              {
+                staticClass:
+                  "browser-default custom-select custom-select-md mt-2",
+                on: {
+                  change: function($event) {
+                    return _vm.selectProvince()
+                  }
+                }
+              },
+              [
+                _c("option", { attrs: { selected: "" } }, [
+                  _vm._v("Select a Province")
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.viewProvince, function(pr) {
+                  return _c(
+                    "option",
+                    { key: pr.id, domProps: { value: pr.province_id } },
+                    [_vm._v(_vm._s(pr.title))]
+                  )
+                })
+              ],
+              2
+            ),
             _vm._v(" "),
             _c(
               "select",
@@ -42309,13 +42362,25 @@ var render = function() {
             ]),
             _c("br"),
             _vm._v(" "),
-            _vm._m(3),
+            _vm._m(1),
             _c("br"),
             _vm._v(" "),
-            _vm._m(4)
+            _c("span", [
+              _c(
+                "strong",
+                {
+                  staticStyle: { "margin-right": "54%", "font-size": "1.2em" }
+                },
+                [_vm._v("Total")]
+              ),
+              _vm._v(
+                "Rp " +
+                  _vm._s(_vm.formatPrice(_vm.subTotalAmout + _vm.amountShip))
+              )
+            ])
           ]),
           _vm._v(" "),
-          _vm._m(5)
+          _vm._m(2)
         ])
       ])
     ])
@@ -42348,46 +42413,6 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "select",
-      { staticClass: "browser-default custom-select custom-select-md" },
-      [
-        _c("option", { attrs: { selected: "" } }, [
-          _vm._v("Choose to delivery")
-        ]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "1" } }, [_vm._v("JNE")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "2" } }, [_vm._v("Tiki")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "3" } }, [_vm._v("Sicepat")])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "select",
-      { staticClass: "browser-default custom-select custom-select-md mt-2" },
-      [
-        _c("option", { attrs: { selected: "" } }, [
-          _vm._v("Select a Province")
-        ]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "1" } }, [_vm._v("Bekasi")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "2" } }, [_vm._v("Jakarta")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "3" } }, [_vm._v("Yogyakarta")])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("span", [
       _c(
         "strong",
@@ -42395,19 +42420,6 @@ var staticRenderFns = [
         [_vm._v("Shipping")]
       ),
       _vm._v("Rp 20.000")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", [
-      _c(
-        "strong",
-        { staticStyle: { "margin-right": "54%", "font-size": "1.2em" } },
-        [_vm._v("Total")]
-      ),
-      _vm._v("Rp 10.000")
     ])
   },
   function() {
@@ -59689,28 +59701,6 @@ function getLocalUser() {
 
 /***/ }),
 
-/***/ "./resources/js/helpers/data/getCourier.js":
-/*!*************************************************!*\
-  !*** ./resources/js/helpers/data/getCourier.js ***!
-  \*************************************************/
-/*! exports provided: getCourierProvince */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCourierProvince", function() { return getCourierProvince; });
-function getCourierProvince() {
-  return new Promise(function (res, rej) {
-    axios.get('/api/auth/getCourier').then(function (response) {
-      res(response.data);
-    })["catch"](function (error) {
-      err(error);
-    });
-  });
-}
-
-/***/ }),
-
 /***/ "./resources/js/helpers/data/getData.js":
 /*!**********************************************!*\
   !*** ./resources/js/helpers/data/getData.js ***!
@@ -59777,6 +59767,28 @@ function deleteCart(credentials) {
       res(response.data);
     })["catch"](function (err) {
       rej("koneksi bermasalah");
+    });
+  });
+}
+
+/***/ }),
+
+/***/ "./resources/js/helpers/data/getOngkir.js":
+/*!************************************************!*\
+  !*** ./resources/js/helpers/data/getOngkir.js ***!
+  \************************************************/
+/*! exports provided: getCourierProvince */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCourierProvince", function() { return getCourierProvince; });
+function getCourierProvince() {
+  return new Promise(function (res, err) {
+    axios.get('/api/auth/getCourierProvince').then(function (response) {
+      res(response.data);
+    })["catch"](function (error) {
+      err(error);
     });
   });
 }
@@ -59864,7 +59876,8 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
     product: [],
     cart: [],
     find: 0,
-    getCourier: []
+    courier: [],
+    province: []
   },
   getters: {
     isLoading: function isLoading(state) {
@@ -59892,6 +59905,12 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
     },
     cart: function cart(state) {
       return state.cart;
+    },
+    courier: function courier(state) {
+      return state.courier;
+    },
+    province: function province(state) {
+      return state.province;
     }
   },
   mutations: {
@@ -59929,6 +59948,12 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
     },
     getCart: function getCart(state, cart) {
       state.cart = cart;
+    },
+    getCourier: function getCourier(state, courier) {
+      state.courier = courier;
+    },
+    getProvince: function getProvince(state, province) {
+      state.province = province;
     }
   },
   actions: {

@@ -40,15 +40,11 @@
                     <div class="mt-2">
                         <select class="browser-default custom-select custom-select-md">
                             <option selected>Choose to delivery</option>
-                            <option value="1">JNE</option>
-                            <option value="2">Tiki</option>
-                            <option value="3">Sicepat</option>
+                            <option v-for="cr in viewCourier" :key="cr.id"  :value="cr.code">{{ cr.title }}</option>
                         </select>
-                        <select class="browser-default custom-select custom-select-md mt-2">
+                        <select @change="selectProvince()" class="browser-default custom-select custom-select-md mt-2">
                             <option selected>Select a Province</option>
-                            <option value="1">Bekasi</option>
-                            <option value="2">Jakarta</option>
-                            <option value="3">Yogyakarta</option>
+                            <option  v-for="pr in viewProvince" :key="pr.id" :value="pr.province_id">{{ pr.title }}</option>
                         </select>
                         <select :disabled="selectCity" class="browser-default custom-select custom-select-md mt-2">
                             <option selected>Select a City</option>
@@ -60,7 +56,7 @@
                     <div class="mt-4">
                         <span><strong style="margin-right:45%; font-size: 1.2em;">Subtotal</strong>Rp {{ formatPrice(subTotalAmout) }}</span><br/>
                         <span><strong style="margin-right:44%; font-size: 1.2em;">Shipping</strong>Rp 20.000</span><br/>
-                        <span><strong style="margin-right:54%; font-size: 1.2em;">Total</strong>Rp 10.000</span>
+                        <span><strong style="margin-right:54%; font-size: 1.2em;">Total</strong>Rp {{ formatPrice(subTotalAmout + amountShip) }}</span>
                     </div>
                     <div class="d-flex justify-content-center mt-3 mb-2">
                         <button type="button" class=" btn-change btn btn-lg btn-block">CheckOut</button>
@@ -75,7 +71,7 @@
 import {getCart} from '../helpers/data/getData';
 import {putCart} from '../helpers/data/getData';
 import {deleteCart} from '../helpers/data/getData';
-import {getCourier} from '../helpers/data/getCourier';
+import {getCourierProvince} from '../helpers/data/getOngkir';
 import axios from 'axios';
 
 
@@ -87,7 +83,8 @@ export default {
                 quantity:''
             },
             subTotalAmout:0,
-            selectCity:false
+            selectCity:true,
+            amountShip:0
         }
     },
     methods: {
@@ -96,14 +93,19 @@ export default {
             return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
         },
         load(){
-            
+            getCourierProvince()
+                .then((res) => {
+                    this.$store.commit('getCourier', res.courier);
+                    this.$store.commit('getProvince', res.province);
+            })
+
             const id = this.$store.getters.currentUser.id;
             getCart(id)
                     .then((res) => {
                         this.$store.commit('getCart', res.cart);
                         //jumlah total keranjang
                         let items = this.$store.getters.cart;
-                        const cart = [];
+                        let cart = [];
 
                         items.forEach(function(item){
                         let sum = item.price * item.quantity;
@@ -135,11 +137,21 @@ export default {
                     .catch((err) => {
                         console,log(err);
                     })
+        },
+        selectProvince() {
+            this.selectCity =false;
+            
         }
     },
     computed: {
         viewCart() {
             return this.$store.getters.cart;
+        },
+        viewCourier() {
+            return this.$store.getters.courier;
+        },
+        viewProvince() {
+            return this.$store.getters.province;
         }
     },
     mounted() {

@@ -1,10 +1,10 @@
 export function getCourierProvince() {
-    return new Promise((res, rej) => {
-        axios.get('/api/auth/getCourier')
+    return new Promise((res, err) => {
+        axios.get('/api/auth/getCourierProvince')
             .then((response) => {
                 res(response.data);
             })
-            .catch((error) => {
+            .catch(error => {
                 err(error);
             })
     })
