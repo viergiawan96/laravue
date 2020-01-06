@@ -2172,10 +2172,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-
-
 
 
 
@@ -2188,7 +2184,11 @@ __webpack_require__.r(__webpack_exports__);
       },
       subTotalAmout: 0,
       selectCity: true,
-      amountShip: 0
+      amountShip: 0,
+      ongkir: {
+        courier: '',
+        destination: ''
+      }
     };
   },
   methods: {
@@ -2242,8 +2242,34 @@ __webpack_require__.r(__webpack_exports__);
         console, log(err);
       });
     },
-    selectProvince: function selectProvince() {
+    selectProvince: function selectProvince(event) {
+      var _this4 = this;
+
       this.selectCity = false;
+      Object(_helpers_data_getOngkir__WEBPACK_IMPORTED_MODULE_1__["getCity"])(event.target.value).then(function (res) {
+        _this4.$store.commit('getCity', res.city);
+      })["catch"](function (err) {
+        console.log('koneksi bermasalah');
+      });
+    },
+    selectCities: function selectCities(event) {
+      this.ongkir.destination = event.target.value;
+      var couriers = this.ongkir.courier;
+
+      if (couriers) {
+        Object(_helpers_data_getOngkir__WEBPACK_IMPORTED_MODULE_1__["getCost"])(this.$data.ongkir).then(function (res) {
+          console.log(res);
+        });
+      }
+    },
+    methodShip: function methodShip() {
+      var destinations = this.ongkir.destination;
+
+      if (destinations) {
+        Object(_helpers_data_getOngkir__WEBPACK_IMPORTED_MODULE_1__["getCost"])(this.$data.ongkir).then(function (res) {
+          console.log(res);
+        });
+      }
     }
   },
   computed: {
@@ -2255,6 +2281,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     viewProvince: function viewProvince() {
       return this.$store.getters.province;
+    },
+    viewcity: function viewcity() {
+      return this.$store.getters.city;
     }
   },
   mounted: function mounted() {
@@ -42284,9 +42313,43 @@ var render = function() {
           _c("div", { staticClass: "mt-2" }, [
             _c(
               "select",
-              { staticClass: "browser-default custom-select custom-select-md" },
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.ongkir.courier,
+                    expression: "ongkir.courier"
+                  }
+                ],
+                staticClass: "browser-default custom-select custom-select-md",
+                on: {
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.$set(
+                        _vm.ongkir,
+                        "courier",
+                        $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      )
+                    },
+                    function($event) {
+                      return _vm.methodShip()
+                    }
+                  ]
+                }
+              },
               [
-                _c("option", { attrs: { selected: "" } }, [
+                _c("option", { attrs: { disabled: "", value: "" } }, [
                   _vm._v("Choose to delivery")
                 ]),
                 _vm._v(" "),
@@ -42308,12 +42371,12 @@ var render = function() {
                   "browser-default custom-select custom-select-md mt-2",
                 on: {
                   change: function($event) {
-                    return _vm.selectProvince()
+                    return _vm.selectProvince($event)
                   }
                 }
               },
               [
-                _c("option", { attrs: { selected: "" } }, [
+                _c("option", { attrs: { disabled: "", selected: "" } }, [
                   _vm._v("Select a Province")
                 ]),
                 _vm._v(" "),
@@ -42333,19 +42396,27 @@ var render = function() {
               {
                 staticClass:
                   "browser-default custom-select custom-select-md mt-2",
-                attrs: { disabled: _vm.selectCity }
+                attrs: { disabled: _vm.selectCity },
+                on: {
+                  change: function($event) {
+                    return _vm.selectCities($event)
+                  }
+                }
               },
               [
-                _c("option", { attrs: { selected: "" } }, [
+                _c("option", { attrs: { disabled: "", selected: "" } }, [
                   _vm._v("Select a City")
                 ]),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "1" } }, [_vm._v("Bekasi")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "2" } }, [_vm._v("Jakarta")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "3" } }, [_vm._v("Yogyakarta")])
-              ]
+                _vm._l(_vm.viewcity, function(ct) {
+                  return _c(
+                    "option",
+                    { key: ct.id, domProps: { value: ct.city_id } },
+                    [_vm._v(_vm._s(ct.title))]
+                  )
+                })
+              ],
+              2
             )
           ]),
           _vm._v(" "),
@@ -42362,7 +42433,16 @@ var render = function() {
             ]),
             _c("br"),
             _vm._v(" "),
-            _vm._m(1),
+            _c("span", [
+              _c(
+                "strong",
+                {
+                  staticStyle: { "margin-right": "44%", "font-size": "1.2em" }
+                },
+                [_vm._v("Shipping")]
+              ),
+              _vm._v("Rp " + _vm._s(_vm.formatPrice(_vm.amountShip)))
+            ]),
             _c("br"),
             _vm._v(" "),
             _c("span", [
@@ -42380,7 +42460,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._m(2)
+          _vm._m(1)
         ])
       ])
     ])
@@ -42407,19 +42487,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { attrs: { scope: "col" } })
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", [
-      _c(
-        "strong",
-        { staticStyle: { "margin-right": "44%", "font-size": "1.2em" } },
-        [_vm._v("Shipping")]
-      ),
-      _vm._v("Rp 20.000")
     ])
   },
   function() {
@@ -59777,17 +59844,37 @@ function deleteCart(credentials) {
 /*!************************************************!*\
   !*** ./resources/js/helpers/data/getOngkir.js ***!
   \************************************************/
-/*! exports provided: getCourierProvince */
+/*! exports provided: getCourierProvince, getCity, getCost */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCourierProvince", function() { return getCourierProvince; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCity", function() { return getCity; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCost", function() { return getCost; });
 function getCourierProvince() {
   return new Promise(function (res, err) {
     axios.get('/api/auth/getCourierProvince').then(function (response) {
       res(response.data);
     })["catch"](function (error) {
+      err(error);
+    });
+  });
+}
+function getCity(credentials) {
+  return new Promise(function (res, rej) {
+    axios.post('/api/auth/getCity', 'id=' + credentials).then(function (response) {
+      res(response.data);
+    })["catch"](function (error) {
+      err(error);
+    });
+  });
+}
+function getCost(credentials) {
+  return new Promise(function (res, rej) {
+    axios.post('/api/auth/getCost', credentials).then(function (response) {
+      res(response.data);
+    })["catch"](function (err) {
       err(error);
     });
   });
@@ -59877,7 +59964,8 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
     cart: [],
     find: 0,
     courier: [],
-    province: []
+    province: [],
+    city: []
   },
   getters: {
     isLoading: function isLoading(state) {
@@ -59911,6 +59999,9 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
     },
     province: function province(state) {
       return state.province;
+    },
+    city: function city(state) {
+      return state.city;
     }
   },
   mutations: {
@@ -59954,6 +60045,9 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
     },
     getProvince: function getProvince(state, province) {
       state.province = province;
+    },
+    getCity: function getCity(state, city) {
+      state.city = city;
     }
   },
   actions: {
@@ -59986,8 +60080,8 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\prod\laravue\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\prod\laravue\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Satrio\download\github\laravue\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Satrio\download\github\laravue\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

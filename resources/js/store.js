@@ -12,7 +12,8 @@ export default {
         cart: [],
         find: 0,
         courier:[],
-        province:[]
+        province:[],
+        city:[]
     },
     getters: {
         isLoading(state) {
@@ -45,6 +46,9 @@ export default {
         },
         province(state) {
             return state.province;
+        },
+        city(state) {
+            return state.city;
         }
     },
     mutations: {
@@ -86,6 +90,9 @@ export default {
         },
         getProvince(state, province) {
             state.province = province;
+        },
+        getCity(state, city) {
+            state.city = city;
         }
     },
     actions: {

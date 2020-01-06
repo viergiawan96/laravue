@@ -29,14 +29,14 @@ class ongkirController extends Controller
     public function getCost(Request $request)
     {
 
-        $cost = RajaOngkir::ongkosKirim([
-            'origin'      =>    153,
-            'destination' =>    $request->destination,
-            'weigth'      =>    1000,
-            'courier'     =>    $request->courier
+        $daftarProvinsi = RajaOngkir::ongkosKirim([
+            'origin'        => 155,     // ID kota/kabupaten asal
+            'destination'   => 80,      // ID kota/kabupaten tujuan
+            'weight'        => 1300,    // berat barang dalam gram
+            'courier'       => 'jne'    // kode kurir pengiriman: ['jne', 'tiki', 'pos'] untuk starter
         ]);
         
-        return response()->json($cost, 200);
+        return response()->json($daftarProvinsi, 200);
 
     }
 }

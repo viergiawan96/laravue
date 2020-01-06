@@ -38,24 +38,22 @@
                 <h3 class="mt-4">Cart Total</h3>
                 <div style="margin-top:5%;">
                     <div class="mt-2">
-                        <select class="browser-default custom-select custom-select-md">
-                            <option selected>Choose to delivery</option>
+                        <select @change="methodShip()" v-model="ongkir.courier" class="browser-default custom-select custom-select-md">
+                            <option disabled value="">Choose to delivery</option>
                             <option v-for="cr in viewCourier" :key="cr.id"  :value="cr.code">{{ cr.title }}</option>
                         </select>
-                        <select @change="selectProvince()" class="browser-default custom-select custom-select-md mt-2">
-                            <option selected>Select a Province</option>
+                        <select @change="selectProvince($event)" class="browser-default custom-select custom-select-md mt-2">
+                            <option disabled selected>Select a Province</option>
                             <option  v-for="pr in viewProvince" :key="pr.id" :value="pr.province_id">{{ pr.title }}</option>
                         </select>
-                        <select :disabled="selectCity" class="browser-default custom-select custom-select-md mt-2">
-                            <option selected>Select a City</option>
-                            <option value="1">Bekasi</option>
-                            <option value="2">Jakarta</option>
-                            <option value="3">Yogyakarta</option>
+                        <select @change="selectCities($event)" :disabled="selectCity" class="browser-default custom-select custom-select-md mt-2">
+                            <option disabled selected>Select a City</option>
+                            <option v-for="ct in viewcity" :key="ct.id" :value="ct.city_id">{{ ct.title }}</option>
                         </select>
                     </div>
                     <div class="mt-4">
                         <span><strong style="margin-right:45%; font-size: 1.2em;">Subtotal</strong>Rp {{ formatPrice(subTotalAmout) }}</span><br/>
-                        <span><strong style="margin-right:44%; font-size: 1.2em;">Shipping</strong>Rp 20.000</span><br/>
+                        <span><strong style="margin-right:44%; font-size: 1.2em;">Shipping</strong>Rp {{ formatPrice(amountShip) }}</span><br/>
                         <span><strong style="margin-right:54%; font-size: 1.2em;">Total</strong>Rp {{ formatPrice(subTotalAmout + amountShip) }}</span>
                     </div>
                     <div class="d-flex justify-content-center mt-3 mb-2">
@@ -68,10 +66,8 @@
 </template>
 
 <script>
-import {getCart} from '../helpers/data/getData';
-import {putCart} from '../helpers/data/getData';
-import {deleteCart} from '../helpers/data/getData';
-import {getCourierProvince} from '../helpers/data/getOngkir';
+import {getCart, putCart, deleteCart} from '../helpers/data/getData';
+import {getCourierProvince, getCity, getCost} from '../helpers/data/getOngkir';
 import axios from 'axios';
 
 
@@ -84,7 +80,11 @@ export default {
             },
             subTotalAmout:0,
             selectCity:true,
-            amountShip:0
+            amountShip:0,
+            ongkir: {
+                courier: '',
+                destination:''
+            }
         }
     },
     methods: {
@@ -138,9 +138,39 @@ export default {
                         console,log(err);
                     })
         },
-        selectProvince() {
+        selectProvince(event) {
             this.selectCity =false;
-            
+
+            getCity(event.target.value)
+                 .then((res) => {
+                     this.$store.commit('getCity', res.city);
+                 })
+                 .catch((err) => {
+                     console.log('koneksi bermasalah');
+                 })
+
+        },
+        selectCities(event) {
+            this.ongkir.destination = event.target.value;
+            let couriers = this.ongkir.courier;
+
+            if(couriers) {
+                getCost(this.$data.ongkir)
+                .then((res) => {
+                    console.log(res)
+                })
+            }
+        
+        },
+        methodShip(){
+            let destinations = this.ongkir.destination;
+
+            if(destinations) {
+                getCost(this.$data.ongkir)
+                .then((res) => {
+                    console.log(res)
+                })
+            }
         }
     },
     computed: {
@@ -152,6 +182,9 @@ export default {
         },
         viewProvince() {
             return this.$store.getters.province;
+        },
+        viewcity() {
+            return this.$store.getters.city;
         }
     },
     mounted() {
