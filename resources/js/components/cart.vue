@@ -157,7 +157,7 @@ export default {
             if(couriers) {
                 getCost(this.$data.ongkir)
                 .then((res) => {
-                    console.log(res)
+                    console.log(res.cost[0].costs)
                 })
             }
         

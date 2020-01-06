@@ -2258,7 +2258,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (couriers) {
         Object(_helpers_data_getOngkir__WEBPACK_IMPORTED_MODULE_1__["getCost"])(this.$data.ongkir).then(function (res) {
-          console.log(res);
+          console.log(res.cost[0].costs);
         });
       }
     },
@@ -60080,8 +60080,8 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Satrio\download\github\laravue\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Satrio\download\github\laravue\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\prod\laravue\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\prod\laravue\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
