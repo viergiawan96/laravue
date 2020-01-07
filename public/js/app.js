@@ -2178,11 +2178,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 
@@ -2196,7 +2191,6 @@ __webpack_require__.r(__webpack_exports__);
       subTotalAmout: 0,
       selectCity: true,
       amountShip: 0,
-      selectService: this.$store.getters.serviceStatus,
       ongkir: {
         courier: '',
         destination: ''
@@ -2290,6 +2284,12 @@ __webpack_require__.r(__webpack_exports__);
           console.log('koneksi bermasalah');
         });
       }
+    },
+    serviceChange: function serviceChange(event) {
+      var serviceId = this.$store.getters.service.find(function (scr) {
+        return scr.service = event.target.value;
+      });
+      this.amountShip = serviceId.cost[0].value;
     }
   },
   computed: {
@@ -2307,6 +2307,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     viewservice: function viewservice() {
       return this.$store.getters.service;
+    },
+    selectService: function selectService() {
+      return this.$store.getters.serviceStatus;
     }
   },
   mounted: function mounted() {
@@ -42338,22 +42341,6 @@ var render = function() {
             { staticClass: "mt-2" },
             [
               _c(
-                "ul",
-                _vm._l(_vm.viewservice, function(view, index) {
-                  return _c("il", { key: index }, [
-                    _vm._v(
-                      "\n                            " +
-                        _vm._s(index) +
-                        " " +
-                        _vm._s(view.service) +
-                        "\n                        "
-                    )
-                  ])
-                }),
-                1
-              ),
-              _vm._v(" "),
-              _c(
                 "select",
                 {
                   directives: [
@@ -42474,7 +42461,12 @@ var render = function() {
                       }
                     ],
                     staticClass:
-                      "browser-default custom-select custom-select-md mt-2"
+                      "browser-default custom-select custom-select-md mt-2",
+                    on: {
+                      change: function($event) {
+                        return _vm.serviceChange($event)
+                      }
+                    }
                   },
                   [
                     _c("option", { attrs: { disabled: "", selected: "" } }, [
@@ -42484,7 +42476,7 @@ var render = function() {
                     _vm._l(_vm.viewservice, function(service, index) {
                       return _c(
                         "option",
-                        { key: index, domProps: { value: index } },
+                        { key: index, domProps: { value: service.service } },
                         [_vm._v(_vm._s(service.service))]
                       )
                     })
@@ -60178,8 +60170,8 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\Satrio\download\github\laravue\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\Satrio\download\github\laravue\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\prod\laravue\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\prod\laravue\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

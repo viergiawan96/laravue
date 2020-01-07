@@ -38,11 +38,6 @@
                 <h3 class="mt-4">Cart Total</h3>
                 <div style="margin-top:5%;">
                     <div class="mt-2">
-                        <ul>
-                            <il v-for="(view, index) in viewservice" :key="index">
-                                {{index}} {{view.service}}
-                            </il>
-                        </ul>
                         <select @change="methodShip()" v-model="ongkir.courier" class="browser-default custom-select custom-select-md">
                             <option disabled value="">Choose to delivery</option>
                             <option v-for="cr in viewCourier" :key="cr.id"  :value="cr.code">{{ cr.title }}</option>
@@ -56,9 +51,9 @@
                             <option v-for="ct in viewcity" :key="ct.id" :value="ct.city_id">{{ ct.title }}</option>
                         </select>
                         <transition name="slide-fade">
-                            <select v-show="selectService" class="browser-default custom-select custom-select-md mt-2">
+                            <select @change="serviceChange($event)" v-show="selectService" class="browser-default custom-select custom-select-md mt-2">
                                 <option disabled selected>Select a Service</option>
-                                <option v-for="(service, index) in viewservice" :key="index" :value="index">{{ service.service }}</option>
+                                <option v-for="(service, index) in viewservice" :key="index" :value="service.service">{{ service.service }}</option>
                             </select>
                         </transition>
                     </div>
@@ -92,7 +87,6 @@ export default {
             subTotalAmout:0,
             selectCity:true,
             amountShip:0,
-            selectService: this.$store.getters.serviceStatus,
             ongkir: {
                 courier: '',
                 destination:''
@@ -188,6 +182,10 @@ export default {
                 })
             }
         
+        },
+        serviceChange(event) {
+            const serviceId = this.$store.getters.service.find(scr => scr.service = event.target.value);
+            this.amountShip = serviceId.cost[0].value;
         }
     },
     computed: {
@@ -205,6 +203,9 @@ export default {
         },
         viewservice() {
             return this.$store.getters.service;
+        },
+        selectService() {
+            return this.$store.getters.serviceStatus;
         }
     },
     mounted() {
