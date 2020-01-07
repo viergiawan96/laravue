@@ -2172,6 +2172,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2185,6 +2196,7 @@ __webpack_require__.r(__webpack_exports__);
       subTotalAmout: 0,
       selectCity: true,
       amountShip: 0,
+      selectService: this.$store.getters.serviceStatus,
       ongkir: {
         courier: '',
         destination: ''
@@ -2242,32 +2254,40 @@ __webpack_require__.r(__webpack_exports__);
         console, log(err);
       });
     },
-    selectProvince: function selectProvince(event) {
+    methodShip: function methodShip() {
       var _this4 = this;
+
+      var destinations = this.ongkir.destination;
+
+      if (destinations) {
+        Object(_helpers_data_getOngkir__WEBPACK_IMPORTED_MODULE_1__["getCost"])(this.$data.ongkir).then(function (res) {
+          _this4.$store.commit('getService', res.cost[0].costs);
+        })["catch"](function (res) {
+          console.log('koneksi bermasalah');
+        });
+      }
+    },
+    selectProvince: function selectProvince(event) {
+      var _this5 = this;
 
       this.selectCity = false;
       Object(_helpers_data_getOngkir__WEBPACK_IMPORTED_MODULE_1__["getCity"])(event.target.value).then(function (res) {
-        _this4.$store.commit('getCity', res.city);
+        _this5.$store.commit('getCity', res.city);
       })["catch"](function (err) {
         console.log('koneksi bermasalah');
       });
     },
     selectCities: function selectCities(event) {
+      var _this6 = this;
+
       this.ongkir.destination = event.target.value;
       var couriers = this.ongkir.courier;
 
       if (couriers) {
         Object(_helpers_data_getOngkir__WEBPACK_IMPORTED_MODULE_1__["getCost"])(this.$data.ongkir).then(function (res) {
-          console.log(res.cost[0].costs);
-        });
-      }
-    },
-    methodShip: function methodShip() {
-      var destinations = this.ongkir.destination;
-
-      if (destinations) {
-        Object(_helpers_data_getOngkir__WEBPACK_IMPORTED_MODULE_1__["getCost"])(this.$data.ongkir).then(function (res) {
-          console.log(res);
+          _this6.$store.commit('getService', res.cost[0].costs);
+        })["catch"](function (res) {
+          console.log('koneksi bermasalah');
         });
       }
     }
@@ -2284,6 +2304,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     viewcity: function viewcity() {
       return this.$store.getters.city;
+    },
+    viewservice: function viewservice() {
+      return this.$store.getters.service;
     }
   },
   mounted: function mounted() {
@@ -7062,7 +7085,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n#quantity {\n        text-align: center;\n}\n.quantity-input {\n        text-align: center;\n        width: 80px;\n}\n.total-cart {\n    background-color:whitesmoke;\n}\n.total-cart h3 {\n    text-align: center;\n    border-block-end-style: dashed;\n    border-width: 1px;\n    border-color: #808080;\n}\n.img{\n    border: 1px solid #ddd;\n    border-radius: 4px;\n    padding: 5px;\n    width: 150px;\n}\n.img:hover {\nbox-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);\n}\n.btn-change{\nbackground: lightseagreen;\nmargin: 20px;\nfloat: left;\nborder:0px;\ncolor:#fff;\nbox-shadow: 0 0 1px #ccc;\n-webkit-transition-duration: 0.5s;\n-webkit-transition-timing-function: ease-out;\n-webkit-box-shadow: 0px 0px 0 0 #31708f inset , 0px 0px 0 #31708f inset;\n}\n.btn-change:hover{\n    -webkit-box-shadow: 0px 50px 0 0px #31708f inset , 0px -50px 0 0px #31708f inset;\n}\n", ""]);
+exports.push([module.i, "\n#quantity {\n        text-align: center;\n}\n.quantity-input {\n        text-align: center;\n        width: 80px;\n}\n.total-cart {\n    background-color:whitesmoke;\n}\n.total-cart h3 {\n    text-align: center;\n    border-block-end-style: dashed;\n    border-width: 1px;\n    border-color: #808080;\n}\n.img{\n    border: 1px solid #ddd;\n    border-radius: 4px;\n    padding: 5px;\n    width: 150px;\n}\n.img:hover {\nbox-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);\n}\n.btn-change{\nbackground: lightseagreen;\nmargin: 20px;\nfloat: left;\nborder:0px;\ncolor:#fff;\nbox-shadow: 0 0 1px #ccc;\n-webkit-transition-duration: 0.5s;\n-webkit-transition-timing-function: ease-out;\n-webkit-box-shadow: 0px 0px 0 0 #31708f inset , 0px 0px 0 #31708f inset;\n}\n.btn-change:hover{\n    -webkit-box-shadow: 0px 50px 0 0px #31708f inset , 0px -50px 0 0px #31708f inset;\n}\n.slide-fade-enter-active {\n-webkit-transition: all .3s ease;\ntransition: all .3s ease;\n}\n.slide-fade-leave-active {\n-webkit-transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);\ntransition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);\n}\n.slide-fade-enter, .slide-fade-leave-to\n{\n-webkit-transform: translateX(10px);\n        transform: translateX(10px);\nopacity: 0;\n}\n", ""]);
 
 // exports
 
@@ -42310,115 +42333,168 @@ var render = function() {
         _c("h3", { staticClass: "mt-4" }, [_vm._v("Cart Total")]),
         _vm._v(" "),
         _c("div", { staticStyle: { "margin-top": "5%" } }, [
-          _c("div", { staticClass: "mt-2" }, [
-            _c(
-              "select",
-              {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.ongkir.courier,
-                    expression: "ongkir.courier"
-                  }
-                ],
-                staticClass: "browser-default custom-select custom-select-md",
-                on: {
-                  change: [
-                    function($event) {
-                      var $$selectedVal = Array.prototype.filter
-                        .call($event.target.options, function(o) {
-                          return o.selected
-                        })
-                        .map(function(o) {
-                          var val = "_value" in o ? o._value : o.value
-                          return val
-                        })
-                      _vm.$set(
-                        _vm.ongkir,
-                        "courier",
-                        $event.target.multiple
-                          ? $$selectedVal
-                          : $$selectedVal[0]
-                      )
-                    },
-                    function($event) {
-                      return _vm.methodShip()
+          _c(
+            "div",
+            { staticClass: "mt-2" },
+            [
+              _c(
+                "ul",
+                _vm._l(_vm.viewservice, function(view, index) {
+                  return _c("il", { key: index }, [
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(index) +
+                        " " +
+                        _vm._s(view.service) +
+                        "\n                        "
+                    )
+                  ])
+                }),
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.ongkir.courier,
+                      expression: "ongkir.courier"
                     }
-                  ]
-                }
-              },
-              [
-                _c("option", { attrs: { disabled: "", value: "" } }, [
-                  _vm._v("Choose to delivery")
-                ]),
-                _vm._v(" "),
-                _vm._l(_vm.viewCourier, function(cr) {
-                  return _c(
-                    "option",
-                    { key: cr.id, domProps: { value: cr.code } },
-                    [_vm._v(_vm._s(cr.title))]
-                  )
-                })
-              ],
-              2
-            ),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                staticClass:
-                  "browser-default custom-select custom-select-md mt-2",
-                on: {
-                  change: function($event) {
-                    return _vm.selectProvince($event)
+                  ],
+                  staticClass: "browser-default custom-select custom-select-md",
+                  on: {
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.ongkir,
+                          "courier",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      },
+                      function($event) {
+                        return _vm.methodShip()
+                      }
+                    ]
                   }
-                }
-              },
-              [
-                _c("option", { attrs: { disabled: "", selected: "" } }, [
-                  _vm._v("Select a Province")
-                ]),
-                _vm._v(" "),
-                _vm._l(_vm.viewProvince, function(pr) {
-                  return _c(
-                    "option",
-                    { key: pr.id, domProps: { value: pr.province_id } },
-                    [_vm._v(_vm._s(pr.title))]
-                  )
-                })
-              ],
-              2
-            ),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                staticClass:
-                  "browser-default custom-select custom-select-md mt-2",
-                attrs: { disabled: _vm.selectCity },
-                on: {
-                  change: function($event) {
-                    return _vm.selectCities($event)
+                },
+                [
+                  _c("option", { attrs: { disabled: "", value: "" } }, [
+                    _vm._v("Choose to delivery")
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.viewCourier, function(cr) {
+                    return _c(
+                      "option",
+                      { key: cr.id, domProps: { value: cr.code } },
+                      [_vm._v(_vm._s(cr.title))]
+                    )
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  staticClass:
+                    "browser-default custom-select custom-select-md mt-2",
+                  on: {
+                    change: function($event) {
+                      return _vm.selectProvince($event)
+                    }
                   }
-                }
-              },
-              [
-                _c("option", { attrs: { disabled: "", selected: "" } }, [
-                  _vm._v("Select a City")
-                ]),
-                _vm._v(" "),
-                _vm._l(_vm.viewcity, function(ct) {
-                  return _c(
-                    "option",
-                    { key: ct.id, domProps: { value: ct.city_id } },
-                    [_vm._v(_vm._s(ct.title))]
-                  )
-                })
-              ],
-              2
-            )
-          ]),
+                },
+                [
+                  _c("option", { attrs: { disabled: "", selected: "" } }, [
+                    _vm._v("Select a Province")
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.viewProvince, function(pr) {
+                    return _c(
+                      "option",
+                      { key: pr.id, domProps: { value: pr.province_id } },
+                      [_vm._v(_vm._s(pr.title))]
+                    )
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  staticClass:
+                    "browser-default custom-select custom-select-md mt-2",
+                  attrs: { disabled: _vm.selectCity },
+                  on: {
+                    change: function($event) {
+                      return _vm.selectCities($event)
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { disabled: "", selected: "" } }, [
+                    _vm._v("Select a City")
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.viewcity, function(ct) {
+                    return _c(
+                      "option",
+                      { key: ct.id, domProps: { value: ct.city_id } },
+                      [_vm._v(_vm._s(ct.title))]
+                    )
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c("transition", { attrs: { name: "slide-fade" } }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.selectService,
+                        expression: "selectService"
+                      }
+                    ],
+                    staticClass:
+                      "browser-default custom-select custom-select-md mt-2"
+                  },
+                  [
+                    _c("option", { attrs: { disabled: "", selected: "" } }, [
+                      _vm._v("Select a Service")
+                    ]),
+                    _vm._v(" "),
+                    _vm._l(_vm.viewservice, function(service, index) {
+                      return _c(
+                        "option",
+                        { key: index, domProps: { value: index } },
+                        [_vm._v(_vm._s(service.service))]
+                      )
+                    })
+                  ],
+                  2
+                )
+              ])
+            ],
+            1
+          ),
           _vm._v(" "),
           _c("div", { staticClass: "mt-4" }, [
             _c("span", [
@@ -59894,9 +59970,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "initialize", function() { return initialize; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setAuthorization", function() { return setAuthorization; });
 function initialize(store, router) {
-  if (store.getters.currentUser) {
-    setAuthorization(store.getters.currentUser.token);
-  }
+  router.beforeEach(function (to, from, next) {
+    var requiresAuth = to.matched.some(function (record) {
+      return record.meta.requiresAuth;
+    });
+    var currentUser = store.state.currentUser;
+
+    if (requiresAuth && !currentUser) {
+      next('/');
+    } else {
+      next();
+    }
+
+    if (currentUser) {
+      setAuthorization(store.getters.currentUser.token);
+    }
+  });
 }
 function setAuthorization(token) {
   axios.defaults.headers.common["Authorization"] = "Bearer ".concat(token);
@@ -59927,10 +60016,7 @@ var routes = [{
 }, {
   path: '/about',
   name: 'about',
-  component: _components_about_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-  meta: {
-    requiresAuth: true
-  }
+  component: _components_about_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
 }, {
   path: '/cart',
   name: 'cart',
@@ -59965,7 +60051,9 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
     find: 0,
     courier: [],
     province: [],
-    city: []
+    city: [],
+    service: [],
+    serviceStatus: false
   },
   getters: {
     isLoading: function isLoading(state) {
@@ -60002,6 +60090,12 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
     },
     city: function city(state) {
       return state.city;
+    },
+    service: function service(state) {
+      return state.service;
+    },
+    serviceStatus: function serviceStatus(state) {
+      return state.serviceStatus;
     }
   },
   mutations: {
@@ -60048,6 +60142,10 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
     },
     getCity: function getCity(state, city) {
       state.city = city;
+    },
+    getService: function getService(state, service) {
+      state.service = service;
+      state.serviceStatus = true;
     }
   },
   actions: {
@@ -60080,8 +60178,8 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\prod\laravue\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\prod\laravue\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Satrio\download\github\laravue\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Satrio\download\github\laravue\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

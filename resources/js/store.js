@@ -13,7 +13,9 @@ export default {
         find: 0,
         courier:[],
         province:[],
-        city:[]
+        city:[],
+        service: [],
+        serviceStatus:false
     },
     getters: {
         isLoading(state) {
@@ -49,6 +51,12 @@ export default {
         },
         city(state) {
             return state.city;
+        },
+        service(state) {
+            return state.service;
+        },
+        serviceStatus(state) {
+            return state.serviceStatus;
         }
     },
     mutations: {
@@ -93,7 +101,11 @@ export default {
         },
         getCity(state, city) {
             state.city = city;
-        }
+        },
+        getService(state, service) {
+            state.service = service;
+            state.serviceStatus = true;
+        },
     },
     actions: {
         login(context) {

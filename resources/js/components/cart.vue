@@ -38,6 +38,11 @@
                 <h3 class="mt-4">Cart Total</h3>
                 <div style="margin-top:5%;">
                     <div class="mt-2">
+                        <ul>
+                            <il v-for="(view, index) in viewservice" :key="index">
+                                {{index}} {{view.service}}
+                            </il>
+                        </ul>
                         <select @change="methodShip()" v-model="ongkir.courier" class="browser-default custom-select custom-select-md">
                             <option disabled value="">Choose to delivery</option>
                             <option v-for="cr in viewCourier" :key="cr.id"  :value="cr.code">{{ cr.title }}</option>
@@ -50,6 +55,12 @@
                             <option disabled selected>Select a City</option>
                             <option v-for="ct in viewcity" :key="ct.id" :value="ct.city_id">{{ ct.title }}</option>
                         </select>
+                        <transition name="slide-fade">
+                            <select v-show="selectService" class="browser-default custom-select custom-select-md mt-2">
+                                <option disabled selected>Select a Service</option>
+                                <option v-for="(service, index) in viewservice" :key="index" :value="index">{{ service.service }}</option>
+                            </select>
+                        </transition>
                     </div>
                     <div class="mt-4">
                         <span><strong style="margin-right:45%; font-size: 1.2em;">Subtotal</strong>Rp {{ formatPrice(subTotalAmout) }}</span><br/>
@@ -81,6 +92,7 @@ export default {
             subTotalAmout:0,
             selectCity:true,
             amountShip:0,
+            selectService: this.$store.getters.serviceStatus,
             ongkir: {
                 courier: '',
                 destination:''
@@ -138,6 +150,18 @@ export default {
                         console,log(err);
                     })
         },
+        methodShip(){
+            let destinations = this.ongkir.destination;
+            if(destinations) {
+                getCost(this.$data.ongkir)
+                .then((res) => {
+                    this.$store.commit('getService', res.cost[0].costs);
+                })
+                .catch((res) => {
+                    console.log('koneksi bermasalah');
+                })
+            }
+        },
         selectProvince(event) {
             this.selectCity =false;
 
@@ -157,20 +181,13 @@ export default {
             if(couriers) {
                 getCost(this.$data.ongkir)
                 .then((res) => {
-                    console.log(res.cost[0].costs)
+                    this.$store.commit('getService', res.cost[0].costs);
+                })
+                .catch((res) => {
+                    console.log('koneksi bermasalah');
                 })
             }
         
-        },
-        methodShip(){
-            let destinations = this.ongkir.destination;
-
-            if(destinations) {
-                getCost(this.$data.ongkir)
-                .then((res) => {
-                    console.log(res)
-                })
-            }
         }
     },
     computed: {
@@ -185,6 +202,9 @@ export default {
         },
         viewcity() {
             return this.$store.getters.city;
+        },
+        viewservice() {
+            return this.$store.getters.service;
         }
     },
     mounted() {
@@ -232,5 +252,16 @@ export default {
     }
     .btn-change:hover{
         -webkit-box-shadow: 0px 50px 0 0px #31708f inset , 0px -50px 0 0px #31708f inset; 
+    }
+    .slide-fade-enter-active {
+    transition: all .3s ease;
+    }
+    .slide-fade-leave-active {
+    transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    }
+    .slide-fade-enter, .slide-fade-leave-to
+    {
+    transform: translateX(10px);
+    opacity: 0;
     }
 </style>
