@@ -60,10 +60,10 @@
                     <div class="mt-4">
                         <span><strong style="margin-right:45%; font-size: 1.2em;">Subtotal</strong>Rp {{ formatPrice(subTotalAmout) }}</span><br/>
                         <span><strong style="margin-right:44%; font-size: 1.2em;">Shipping</strong>Rp {{ formatPrice(amountShip) }}</span><br/>
-                        <span><strong style="margin-right:54%; font-size: 1.2em;">Total</strong>Rp {{ formatPrice(subTotalAmout + amountShip) }}</span>
+                        <span><strong style="margin-right:54%; font-size: 1.2em;">Total</strong>Rp {{ formatPrice(totalAmount) }}</span>
                     </div>
                     <div class="d-flex justify-content-center mt-3 mb-2">
-                        <button type="button" class=" btn-change btn btn-lg btn-block">CheckOut</button>
+                        <button @click="checkOut()" type="button" class=" btn-change btn btn-lg btn-block">CheckOut</button>
                     </div>
                 </div>
             </div>
@@ -186,6 +186,9 @@ export default {
         serviceChange(event) {
             const serviceId = this.$store.getters.service.find(scr => scr.service = event.target.value);
             this.amountShip = serviceId.cost[0].value;
+        },
+        checkOut() {
+            console.log(this.subTotalAmout + this.amountShip);
         }
     },
     computed: {
@@ -206,6 +209,9 @@ export default {
         },
         selectService() {
             return this.$store.getters.serviceStatus;
+        },
+        totalAmount() {
+            return this.subTotalAmout + this.amountShip;
         }
     },
     mounted() {

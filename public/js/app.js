@@ -2290,6 +2290,9 @@ __webpack_require__.r(__webpack_exports__);
         return scr.service = event.target.value;
       });
       this.amountShip = serviceId.cost[0].value;
+    },
+    checkOut: function checkOut() {
+      console.log(this.subTotalAmout + this.amountShip);
     }
   },
   computed: {
@@ -2310,6 +2313,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     selectService: function selectService() {
       return this.$store.getters.serviceStatus;
+    },
+    totalAmount: function totalAmount() {
+      return this.subTotalAmout + this.amountShip;
     }
   },
   mounted: function mounted() {
@@ -42521,14 +42527,29 @@ var render = function() {
                 },
                 [_vm._v("Total")]
               ),
-              _vm._v(
-                "Rp " +
-                  _vm._s(_vm.formatPrice(_vm.subTotalAmout + _vm.amountShip))
-              )
+              _vm._v("Rp " + _vm._s(_vm.formatPrice(_vm.totalAmount)))
             ])
           ]),
           _vm._v(" "),
-          _vm._m(1)
+          _c(
+            "div",
+            { staticClass: "d-flex justify-content-center mt-3 mb-2" },
+            [
+              _c(
+                "button",
+                {
+                  staticClass: " btn-change btn btn-lg btn-block",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      return _vm.checkOut()
+                    }
+                  }
+                },
+                [_vm._v("CheckOut")]
+              )
+            ]
+          )
         ])
       ])
     ])
@@ -42556,25 +42577,6 @@ var staticRenderFns = [
         _c("th", { attrs: { scope: "col" } })
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "d-flex justify-content-center mt-3 mb-2" },
-      [
-        _c(
-          "button",
-          {
-            staticClass: " btn-change btn btn-lg btn-block",
-            attrs: { type: "button" }
-          },
-          [_vm._v("CheckOut")]
-        )
-      ]
-    )
   }
 ]
 render._withStripped = true
