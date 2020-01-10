@@ -41719,7 +41719,7 @@ var render = function() {
                       "router-link",
                       {
                         attrs: {
-                          to: { path: "/about", params: { name: "sai" } }
+                          to: { path: "/about", query: { name: "sai" } }
                         }
                       },
                       [_vm._v("About")]
