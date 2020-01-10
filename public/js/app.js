@@ -41715,9 +41715,15 @@ var render = function() {
                   "a",
                   { staticClass: "nav-link" },
                   [
-                    _c("router-link", { attrs: { to: "/about" } }, [
-                      _vm._v("About")
-                    ])
+                    _c(
+                      "router-link",
+                      {
+                        attrs: {
+                          to: { path: "/about", params: { name: "sai" } }
+                        }
+                      },
+                      [_vm._v("About")]
+                    )
                   ],
                   1
                 )
@@ -60172,8 +60178,8 @@ var user = Object(_helpers_auth__WEBPACK_IMPORTED_MODULE_0__["getLocalUser"])();
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\prod\laravue\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\prod\laravue\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\Satrio\download\github\laravue\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\Satrio\download\github\laravue\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

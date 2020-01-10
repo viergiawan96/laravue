@@ -10,7 +10,7 @@
                             <a class="nav-link"><router-link to="/">Home</router-link></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link"><router-link to="/about">About</router-link></a>
+                            <a class="nav-link"><router-link :to="{path:'/about',params:{name:'sai'}}">About</router-link></a>
                         </li>
                         <li v-if="isLoggedIn" class="nav-item">
                             <a class="nav-link"><router-link to="/cart">Cart</router-link></a>
